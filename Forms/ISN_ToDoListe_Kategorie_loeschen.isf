@@ -1,0 +1,291 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <ComboConstants.au3>
+
+$ToDoList_Delete_Category = GUICreate(_Get_langstr(1276),469,208,-1,-1,BitOr($WS_POPUP,$WS_CAPTION),BitOr($WS_EX_MDICHILD,$WS_EX_WINDOWEDGE),$ToDoList_Category_Manager)
+GUISetBkColor(0xFFFFFF,$ToDoList_Delete_Category)
+_Control_set_DPI_Scaling($ToDoList_Delete_Category)
+_GUISetIcon($ToDoList_Delete_Category, $smallIconsdll,1524)
+_CenterOnMonitor($ToDoList_Delete_Category ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ToDoList_Delete_Category)
+GUISetBkColor($Fenster_Hintergrundfarbe,$ToDoList_Delete_Category)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,469,50)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,208-50,469,50)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+
+
+GUICtrlCreateLabel(_Get_langstr(1285),10,10,446,31,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+$todo_category_loeschen_delete_all_radio = GUICtrlCreateRadio(_Get_langstr(1287),18,56,442,20,-1,-1)
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Kategoriue_loeschen_Radio_Event")
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling($todo_category_loeschen_delete_all_radio)
+$todo_category_loeschen_move_to_radio = GUICtrlCreateRadio(_Get_langstr(1286),18,91,446,20,-1,-1)
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Kategoriue_loeschen_Radio_Event")
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling($todo_category_loeschen_move_to_radio)
+$todo_category_loeschen_categories_combo = GUICtrlCreateCombo("",46,121,406,21,$CBS_DROPDOWNLIST,-1)
+GUICtrlSetData(-1,"")
+_Control_set_DPI_Scaling($todo_category_loeschen_categories_combo)
+GUICtrlCreateButton(_Get_langstr(7),10,168,128,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Neue_Kategorie_loeschen_OK")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),143,168,128,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Neue_Kategorie_loeschen_Abbrechen")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreatePic("",18,123,16,16,-1,-1)
+_Control_set_DPI_Scaling(-1,true)
+_SetIconAlpha(-1, $smallIconsdll,_ISN_Pfeil_ID_aus_smallicons_DLL(),16,16)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(1276)
+breite=469
+hoehe=208
+style=$WS_POPUP+$WS_CAPTION
+exstyle=$WS_EX_MDICHILD+$WS_EX_WINDOWEDGE
+bgcolour=0xFFFFFF
+bgimage=none
+handle=ToDoList_Delete_Category
+parent=$ToDoList_Category_Manager
+code=_Control_set_DPI_Scaling($GUI_HANDLE)[BREAK]_GUISetIcon($GUI_HANDLE, $smallIconsdll,1524)[BREAK]_CenterOnMonitor($GUI_HANDLE ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$GUI_HANDLE)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$GUI_HANDLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,469,50)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,208-50,469,50)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK][BREAK][BREAK]
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00422550]
+handle=406
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=446
+height=31
+text=_Get_langstr(1285)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=0
+locked=0
+resize=550
+iconindex=
+textmode=func
+[0x0027248C]
+handle=407
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=168
+width=128
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_ToDo_Liste_Kategorien_verwalten_Neue_Kategorie_loeschen_OK
+bgimage=
+tabpage=-1
+order=4
+textmode=func
+iconindex=
+resize=834
+locked=0
+[0x001E1F7E]
+handle=408
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=143
+y=168
+width=128
+height=30
+text=_Get_langstr(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_ToDo_Liste_Kategorien_verwalten_Neue_Kategorie_loeschen_Abbrechen
+bgimage=
+tabpage=-1
+textmode=func
+iconindex=
+resize=834
+locked=0
+order=5
+[0x001C1F98]
+handle=409
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)
+type=combo
+x=46
+y=121
+width=406
+height=21
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$CBS_DROPDOWNLIST
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=todo_category_loeschen_categories_combo
+func=
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=text
+[0x001D1F86]
+handle=410
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)
+type=radio
+x=18
+y=56
+width=442
+height=20
+text=_Get_langstr(1287)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=todo_category_loeschen_delete_all_radio
+func=_ToDo_Liste_Kategorien_verwalten_Kategoriue_loeschen_Radio_Event
+bgimage=
+order=1
+tabpage=-1
+iconindex=
+textmode=func
+[0x001F1F7A]
+handle=411
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)
+type=radio
+x=18
+y=91
+width=446
+height=20
+text=_Get_langstr(1286)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=todo_category_loeschen_move_to_radio
+func=_ToDo_Liste_Kategorien_verwalten_Kategoriue_loeschen_Radio_Event
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=2
+[0x003423C2]
+handle=412
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle,true)[BREAK]_SetIconAlpha(-1, $smallIconsdll,_ISN_Pfeil_ID_aus_smallicons_DLL(),16,16)
+type=image
+x=18
+y=123
+width=16
+height=16
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=7
+tabpage=-1
+iconindex=
+textmode=text
+#ce

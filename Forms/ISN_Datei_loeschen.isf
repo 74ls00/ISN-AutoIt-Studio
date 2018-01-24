@@ -1,0 +1,244 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$Datei_loeschen_GUI = GUICreate(_Get_langstr(74),557,176,-1,-1,BitOr($WS_CAPTION,$WS_POPUP),$WS_EX_MDICHILD,$StudioFenster)
+GUISetBkColor(0xFFFFFF,$Datei_loeschen_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Hide_Delete_file_GUI", $Datei_loeschen_GUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$Datei_loeschen_GUI)
+_Control_set_DPI_Scaling($Datei_loeschen_GUI)
+_CenterOnMonitor($Datei_loeschen_GUI,"", $Runonmonitor)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,557,40)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Datei_loeschen_GUI)
+GUICtrlCreateLabel(_Get_langstr(74),10,10,540,30,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),120,110,121,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Hide_Delete_file_GUI")
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(7),10,110,100,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetOnEvent(-1,"_Try_to_delete_file")
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(905),10,150,540,15,-1,-1)
+GUICtrlSetColor(-1,"0x808080")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+$datei_loeschen_text = GUICtrlCreateLabel(_Get_langstr(602),10,50,540,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($datei_loeschen_text)
+$datei_loeschen_include_checkbox = GUICtrlCreateCheckbox(_Get_langstr(904),10,80,513,20,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling($datei_loeschen_include_checkbox)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_Get_langstr(74)
+breite=557
+hoehe=176
+style=$WS_CAPTION+$WS_POPUP
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Datei_loeschen_GUI
+parent=$StudioFenster
+code=GUISetFont ($Default_font_size,400, 0,$Default_font,$Datei_loeschen_GUI)[BREAK]_Control_set_DPI_Scaling($Datei_loeschen_GUI)[BREAK]_CenterOnMonitor($Datei_loeschen_GUI,"", $Runonmonitor)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,557,40)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$Datei_loeschen_GUI)
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Hide_Delete_file_GUI
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00181878]
+handle=402
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=540
+height=30
+text=_Get_langstr(74)
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+textmode=func
+locked=0
+iconindex=
+resize=
+[0x00161D3A]
+handle=403
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=110
+width=100
+height=30
+text=_Get_langstr(7)
+state=80
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Try_to_delete_file
+bgimage=
+order=3
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x00121908]
+handle=404
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=50
+width=540
+height=15
+text=_Get_langstr(602)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=datei_loeschen_text
+func=
+bgimage=
+order=14
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x00131870]
+handle=405
+code=_Control_set_DPI_Scaling($control_handle)
+type=checkbox
+x=10
+y=80
+width=513
+height=20
+text=_Get_langstr(904)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=datei_loeschen_include_checkbox
+func=
+bgimage=
+order=17
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+[0x0012191C]
+handle=406
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=120
+y=110
+width=121
+height=30
+text=_Get_langstr(8)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Hide_Delete_file_GUI
+bgimage=
+order=3
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x00111868]
+handle=407
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=150
+width=540
+height=15
+text=_Get_langstr(905)
+state=80
+style=
+exstyle=
+textcolour=0x808080
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=14
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+#ce

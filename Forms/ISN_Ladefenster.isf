@@ -1,0 +1,186 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <ProgressConstants.au3>
+
+$Loading_GUI = GUICreate(_Get_langstr(36),356,108,-1,-1,BitOr($WS_POPUP,$WS_CHILD,$WS_CAPTION),$WS_EX_MDICHILD,$StudioFenster)
+GUISetBkColor(0xFFFFFF,$Loading_GUI)
+_Control_set_DPI_Scaling($Loading_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,356,25)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1,"")
+GUICtrlSetState(-1,$GUI_DISABLE)
+_CenterOnMonitor($Loading_GUI ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$Loading_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Loading_GUI)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,108-30,400,30)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+$Loading_Text1 = GUICtrlCreateLabel("Projekt wird erstellt...",68,12,276,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling($Loading_Text1)
+$Loading_Text2 = GUICtrlCreateLabel("Bitte warten...",68,44,276,22,$SS_CENTERIMAGE,-1)
+GUICtrlSetFont(-1,10,400,0,"Segoe UI")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($Loading_Text2)
+GUICtrlCreateIcon("",-1,19,23,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1,true)
+GUICtrlSetImage(-1,$Loading1_Ani)
+$Loading_progressbar = GUICtrlCreateProgress(13,88,331,10,-1,-1)
+_Control_set_DPI_Scaling($Loading_progressbar)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(36)
+breite=356
+hoehe=108
+style=$WS_POPUP+$WS_CHILD+$WS_CAPTION
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Loading_GUI
+parent=$StudioFenster
+code=_Control_set_DPI_Scaling($Loading_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,356,25)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1,"")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]_CenterOnMonitor($Loading_GUI ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$Loading_GUI)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$Loading_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,108-30,400,30)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x000827CA]
+func=
+bgimage=
+font=Segoe UI
+fontsize=16
+fontstyle=400
+textcolour=0x003399
+bgcolour=-2
+state=80
+style=
+exstyle=
+type=label
+x=68
+y=12
+width=276
+height=32
+text=Projekt wird erstellt...
+id=Loading_Text1
+handle=406
+order=0
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+code=GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+locked=0
+[0x000227C8]
+func=
+bgimage=
+font=Segoe UI
+fontsize=10
+fontstyle=400
+textcolour=0x000000
+bgcolour=-2
+state=80
+style=$SS_CENTERIMAGE
+exstyle=
+type=label
+x=68
+y=44
+width=276
+height=22
+text=Bitte warten...
+id=Loading_Text2
+handle=407
+order=3
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+code=_Control_set_DPI_Scaling($control_handle)
+locked=0
+[0x000227C6]
+text=
+func=
+bgimage=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+textcolour=0x000000
+bgcolour=0xF0F0F0
+state=80
+style=
+exstyle=
+type=progress
+x=13
+y=88
+width=331
+height=10
+id=Loading_progressbar
+handle=408
+order=4
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+code=_Control_set_DPI_Scaling($control_handle)
+locked=0
+[0x000227C4]
+handle=409
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle,true)[BREAK]GUICtrlSetImage(-1,$Loading1_Ani)
+type=icon
+x=19
+y=23
+width=32
+height=32
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=text
+#ce

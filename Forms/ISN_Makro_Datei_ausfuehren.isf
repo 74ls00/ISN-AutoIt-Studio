@@ -1,0 +1,478 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$runfile_config = GUICreate(_Get_langstr(594),466,363,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$newrule_GUI)
+GUISetBkColor(0xFFFFFF,$runfile_config)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_cancel_any_config", $runfile_config)
+_Control_set_DPI_Scaling($runfile_config)
+GUISetBkColor($Fenster_Hintergrundfarbe,$runfile_config)
+_GUISetIcon($runfile_config, $smallIconsdll,337)
+_CenterOnMonitor($runfile_config ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$runfile_config)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,466,50)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,363-50,466,50)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlCreateLabel(_Get_langstr(594),10,13,470,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+GUICtrlSetFont(-1,16,400,default,$Default_font)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(594),10,60,459,15,-1,-1)
+GUICtrlSetFont(-1,8,800,0,"MS Sans Serif")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$openfilerule_exeinput = GUICtrlCreateInput("",10,80,441,20,-1,512)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($openfilerule_exeinput)
+GUICtrlCreateButton(_Get_langstr(187),10,110,131,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Config_Runfileselect_file")
+GUICtrlSetResizing(-1,802)
+Button_AddIcon(-1, $smallIconsdll, 1282,0)
+_Control_set_DPI_Scaling(-1)
+$openfilerule_extended_paths = GUICtrlCreateButton(_Get_langstr(577),150,110,130,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Show_Extendedpaths")
+GUICtrlSetResizing(-1,802)
+Button_AddIcon(-1, $smallIconsdll, 1334,0)
+_Control_set_DPI_Scaling($openfilerule_extended_paths)
+GUICtrlCreateLabel(_Get_langstr(596),10,150,460,15,-1,-1)
+GUICtrlSetFont(-1,8,800,0,"MS Sans Serif")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$openfilerule_paraminput = GUICtrlCreateInput("",10,170,441,20,-1,512)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($openfilerule_paraminput)
+$openfilerule_waitcheckbox = GUICtrlCreateCheckbox(_Get_langstr(597),10,260,441,20,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($openfilerule_waitcheckbox)
+$openfilerule_hidewindowcheckbox = GUICtrlCreateCheckbox(_Get_langstr(598),10,280,441,20,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($openfilerule_hidewindowcheckbox)
+GUICtrlCreateButton(_Get_langstr(7),10,322,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Save_Config_Runfile")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),120,322,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_cancel_any_config")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+$openfilemakro_extended_paths_Parameter = GUICtrlCreateButton(_Get_langstr(577),11,199,130,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Show_Extendedpaths")
+GUICtrlSetResizing(-1,802)
+Button_AddIcon(-1, $smallIconsdll, 1334,0)
+_Control_set_DPI_Scaling($openfilemakro_extended_paths_Parameter)
+$openfilemakro_parameterexecutecheckbox = GUICtrlCreateCheckbox(_Get_langstr(1070),10,239,441,20,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($openfilemakro_parameterexecutecheckbox)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_Get_langstr(594)
+breite=466
+hoehe=363
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=runfile_config
+parent=$newrule_GUI
+code=_Control_set_DPI_Scaling($runfile_config)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$runfile_config)[BREAK]_GUISetIcon($runfile_config, $smallIconsdll,337)[BREAK]_CenterOnMonitor($runfile_config ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$runfile_config)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,466,50)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,363-50,466,50)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_cancel_any_config
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00161EB4]
+handle=405
+code=GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]GUICtrlSetFont(-1,16,400,default,$Default_font)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=13
+width=470
+height=32
+text=_Get_langstr(594)
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+textmode=func
+iconindex=
+resize=550
+[0x00101EB2]
+handle=406
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=60
+width=459
+height=15
+text=_Get_langstr(594)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=800
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+tooltip=
+textmode=func
+iconindex=
+resize=550
+[0x000F1EB0]
+handle=407
+code=_Control_set_DPI_Scaling($control_handle)
+type=input
+x=10
+y=80
+width=441
+height=20
+text=
+state=80
+style=
+exstyle=512
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$openfilerule_exeinput
+func=
+bgimage=
+order=3
+tabpage=-1
+tooltip=
+textmode=text
+iconindex=
+resize=550
+[0x00101EAC]
+handle=408
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=150
+width=460
+height=15
+text=_Get_langstr(596)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=800
+fontattribute=0
+id=
+func=
+bgimage=
+order=5
+tabpage=-1
+tooltip=
+textmode=func
+resize=550
+iconindex=
+[0x00111EA8]
+handle=409
+code=_Control_set_DPI_Scaling($control_handle)
+type=input
+x=10
+y=170
+width=441
+height=20
+text=
+state=80
+style=
+exstyle=512
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$openfilerule_paraminput
+func=
+bgimage=
+order=6
+tabpage=-1
+tooltip=
+textmode=text
+resize=550
+iconindex=
+[0x000E1EAE]
+handle=410
+code=_Control_set_DPI_Scaling($control_handle)
+type=checkbox
+x=10
+y=260
+width=441
+height=20
+text=_Get_langstr(597)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=openfilerule_waitcheckbox
+func=
+bgimage=
+order=7
+tabpage=-1
+tooltip=
+textmode=func
+resize=550
+iconindex=
+[0x000F1EA6]
+handle=411
+code=_Control_set_DPI_Scaling($control_handle)
+type=checkbox
+x=10
+y=280
+width=441
+height=20
+text=_Get_langstr(598)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=openfilerule_hidewindowcheckbox
+func=
+bgimage=
+order=8
+tabpage=-1
+tooltip=
+textmode=func
+resize=550
+iconindex=
+[0x000F1EA4]
+handle=412
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=322
+width=100
+height=30
+text=_Get_langstr(7)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Save_Config_Runfile
+bgimage=
+order=9
+tabpage=-1
+tooltip=
+textmode=func
+resize=834
+iconindex=
+[0x000E1EA0]
+handle=413
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=120
+y=322
+width=100
+height=30
+text=_Get_langstr(8)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_cancel_any_config
+bgimage=
+order=10
+tabpage=-1
+tooltip=
+textmode=func
+resize=834
+iconindex=
+[0x000D1EA2]
+handle=414
+code=Button_AddIcon(-1, $smallIconsdll, 1334,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=150
+y=110
+width=130
+height=30
+text=_Get_langstr(577)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=openfilerule_extended_paths
+func=_Show_Extendedpaths
+bgimage=
+order=4
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+resize=802
+iconindex=
+[0x000D1E9E]
+handle=415
+code=Button_AddIcon(-1, $smallIconsdll, 1282,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=110
+width=131
+height=30
+text=_Get_langstr(187)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Config_Runfileselect_file
+bgimage=
+order=4
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+resize=802
+iconindex=
+[0x000E1E9C]
+handle=416
+code=Button_AddIcon(-1, $smallIconsdll, 1334,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=11
+y=199
+width=130
+height=30
+text=_Get_langstr(577)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$openfilemakro_extended_paths_Parameter
+func=_Show_Extendedpaths
+bgimage=
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+resize=802
+order=12
+iconindex=
+[0x000E1E9A]
+handle=417
+code=_Control_set_DPI_Scaling($control_handle)
+type=checkbox
+x=10
+y=239
+width=441
+height=20
+text=_Get_langstr(1070)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=openfilemakro_parameterexecutecheckbox
+func=
+bgimage=
+tabpage=-1
+tooltip=
+textmode=func
+resize=550
+locked=0
+order=13
+iconindex=
+#ce

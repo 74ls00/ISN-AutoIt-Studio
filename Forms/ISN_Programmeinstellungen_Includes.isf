@@ -1,0 +1,308 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+GUICtrlCreateGroup("",210,60,782,581,-1,-1)
+if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+GUICtrlCreatePic("",230,80,32,32,-1,-1)
+_SetIconAlpha(-1, $bigiconsdll,381,32,32)
+_Control_set_DPI_Scaling(-1,true)
+GUICtrlCreateLabel(_Get_langstr(1074),271,84,692,25,-1,-1)
+GUICtrlSetFont(-1,12,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,12,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+$Einstellungen_AutoItIncludes_Verwalten_Checkbox = GUICtrlCreateCheckbox(_Get_langstr(1072),225,187,751,20,-1,-1)
+GUICtrlSetOnEvent(-1,"_Toggle_autocompletefields")
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling($Einstellungen_AutoItIncludes_Verwalten_Checkbox)
+$Einstellungen_AutoItIncludes_Verwalten_Listview = GUICtrlCreatelistview(_Get_langstr(223),262,228,719,404,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($Einstellungen_AutoItIncludes_Verwalten_Listview)
+_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))
+_GUICtrlListView_SetImageList($Einstellungen_AutoItIncludes_Verwalten_Listview, $hToolBarImageListNorm,1)
+
+$Einstellungen_AutoItIncludes_Verwalten_Remove_Button = GUICtrlCreateButton("",225,266,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Weitere_Includes_Pfad_entfernen")
+Button_AddIcon(-1, $smallIconsdll, 1727,4)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($Einstellungen_AutoItIncludes_Verwalten_Remove_Button)
+$Einstellungen_AutoItIncludes_Verwalten_Remove_Button = GUICtrlCreatePic("",225,266,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+GUICtrlSetOnEvent(-1,"_Weitere_Includes_Pfad_entfernen")
+_SetIconAlpha($Einstellungen_AutoItIncludes_Verwalten_Remove_Button, $smallIconsdll,1727+1,16,16)
+Endif
+GUICtrlSetTip($Einstellungen_AutoItIncludes_Verwalten_Remove_Button,_Get_langstr(1076))
+_Control_set_DPI_Scaling($Einstellungen_AutoItIncludes_Verwalten_Remove_Button)
+GUICtrlCreateLabel(_Get_langstr(1073),225,123,751,64,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$Einstellungen_AutoItIncludes_Verwalten_Add_Button = GUICtrlCreateButton("",225,228,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Weitere_Includes_Pfad_hinzufuegen")
+Button_AddIcon(-1, $smallIconsdll, 1732,4)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($Einstellungen_AutoItIncludes_Verwalten_Add_Button)
+$Einstellungen_AutoItIncludes_Verwalten_Add_Button = GUICtrlCreatePic("",225,228,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($Einstellungen_AutoItIncludes_Verwalten_Add_Button, $smallIconsdll,1732+1,16,16)
+GUICtrlSetOnEvent($Einstellungen_AutoItIncludes_Verwalten_Add_Button,"_Weitere_Includes_Pfad_hinzufuegen")
+Endif
+GUICtrlSetTip($Einstellungen_AutoItIncludes_Verwalten_Add_Button,_Get_langstr(1075))
+_Control_set_DPI_Scaling($Einstellungen_AutoItIncludes_Verwalten_Add_Button)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Form1
+breite=1007
+hoehe=657
+style=$WS_CAPTION+$WS_SIZEBOX+$WS_MAXIMIZEBOX
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=hgui
+parent=
+code=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=true
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00101D86]
+handle=402
+locked=0
+code=GUICtrlSetFont(-1,12,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=271
+y=84
+width=692
+height=25
+text=_Get_langstr(1074)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=12
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=9
+tabpage=-1
+textmode=func
+resize=
+iconindex=
+[0x000E2326]
+handle=403
+locked=0
+code=if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+type=group
+x=210
+y=60
+width=782
+height=581
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=5
+tabpage=-1
+textmode=text
+resize=
+iconindex=
+[0x00082356]
+handle=404
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=checkbox
+x=225
+y=187
+width=751
+height=20
+text=_Get_langstr(1072)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_AutoItIncludes_Verwalten_Checkbox
+func=_Toggle_autocompletefields
+bgimage=
+order=10
+tabpage=-1
+textmode=func
+resize=
+[0x000C1C92]
+handle=405
+locked=0
+code=Button_AddIcon(-1, $smallIconsdll, 1732,4)[BREAK]if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($Einstellungen_AutoItIncludes_Verwalten_Add_Button)[BREAK]$Einstellungen_AutoItIncludes_Verwalten_Add_Button = GUICtrlCreatePic("",225,228,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($Einstellungen_AutoItIncludes_Verwalten_Add_Button, $smallIconsdll,1732+1,16,16)[BREAK]GUICtrlSetOnEvent($Einstellungen_AutoItIncludes_Verwalten_Add_Button,"_Weitere_Includes_Pfad_hinzufuegen")[BREAK]Endif[BREAK]GUICtrlSetTip($Einstellungen_AutoItIncludes_Verwalten_Add_Button,_Get_langstr(1075))[BREAK]_Control_set_DPI_Scaling($Einstellungen_AutoItIncludes_Verwalten_Add_Button)
+type=button
+x=225
+y=228
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_AutoItIncludes_Verwalten_Add_Button
+func=_Weitere_Includes_Pfad_hinzufuegen
+bgimage=
+order=21
+tabpage=-1
+textmode=text
+resize=
+iconindex=
+[0x00081E7E]
+handle=406
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=225
+y=123
+width=751
+height=64
+text=_Get_langstr(1073)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=func
+resize=550
+order=16
+iconindex=
+[0x000A1CE0]
+handle=407
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))[BREAK]_GUICtrlListView_SetImageList($Einstellungen_AutoItIncludes_Verwalten_Listview, $hToolBarImageListNorm,1)[BREAK][BREAK]
+type=listview
+x=262
+y=228
+width=719
+height=404
+text=_Get_langstr(223)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_AutoItIncludes_Verwalten_Listview
+func=
+bgimage=
+order=12
+tabpage=-1
+textmode=func
+iconindex=
+[0x000D1C18]
+handle=408
+locked=0
+code=Button_AddIcon(-1, $smallIconsdll, 1727,4)[BREAK]if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($Einstellungen_AutoItIncludes_Verwalten_Remove_Button)[BREAK]$Einstellungen_AutoItIncludes_Verwalten_Remove_Button = GUICtrlCreatePic("",225,266,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]GUICtrlSetOnEvent(-1,"_Weitere_Includes_Pfad_entfernen")[BREAK]_SetIconAlpha($Einstellungen_AutoItIncludes_Verwalten_Remove_Button, $smallIconsdll,1727+1,16,16)[BREAK]Endif[BREAK]GUICtrlSetTip($Einstellungen_AutoItIncludes_Verwalten_Remove_Button,_Get_langstr(1076))[BREAK]_Control_set_DPI_Scaling($Einstellungen_AutoItIncludes_Verwalten_Remove_Button)
+type=button
+x=225
+y=266
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_AutoItIncludes_Verwalten_Remove_Button
+func=_Weitere_Includes_Pfad_entfernen
+bgimage=
+tabpage=-1
+textmode=text
+resize=
+order=13
+iconindex=
+[0x000E23C2]
+handle=409
+locked=0
+resize=
+code=_SetIconAlpha(-1, $bigiconsdll,381,32,32)[BREAK]_Control_set_DPI_Scaling($control_handle,true)
+type=image
+x=230
+y=80
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=9
+tabpage=-1
+iconindex=
+textmode=text
+#ce

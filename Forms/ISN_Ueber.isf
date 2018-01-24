@@ -1,0 +1,149 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$ISN_Ueber_GUI = GUICreate(_Get_langstr(178),459,197,-1,-1,BitOr($WS_CAPTION,$WS_POPUP,$WS_SYSMENU),$WS_EX_MDICHILD,$studiofenster)
+GUISetBkColor(0xFFFFFF,$ISN_Ueber_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_hide_Info", $ISN_Ueber_GUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ISN_Ueber_GUI)
+_Control_set_DPI_Scaling($ISN_Ueber_GUI)
+_CenterOnMonitor($ISN_Ueber_GUI,"", $Runonmonitor)
+GUICtrlCreatePic(@scriptdir&"\data\firstconfig_bg.jpg",0,-383,706,585)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+$ueber_txt = GUICtrlCreateLabel("Mein Text"&@crlf&"lölkö",153,36,290,109,$SS_CENTER,-1)
+GUICtrlSetFont(-1,8,400,0,"Arial")
+GUICtrlSetColor(-1,"0x4B4B4B")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1, 8.5, 800, 0, "Arial")
+_Control_set_DPI_Scaling($ueber_txt)
+GUICtrlCreateButton(_Get_langstr(7),179.5,161,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_hide_Info")
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreatePic("",14,10,131,131,-1,-1)
+GUICtrlSetState(-1,BitOr($GUI_SHOW,$GUI_DISABLE))
+_Control_set_DPI_Scaling(-1)
+_SetImage(-1, @ScriptDir & "\Data\isn_logo_l.png")
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(178)
+breite=459
+hoehe=197
+style=$WS_CAPTION+$WS_POPUP+$WS_SYSMENU
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=ISN_Ueber_GUI
+parent=$studiofenster
+code=GUISetFont ($Default_font_size,400, 0,$Default_font,$ISN_Ueber_GUI)[BREAK]_Control_set_DPI_Scaling($ISN_Ueber_GUI)[BREAK]_CenterOnMonitor($ISN_Ueber_GUI,"", $Runonmonitor)[BREAK]GUICtrlCreatePic(@scriptdir&"\data\firstconfig_bg.jpg",0,-383,706,585)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_hide_Info
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x0008488C]
+handle=402
+locked=0
+resize=
+code=GUICtrlSetFont(-1, 8.5, 800, 0, "Arial")[BREAK]_Control_set_DPI_Scaling($Control_handle)
+type=label
+x=153
+y=36
+width=290
+height=109
+text=Mein Text[BREAK]lölkö
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x4B4B4B
+bgcolour=-2
+font=Arial
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ueber_txt
+func=
+bgimage=
+order=1
+tabpage=-1
+iconindex=
+textmode=text
+[0x00014890]
+handle=403
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($Control_handle)[BREAK]_SetImage(-1, @ScriptDir & "\Data\isn_logo_l.png")[BREAK]
+type=image
+x=14
+y=10
+width=131
+height=131
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_DISABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=3
+[0x00024894]
+handle=404
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($Control_handle)
+type=button
+x=179.5
+y=161
+width=100
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_hide_Info
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=func
+#ce

@@ -1,0 +1,186 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$Choose_File_GUI = GUICreate(_Get_langstr(187),500,449,-1,-1,BitOr($WS_CAPTION,$WS_POPUP,$WS_SYSMENU),$WS_EX_MDICHILD,$Studiofenster)
+GUISetBkColor(0xFFFFFF,$Choose_File_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_close_Choose_File", $Choose_File_GUI)
+_CenterOnMonitor($Choose_File_GUI,"", $Runonmonitor)
+_Control_set_DPI_Scaling($Choose_File_GUI)
+GUISetFont ($Default_font_size,500, 0,$Default_font,$Choose_File_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Choose_File_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,500,50)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_Bottom.jpg",0,449-50,500,50)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+$Choose_File_GUI_Label = GUICtrlCreateLabel(_Get_langstr(187),10,10,340,22,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1, 12, 400, 0, $Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling($Choose_File_GUI_Label)
+$Choose_File_GUI_OK = GUICtrlCreateButton(_Get_langstr(7),10,410,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Choose_File_OK")
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling($Choose_File_GUI_OK)
+$Choose_File_GUI_Abbrechen = GUICtrlCreateButton(_Get_langstr(8),120,410,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_close_Choose_File")
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling($Choose_File_GUI_Abbrechen)
+$Choose_File_GUI_Mehr = GUICtrlCreateButton(_Get_langstr(969),330,410,160,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Choose_external_file")
+Button_AddIcon(-1, $smallIconsdll, 857,0)
+_Control_set_DPI_Scaling($Choose_File_GUI_Mehr)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(187)
+breite=500
+hoehe=449
+style=$WS_CAPTION+$WS_POPUP+$WS_SYSMENU
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Choose_File_GUI
+parent=$Studiofenster
+code=_CenterOnMonitor($Choose_File_GUI,"", $Runonmonitor)[BREAK]_Control_set_DPI_Scaling($Choose_File_GUI)[BREAK]GUISetFont ($Default_font_size,500, 0,$Default_font,$Choose_File_GUI)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$Choose_File_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,500,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_Bottom.jpg",0,449-50,500,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_close_Choose_File
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00151C7E]
+handle=402
+locked=0
+resize=
+code=GUICtrlSetFont(-1, 12, 400, 0, $Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=340
+height=22
+text=_Get_langstr(187)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Choose_File_GUI_Label
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=func
+[0x00071C52]
+handle=403
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=410
+width=100
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Choose_File_GUI_OK
+func=_Choose_File_OK
+bgimage=
+order=2
+tabpage=-1
+iconindex=
+textmode=func
+[0x00061C58]
+handle=404
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=120
+y=410
+width=100
+height=30
+text=_Get_langstr(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Choose_File_GUI_Abbrechen
+func=_close_Choose_File
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=3
+[0x00061C50]
+handle=405
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 857,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=330
+y=410
+width=160
+height=30
+text=_Get_langstr(969)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Choose_File_GUI_Mehr
+func=_Choose_external_file
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=4
+#ce

@@ -1,0 +1,193 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$Changelog_GUI = GUICreate(_Get_langstr(660),820,490,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$Update_GUI)
+GUISetBkColor(0xFFFFFF,$Changelog_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Hide_Changelog", $Changelog_GUI)
+_CenterOnMonitor($Changelog_GUI, "", $Runonmonitor)
+_GUISetIcon($Changelog_GUI, $smallIconsdll, 762)
+_Control_set_DPI_Scaling($Changelog_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe, $Changelog_GUI)
+guictrlcreatepic(@scriptdir & "\Data\wintop.jpg", 0, 0, 820, 70)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1, $GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+guictrlcreatepic(@scriptdir & "\Data\row_bottom.jpg", 0, 490 - 50, 820, 50)
+GUICtrlSetResizing(-1,578)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1, $GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlCreateLabel(_Get_langstr(660),53,10,744,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1, 16, 400, 0, $Default_font)
+GUICtrlSetColor(-1, $Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(7),10,450,142,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Hide_Changelog")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314, 0)
+_Control_set_DPI_Scaling(-1)
+$Changelog_GUI_Edit = GUICtrlCreateEdit("",10,50,801,379,2099200,-1)
+GUICtrlSetResizing(-1,102)
+GUICtrlSetBkColor(-1,$Fenster_Hintergrundfarbe)
+_Control_set_DPI_Scaling($Changelog_GUI_Edit)
+GUICtrlCreatePic("",10,10,32,32,-1,-1)
+GUICtrlSetResizing(-1,802)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,341+1,32,32)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(660)
+breite=820
+hoehe=490
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$Changelog_GUI
+parent=$Update_GUI
+code=_CenterOnMonitor($Changelog_GUI, "", $Runonmonitor)[BREAK]_GUISetIcon($GUI_HANDLE, $smallIconsdll, 762)[BREAK]_Control_set_DPI_Scaling($Changelog_GUI)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe, $Changelog_GUI)[BREAK]guictrlcreatepic(@scriptdir & "\Data\wintop.jpg", 0, 0, 820, 70)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1, $GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]guictrlcreatepic(@scriptdir & "\Data\row_bottom.jpg", 0, 490 - 50, 820, 50)[BREAK]GUICtrlSetResizing(-1,578)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1, $GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Hide_Changelog
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x000D217A]
+handle=405
+code=GUICtrlSetFont(-1, 16, 400, 0, $Default_font)[BREAK]GUICtrlSetColor(-1, $Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=53
+y=10
+width=744
+height=32
+text=_Get_langstr(660)
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+id=
+func=
+bgimage=
+tabpage=-1
+tooltip=
+fontattribute=0
+order=0
+iconindex=
+resize=550
+textmode=func
+locked=0
+[0x0008218C]
+handle=406
+code=Button_AddIcon(-1, $smallIconsdll, 314, 0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=450
+width=142
+height=30
+text=_Get_langstr(7)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=
+func=_Hide_Changelog
+bgimage=
+tabpage=-1
+tooltip=
+fontattribute=0
+order=2
+iconindex=
+resize=834
+textmode=func
+locked=0
+[0x0007218A]
+handle=407
+code=GUICtrlSetBkColor(-1,$Fenster_Hintergrundfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=edit
+x=10
+y=50
+width=801
+height=379
+text=
+state=80
+style=2099200
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=$Changelog_GUI_Edit
+func=
+bgimage=
+tooltip=
+fontattribute=0
+tabpage=-1
+order=3
+iconindex=
+resize=102
+textmode=text
+[0x00072188]
+handle=408
+locked=0
+resize=802
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,341+1,32,32)
+type=image
+x=10
+y=10
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=text
+#ce

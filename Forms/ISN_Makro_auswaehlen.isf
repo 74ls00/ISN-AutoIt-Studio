@@ -1,0 +1,231 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+
+$Makro_auswaehlen_GUI = GUICreate(_Get_langstr(1053),524,381,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$Studiofenster)
+GUISetBkColor(0xFFFFFF,$Makro_auswaehlen_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Hide_AU3_aus_Projektbaum_mit_vorhandenen_Makro_kompilieren", $Makro_auswaehlen_GUI)
+GUISetOnEvent($GUI_EVENT_RESTORE, "_Elemente_an_Fesntergroesse_anpassen", $Makro_auswaehlen_GUI)
+GUISetOnEvent($GUI_EVENT_MAXIMIZE, "_Elemente_an_Fesntergroesse_anpassen", $Makro_auswaehlen_GUI)
+GUISetOnEvent($GUI_EVENT_RESIZED, "_Elemente_an_Fesntergroesse_anpassen", $Makro_auswaehlen_GUI)
+_Control_set_DPI_Scaling($Makro_auswaehlen_GUI)
+_CenterOnMonitor($Makro_auswaehlen_GUI ,"", $Runonmonitor)
+_GUISetIcon($Makro_auswaehlen_GUI, $smallIconsdll, 1548)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$Makro_auswaehlen_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,524,55)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,381-50,524,50)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Makro_auswaehlen_GUI)
+GUICtrlCreateLabel(_Get_langstr(1053),10,10,498,35,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(1054),10,51,504,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$makro_auswaehlen_listview = GUICtrlCreatelistview(_Get_langstr(526),10,83,500,236,BitOr($LVS_SINGLESEL,$LVS_SHOWSELALWAYS),BitOr($LVS_EX_FULLROWSELECT,$LVS_EX_GRIDLINES,$LVS_EX_DOUBLEBUFFER))
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($makro_auswaehlen_listview)
+_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))
+_GUICtrlListView_SetImageList($makro_auswaehlen_listview, $hImage,1)
+_GUICtrlListView_HideColumn(-1,2)
+GUICtrlCreateButton(_Get_langstr(7),10,342,108,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_AU3_mit_vorhandenen_Makro_kompilieren_Makro_auswaehlen")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),129,342,108,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Hide_AU3_aus_Projektbaum_mit_vorhandenen_Makro_kompilieren")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_Get_langstr(1053)
+breite=524
+hoehe=381
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Makro_auswaehlen_GUI
+parent=$Studiofenster
+code=_Control_set_DPI_Scaling($Makro_auswaehlen_GUI)[BREAK]_CenterOnMonitor($Makro_auswaehlen_GUI ,"", $Runonmonitor)[BREAK]_GUISetIcon($Makro_auswaehlen_GUI, $smallIconsdll, 1548)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$Makro_auswaehlen_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,524,55)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,381-50,524,50)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$Makro_auswaehlen_GUI)
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Hide_AU3_aus_Projektbaum_mit_vorhandenen_Makro_kompilieren
+gui_event_minimize=
+gui_event_restore=_Elemente_an_Fesntergroesse_anpassen
+gui_event_maximize=_Elemente_an_Fesntergroesse_anpassen
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=_Elemente_an_Fesntergroesse_anpassen
+gui_event_dropped=
+[0x000932F0]
+handle=402
+locked=0
+resize=550
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=498
+height=35
+text=_Get_langstr(1053)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+textmode=func
+iconindex=
+[0x000132F4]
+handle=403
+locked=0
+resize=550
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=51
+width=504
+height=15
+text=_Get_langstr(1054)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+textmode=func
+iconindex=
+[0x000132F8]
+handle=404
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))[BREAK]_GUICtrlListView_SetImageList($makro_auswaehlen_listview, $hImage,1)[BREAK]_GUICtrlListView_HideColumn(-1,2)
+type=listview
+x=10
+y=83
+width=500
+height=236
+text=_Get_langstr(526)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_SINGLESEL+$LVS_SHOWSELALWAYS
+exstyle=$LVS_EX_FULLROWSELECT+$LVS_EX_GRIDLINES+$LVS_EX_DOUBLEBUFFER
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=makro_auswaehlen_listview
+func=
+bgimage=
+order=3
+tabpage=-1
+textmode=func
+iconindex=
+[0x00013300]
+handle=405
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=342
+width=108
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_AU3_mit_vorhandenen_Makro_kompilieren_Makro_auswaehlen
+bgimage=
+order=4
+tabpage=-1
+textmode=func
+iconindex=
+[0x00013304]
+handle=406
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=129
+y=342
+width=108
+height=30
+text=_Get_langstr(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Hide_AU3_aus_Projektbaum_mit_vorhandenen_Makro_kompilieren
+bgimage=
+tabpage=-1
+textmode=func
+order=5
+iconindex=
+#ce

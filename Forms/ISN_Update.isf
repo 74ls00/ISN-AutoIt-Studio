@@ -1,0 +1,457 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+#include <ProgressConstants.au3>
+
+$Update_GUI = GUICreate(_Get_langstr(1) & ' - ' & _Get_langstr(336),532,430,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_TOPMOST)
+GUISetBkColor(0xFFFFFF,$Update_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_ISNHelper_Updater_exit", $Update_GUI)
+_GUISetIcon($Update_GUI, $smallIconsdll, 762)
+_Control_set_DPI_Scaling($Update_GUI)
+_CenterOnMonitor($Update_GUI, "", $Runonmonitor)
+GUISetFont(8.5, 400, 0, "Segoe UI", $Update_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe, $Update_GUI)
+guictrlcreatepic(@scriptdir & "\Data\wintop.jpg", 0, 0, 532, 60)
+GUICtrlSetResizing(-1,546)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1, $GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+guictrlcreatepic(@scriptdir & "\Data\row_bottom.jpg", 0, 430 - 50, 532, 50)
+GUICtrlSetResizing(-1,578)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1, $GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlCreateLabel("ISN AutoIt Studio - Update",50,10,461,33,-1,-1)
+GUICtrlSetFont(-1,16,300,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,546)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetData(-1,_Get_langstr(1) & " - " & _Get_langstr(336))
+GUICtrlSetFont(-1, 16, 400, default, $Default_font)
+GUICtrlSetColor(-1, $Titel_Schriftfarbe)
+$update_currentversion = GUICtrlCreateLabel("Zurzeit installierte Version:",10,103,509,20,$SS_LEFT,-1)
+GUICtrlSetFont(-1,9,400,0,"Segoe UI")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($update_currentversion)
+$update_newversion = GUICtrlCreateLabel("Aktuellste Version:",10,103,509,20,$SS_RIGHT,-1)
+GUICtrlSetFont(-1,9,400,0,"Segoe UI")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($update_newversion)
+GUICtrlSetData(-1,_Get_langstr(334) & " " & _Get_langstr(335))
+$update_status = GUICtrlCreateLabel("Text",50,59,469,27,-1,-1)
+GUICtrlSetFont(-1,14,300,0,"Segoe UI")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($update_status)
+$update_prgressbar = GUICtrlCreateProgress(10,352,471,14,-1,-1)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling($update_prgressbar)
+$update_prgressbarlabel = GUICtrlCreateLabel("0 %",489,352,36,15,-1,-1)
+GUICtrlSetFont(-1,8,400,0,"Segoe UI")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,836)
+_Control_set_DPI_Scaling($update_prgressbarlabel)
+$update_gobutton = GUICtrlCreateButton(_Get_langstr(347),10,390,142,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Do_update")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 762, 0)
+_Control_set_DPI_Scaling($update_gobutton)
+$Loading_logo = GUICtrlCreateIcon("",-1,10,57,32,32,-1,-1)
+GUICtrlSetResizing(-1,802)
+GUICtrlSetImage(-1,$Loading2_Ani)
+_Control_set_DPI_Scaling(-1)
+$update_cancelbutton = GUICtrlCreateButton(_Get_langstr(8),380,390,142,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_ISNHelper_Updater_exit")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon($update_cancelbutton, $smallIconsdll, 1173, 0)
+_Control_set_DPI_Scaling($update_cancelbutton)
+$update_log = GUICtrlCreateEdit("",10,130,509,212,2099200,-1)
+GUICtrlSetResizing(-1,614)
+GUICtrlSetBkColor(-1,$Fenster_Hintergrundfarbe)
+_Control_set_DPI_Scaling($update_log)
+GUICtrlCreatePic("",10,10,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,341+1,32,32)
+$update_changelog_button = GUICtrlCreateButton(_Get_langstr(811),155,390,221,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Show_Changelog")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1116, 0)
+_Control_set_DPI_Scaling($update_changelog_button)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(1) & ' - ' & _Get_langstr(336)
+breite=532
+hoehe=430
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_TOPMOST
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$Update_GUI
+parent=
+code=_GUISetIcon($Update_GUI, $smallIconsdll, 762)[BREAK]_Control_set_DPI_Scaling($Update_GUI)[BREAK]_CenterOnMonitor($Update_GUI, "", $Runonmonitor)[BREAK]GUISetFont(8.5, 400, 0, "Segoe UI", $Update_GUI)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe, $Update_GUI)[BREAK]guictrlcreatepic(@scriptdir & "\Data\wintop.jpg", 0, 0, 532, 60)[BREAK]GUICtrlSetResizing(-1,546)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1, $GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]guictrlcreatepic(@scriptdir & "\Data\row_bottom.jpg", 0, 430 - 50, 532, 50)[BREAK]GUICtrlSetResizing(-1,578)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1, $GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_ISNHelper_Updater_exit
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00301812]
+handle=404
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]GUICtrlSetData(-1,_Get_langstr(1) & " - " & _Get_langstr(336))[BREAK]GUICtrlSetFont(-1, 16, 400, default, $Default_font)[BREAK]GUICtrlSetColor(-1, $Titel_Schriftfarbe)
+type=label
+x=50
+y=10
+width=461
+height=33
+text=ISN AutoIt Studio - Update
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=300
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=546
+textmode=text
+locked=0
+[0x0003209C]
+handle=405
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]
+type=label
+x=10
+y=103
+width=509
+height=20
+text=Zurzeit installierte Version:
+state=80
+style=$SS_LEFT
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Segoe UI
+fontsize=9
+fontstyle=400
+id=$update_currentversion
+func=
+bgimage=
+tabpage=-1
+tooltip=
+fontattribute=0
+order=5
+iconindex=
+resize=550
+textmode=text
+locked=0
+[0x000220BA]
+handle=406
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]GUICtrlSetData(-1,_Get_langstr(334) & " " & _Get_langstr(335))
+type=label
+x=10
+y=103
+width=509
+height=20
+text=Aktuellste Version:
+state=80
+style=$SS_RIGHT
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Segoe UI
+fontsize=9
+fontstyle=400
+id=$update_newversion
+func=
+bgimage=
+tabpage=-1
+tooltip=
+fontattribute=0
+order=6
+iconindex=
+resize=550
+textmode=text
+locked=0
+[0x000220BC]
+handle=407
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=50
+y=59
+width=469
+height=27
+text=Text
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Segoe UI
+fontsize=14
+fontstyle=300
+id=$update_status
+func=
+bgimage=
+order=7
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=550
+textmode=text
+locked=0
+[0x000220B6]
+handle=408
+code=_Control_set_DPI_Scaling($control_handle)
+type=progress
+x=10
+y=352
+width=471
+height=14
+text=
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=$update_prgressbar
+fontsize=8
+fontstyle=400
+id=$update_prgressbar
+func=
+bgimage=
+order=9
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=582
+textmode=text
+locked=0
+[0x000220B8]
+handle=409
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=489
+y=352
+width=36
+height=15
+text=0 %
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Segoe UI
+fontsize=8
+fontstyle=400
+id=$update_prgressbarlabel
+func=
+bgimage=
+order=10
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=836
+textmode=text
+locked=0
+[0x000220B2]
+handle=410
+code=Button_AddIcon(-1, $smallIconsdll, 762, 0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=390
+width=142
+height=30
+text=_Get_langstr(347)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=$update_gobutton
+func=_Do_update
+bgimage=
+order=11
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=834
+textmode=func
+[0x000220B4]
+handle=411
+code=Button_AddIcon($update_cancelbutton, $smallIconsdll, 1173, 0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=380
+y=390
+width=142
+height=30
+text=_Get_langstr(8)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=$update_cancelbutton
+func=_ISNHelper_Updater_exit
+bgimage=
+order=12
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=834
+textmode=func
+[0x000220AE]
+handle=412
+code=GUICtrlSetBkColor(-1,$Fenster_Hintergrundfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=edit
+x=10
+y=130
+width=509
+height=212
+text=
+state=80
+style=2099200
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=$update_log
+func=
+bgimage=
+order=13
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=614
+textmode=text
+locked=0
+[0x000220B0]
+handle=413
+code=Button_AddIcon(-1, $smallIconsdll, 1116, 0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=155
+y=390
+width=221
+height=30
+text=_Get_langstr(811)
+state=$GUI_DISABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=$update_changelog_button
+func=_Show_Changelog
+bgimage=
+tooltip=
+fontattribute=0
+tabpage=-1
+order=14
+iconindex=
+resize=834
+textmode=func
+locked=0
+[0x000220AA]
+handle=414
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,341+1,32,32)
+type=image
+x=10
+y=10
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=14
+tabpage=-1
+iconindex=
+textmode=text
+[0x000220AC]
+handle=415
+locked=0
+resize=802
+code=GUICtrlSetImage(-1,$Loading2_Ani)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]
+type=icon
+x=10
+y=57
+width=32
+height=32
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$Loading_logo
+func=
+bgimage=
+order=12
+tabpage=-1
+iconindex=
+textmode=text
+#ce

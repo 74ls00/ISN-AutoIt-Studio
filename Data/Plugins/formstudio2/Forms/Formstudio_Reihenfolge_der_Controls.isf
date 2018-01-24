@@ -1,0 +1,305 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+
+$control_reihenfolge_GUI = GUICreate(_ISNPlugin_Get_langstring(170),645,493,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_MAXIMIZEBOX),-1,$StudioFenster_inside)
+GUISetBkColor(0xFFFFFF,$control_reihenfolge_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Control_Reihenfolge_Abbrechen", $control_reihenfolge_GUI)
+GUISetOnEvent($GUI_EVENT_RESTORE, "_Elemente_an_Fesntergroesse_anpassen", $control_reihenfolge_GUI)
+GUISetOnEvent($GUI_EVENT_MAXIMIZE, "_Elemente_an_Fesntergroesse_anpassen", $control_reihenfolge_GUI)
+GUISetOnEvent($GUI_EVENT_RESIZED, "_Elemente_an_Fesntergroesse_anpassen", $control_reihenfolge_GUI)
+_Control_set_DPI_Scaling($control_reihenfolge_GUI)
+_CenterOnMonitor($control_reihenfolge_GUI,"", $Runonmonitor)
+GUISetBkColor($ISN_Hintergrundfarbe,$control_reihenfolge_GUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$control_reihenfolge_GUI)
+guictrlcreatepic($Window_TOP_IMG,0,0,645,50)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic($Window_Row_Bottom_IMG,0,493-50,645,50)
+GUICtrlSetState(-1,$GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+Global $control_reihenfolge_GUI_ToolTip = _GUIToolTip_Create($control_reihenfolge_GUI) ;Tooltip Handler
+
+
+
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(57),10,453,124,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Control_Reihenfolge_OK")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(170),10,10,625,30,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(174),522,49,113,28,-1,-1)
+GUICtrlSetOnEvent(-1,"_Control_Reihenfolge_verschiebe_nach_oben")
+GUICtrlSetResizing(-1,804)
+Button_AddIcon(-1, $smallIconsdll, 1737,0)
+_Control_set_DPI_Scaling(-1)
+_GUIToolTip_AddTool($control_reihenfolge_GUI_ToolTip, 0, _ISNPlugin_Get_langstring(174), GUICtrlGetHandle(-1))
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(171),10,423,621,20,-1,-1)
+GUICtrlSetColor(-1,"0x808080")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+$control_reihenfolge_GUI_listview = GUICtrlCreatelistview(' |'&_ISNPlugin_Get_langstring(172),10,50,506,367,-1,BitOr($LVS_EX_FULLROWSELECT,$LVS_EX_GRIDLINES))
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetData(-1," |"&_ISNPlugin_Get_langstring(172))
+_GUICtrlListView_SetImageList($control_reihenfolge_GUI_listview, $hToolBarImageListNorm,1)
+_GUICtrlListView_HideColumn($control_reihenfolge_GUI_listview, 4)
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(173),522,79,113,28,-1,-1)
+GUICtrlSetOnEvent(-1,"_Control_Reihenfolge_verschiebe_nach_unten")
+GUICtrlSetResizing(-1,804)
+Button_AddIcon(-1, $smallIconsdll, 1736,0)
+_Control_set_DPI_Scaling(-1)
+_GUIToolTip_AddTool($control_reihenfolge_GUI_ToolTip, 0, _ISNPlugin_Get_langstring(173), GUICtrlGetHandle(-1))
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(58),140,453,124,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Control_Reihenfolge_Abbrechen")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 922,0)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_ISNPlugin_Get_langstring(170)
+breite=645
+hoehe=493
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_MAXIMIZEBOX
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$control_reihenfolge_GUI
+parent=$StudioFenster_inside
+code=_Control_set_DPI_Scaling($control_reihenfolge_GUI)[BREAK]_CenterOnMonitor($control_reihenfolge_GUI,"", $Runonmonitor)[BREAK]GUISetBkColor($ISN_Hintergrundfarbe,$control_reihenfolge_GUI)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$control_reihenfolge_GUI)[BREAK]guictrlcreatepic($Window_TOP_IMG,0,0,645,50)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic($Window_Row_Bottom_IMG,0,493-50,645,50)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]Global $control_reihenfolge_GUI_ToolTip = _GUIToolTip_Create($control_reihenfolge_GUI) ;Tooltip Handler[BREAK][BREAK][BREAK][BREAK]
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Control_Reihenfolge_Abbrechen
+gui_event_minimize=
+gui_event_restore=_Elemente_an_Fesntergroesse_anpassen
+gui_event_maximize=_Elemente_an_Fesntergroesse_anpassen
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=_Elemente_an_Fesntergroesse_anpassen
+gui_event_dropped=
+[0x00302460]
+handle=392
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling(-1)
+type=button
+x=10
+y=453
+width=124
+height=30
+text=_ISNPlugin_Get_langstring(57)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Control_Reihenfolge_OK
+bgimage=
+tabpage=-1
+order=0
+iconindex=
+resize=834
+textmode=func
+locked=0
+[0x002B245A]
+handle=393
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)[BREAK]_Control_set_DPI_Scaling(-1)
+type=label
+x=10
+y=10
+width=625
+height=30
+text=_ISNPlugin_Get_langstring(170)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=1
+iconindex=
+resize=550
+textmode=func
+locked=0
+[0x0024249C]
+handle=394
+code=Button_AddIcon(-1, $smallIconsdll, 1737,0)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]_GUIToolTip_AddTool($control_reihenfolge_GUI_ToolTip, 0, _ISNPlugin_Get_langstring(174), GUICtrlGetHandle($control_handle))
+type=button
+x=522
+y=49
+width=113
+height=28
+text=_ISNPlugin_Get_langstring(174)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Control_Reihenfolge_verschiebe_nach_oben
+bgimage=
+tabpage=-1
+iconindex=
+resize=804
+textmode=func
+locked=0
+order=2
+[0x00262494]
+handle=395
+locked=0
+resize=582
+code=_Control_set_DPI_Scaling(-1)
+type=label
+x=10
+y=423
+width=621
+height=20
+text=_ISNPlugin_Get_langstring(171)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x808080
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=func
+[0x002624A2]
+handle=396
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetData(-1," |"&_ISNPlugin_Get_langstring(172))[BREAK]_GUICtrlListView_SetImageList($control_reihenfolge_GUI_listview, $hToolBarImageListNorm,1)[BREAK]_GUICtrlListView_HideColumn($control_reihenfolge_GUI_listview, 4)
+type=listview
+x=10
+y=50
+width=506
+height=367
+text=' |'&_ISNPlugin_Get_langstring(172)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$LVS_EX_FULLROWSELECT+$LVS_EX_GRIDLINES
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=control_reihenfolge_GUI_listview
+func=
+bgimage=
+order=5
+tabpage=-1
+iconindex=
+textmode=func
+[0x0025249A]
+handle=397
+code=Button_AddIcon(-1, $smallIconsdll, 1736,0)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]_GUIToolTip_AddTool($control_reihenfolge_GUI_ToolTip, 0, _ISNPlugin_Get_langstring(173), GUICtrlGetHandle($control_handle))
+type=button
+x=522
+y=79
+width=113
+height=28
+text=_ISNPlugin_Get_langstring(173)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Control_Reihenfolge_verschiebe_nach_unten
+bgimage=
+tabpage=-1
+iconindex=
+resize=804
+textmode=func
+locked=0
+order=6
+[0x00252498]
+handle=398
+code=Button_AddIcon(-1, $smallIconsdll, 922,0)[BREAK]_Control_set_DPI_Scaling(-1)
+type=button
+x=140
+y=453
+width=124
+height=30
+text=_ISNPlugin_Get_langstring(58)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Control_Reihenfolge_Abbrechen
+bgimage=
+tabpage=-1
+iconindex=
+resize=834
+textmode=func
+locked=0
+order=7
+#ce

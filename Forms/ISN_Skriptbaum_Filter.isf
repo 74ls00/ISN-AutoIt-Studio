@@ -1,0 +1,291 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$skriuptbaum_FilterGUI = GUICreate(_Get_langstr(964),639,511,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$config_GUI)
+GUISetBkColor(0xFFFFFF,$skriuptbaum_FilterGUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Verstecke_Skriptbaum_FilterGUI", $skriuptbaum_FilterGUI)
+_GUISetIcon($skriuptbaum_FilterGUI, $smallIconsdll, 1337)
+_Control_set_DPI_Scaling($skriuptbaum_FilterGUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$skriuptbaum_FilterGUI)
+_CenterOnMonitor($skriuptbaum_FilterGUI,"", $Runonmonitor)
+GUISetBkColor($Fenster_Hintergrundfarbe,$skriuptbaum_FilterGUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,639,30)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,511-50,639,50)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlCreateLabel(_Get_langstr(964),54,13,575,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(965),10,51,619,33,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$skriuptbaum_FilterGUI_Edit = GUICtrlCreateEdit("",10,90,620,338,BitOr($ES_WANTRETURN,$WS_VSCROLL,$WS_HSCROLL),-1)
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($skriuptbaum_FilterGUI_Edit)
+GUICtrlCreateButton(_Get_langstr(7),10,470,119,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Skriptbaum_FilterGUI_OK")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(564),10,438,619,15,-1,-1)
+GUICtrlSetColor(-1,"0xFF0000")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),140,470,119,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Verstecke_Skriptbaum_FilterGUI")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreatePic("",13,13,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,233+1,32,32)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_Get_langstr(964)
+breite=639
+hoehe=511
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=skriuptbaum_FilterGUI
+parent=$config_GUI
+code=_GUISetIcon($skriuptbaum_FilterGUI, $smallIconsdll, 1337)[BREAK]_Control_set_DPI_Scaling($skriuptbaum_FilterGUI)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$skriuptbaum_FilterGUI)[BREAK]_CenterOnMonitor($skriuptbaum_FilterGUI,"", $Runonmonitor)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$skriuptbaum_FilterGUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,639,30)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,511-50,639,50)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Verstecke_Skriptbaum_FilterGUI
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00122BD6]
+handle=406
+locked=0
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=54
+y=13
+width=575
+height=32
+text=_Get_langstr(964)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+textmode=func
+iconindex=
+resize=550
+[0x0015287A]
+handle=407
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=51
+width=619
+height=33
+text=_Get_langstr(965)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+textmode=func
+iconindex=
+resize=550
+[0x000E294C]
+handle=408
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=edit
+x=10
+y=90
+width=620
+height=338
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_WANTRETURN+$WS_VSCROLL+$WS_HSCROLL
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=skriuptbaum_FilterGUI_Edit
+func=
+bgimage=
+order=3
+tabpage=-1
+textmode=text
+iconindex=
+resize=102
+[0x00172952]
+handle=409
+locked=0
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=470
+width=119
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Skriptbaum_FilterGUI_OK
+bgimage=
+order=4
+tabpage=-1
+textmode=func
+iconindex=
+resize=834
+[0x000E2A34]
+handle=410
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=438
+width=619
+height=15
+text=_Get_langstr(564)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0xFF0000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=5
+tabpage=-1
+textmode=func
+iconindex=
+resize=582
+[0x002512CA]
+handle=411
+locked=0
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=140
+y=470
+width=119
+height=30
+text=_Get_langstr(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Verstecke_Skriptbaum_FilterGUI
+bgimage=
+tabpage=-1
+textmode=func
+order=6
+iconindex=
+resize=834
+[0x00132A2A]
+handle=412
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,233+1,32,32)
+type=image
+x=13
+y=13
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=7
+tabpage=-1
+iconindex=
+textmode=text
+#ce

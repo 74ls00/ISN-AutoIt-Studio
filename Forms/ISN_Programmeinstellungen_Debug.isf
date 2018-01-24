@@ -1,0 +1,196 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$ISNSTudio_debug = GUICreate(_Get_langstr(1)&' - '&_Get_langstr(306),540,501,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$Config_GUI)
+GUISetBkColor(0xFFFFFF,$ISNSTudio_debug)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_HIDE_Studio_Debug", $ISNSTudio_debug)
+_Control_set_DPI_Scaling($ISNSTudio_debug)
+_GUISetIcon($ISNSTudio_debug, $smallIconsdll,1374)
+_CenterOnMonitor($ISNSTudio_debug ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ISNSTudio_debug)
+GUISetBkColor($Fenster_Hintergrundfarbe,$ISNSTudio_debug )
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,540,60)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+
+guictrlcreatepic(@scriptdir & "\Data\row_bottom.jpg", 0, 501 - 50, 540, 50)
+GUICtrlSetResizing(-1,578)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1, $GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlCreateLabel(_Get_langstr(1)&' - '&_Get_langstr(306),10,5,517,32,$SS_CENTERIMAGE,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,default,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+$ISNSTudio_debug_edit = GUICtrlCreateEdit("",10,50,521,363,BitOr($ES_READONLY,$WS_VSCROLL),-1)
+GUICtrlSetResizing(-1,102)
+GUICtrlSetBkColor(-1,$Fenster_Hintergrundfarbe)
+_Control_set_DPI_Scaling($ISNSTudio_debug_edit)
+GUICtrlCreateButton(_Get_langstr(7),10,461,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_HIDE_Studio_Debug")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+$isnstudio_debug_console_checkbox = GUICtrlCreateCheckbox(_Get_langstr(1297),11,421,516,20,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling($isnstudio_debug_console_checkbox)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(1)&' - '&_Get_langstr(306)
+breite=540
+hoehe=501
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=ISNSTudio_debug
+parent=$Config_GUI
+code=_Control_set_DPI_Scaling($ISNSTudio_debug)[BREAK]_GUISetIcon($ISNSTudio_debug, $smallIconsdll,1374)[BREAK]_CenterOnMonitor($ISNSTudio_debug ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$ISNSTudio_debug)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$ISNSTudio_debug )[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,540,60)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK][BREAK]guictrlcreatepic(@scriptdir & "\Data\row_bottom.jpg", 0, 501 - 50, 540, 50)[BREAK]GUICtrlSetResizing(-1,578)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1, $GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_HIDE_Studio_Debug
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x000B2658]
+handle=406
+locked=0
+resize=550
+code=GUICtrlSetFont(-1,16,400,default,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=5
+width=517
+height=32
+text=_Get_langstr(1)&' - '&_Get_langstr(306)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTERIMAGE
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=func
+[0x00062646]
+handle=407
+locked=0
+resize=102
+code=GUICtrlSetBkColor(-1,$Fenster_Hintergrundfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=edit
+x=10
+y=50
+width=521
+height=363
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_READONLY+$WS_VSCROLL
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ISNSTudio_debug_edit
+func=
+bgimage=
+order=2
+tabpage=-1
+iconindex=
+textmode=text
+[0x00222194]
+handle=408
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=461
+width=100
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_HIDE_Studio_Debug
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=func
+[0x00112160]
+handle=409
+locked=0
+resize=582
+code=_Control_set_DPI_Scaling($control_handle)
+type=checkbox
+x=11
+y=421
+width=516
+height=20
+text=_Get_langstr(1297)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=isnstudio_debug_console_checkbox
+func=
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=func
+#ce

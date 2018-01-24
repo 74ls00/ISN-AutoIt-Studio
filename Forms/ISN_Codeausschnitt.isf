@@ -1,0 +1,485 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$Codeausschnitt_GUI = GUICreate(_Get_langstr(810),975,627,-1,-1,BitOr($WS_SIZEBOX,$WS_CAPTION,$WS_MAXIMIZEBOX,$WS_SYSMENU),BitOr($WS_EX_MDICHILD,$WS_EX_TOPMOST),$StudioFenster)
+GUISetBkColor(0xFFFFFF,$Codeausschnitt_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Hide_Codeausschnitt_GUI", $Codeausschnitt_GUI)
+_Control_set_DPI_Scaling($Codeausschnitt_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Codeausschnitt_GUI)
+_CenterOnMonitor($Codeausschnitt_GUI ,"", $Runonmonitor)
+_GUISetIcon($Codeausschnitt_GUI, $smallIconsdll,1785)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$Codeausschnitt_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,975,50,$WS_CLIPSIBLINGS)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetResizing (-1, 550)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,627-50,975,50,$WS_CLIPSIBLINGS)
+GUICtrlSetResizing (-1, 582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetResizing (-1, $GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)
+GUICtrlSetState(-1,$GUI_DISABLE)
+$Codeausschnitt_GUI_titel2 = GUICtrlCreateLabel("test.au3",54,37,908,46,-1,-1)
+GUICtrlSetFont(-1,13,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,13,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling($Codeausschnitt_GUI_titel2)
+$Codeausschnitt_GUI_titel = GUICtrlCreateLabel("Code ausschnitt",53,6,911,30,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling($Codeausschnitt_GUI_titel)
+$Codeausschnitt_OK_Button = GUICtrlCreateButton(_Get_langstr(7),6,587,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Codeausschnitt_GUI_OK")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling($Codeausschnitt_OK_Button)
+$Codeausschnitt_Abbrechen_Button = GUICtrlCreateButton(_Get_langstr(8),111,587,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Hide_Codeausschnitt_GUI")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling($Codeausschnitt_Abbrechen_Button)
+$Codeausschnitt_GUI_bereichlabel = GUICtrlCreateLabel("Bereich: Zeile 4 bis 10",225,603,736,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,834)
+_Control_set_DPI_Scaling($Codeausschnitt_GUI_bereichlabel)
+$Codeausschnitt_GUI_Dateilabel = GUICtrlCreateLabel("Datei:",225,588,736,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,834)
+_Control_set_DPI_Scaling($Codeausschnitt_GUI_Dateilabel)
+$codeausschnitt_Dateipfad = GUICtrlCreateInput("Mein Text",340,640,150,20,$ES_READONLY,$WS_EX_CLIENTEDGE)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,832)
+_Control_set_DPI_Scaling($codeausschnitt_Dateipfad)
+GUICtrlSetState(-1,$GUI_HIDE)
+$codeausschnitt_bisZEILE = GUICtrlCreateInput("Mein Text",180,640,150,20,$ES_READONLY,$WS_EX_CLIENTEDGE)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling($codeausschnitt_bisZEILE)
+GUICtrlSetState(-1,$GUI_HIDE)
+$codeausschnitt_vonZEILE = GUICtrlCreateInput("Mein Text",20,640,150,20,$ES_READONLY,$WS_EX_CLIENTEDGE)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling($codeausschnitt_vonZEILE)
+GUICtrlSetState(-1,$GUI_HIDE)
+GUICtrlCreateDummy()
+$scintilla_Codeausschnitt = SCI_CreateEditorAu3($Codeausschnitt_GUI,10*$DPI,93*$DPI,953*$DPI,475*$DPI)
+SendMessage($scintilla_Codeausschnitt, $SCI_SETLEXER, $SCLEX_AU3, 0)
+$Codeausschnitt_Code_Kopieren_Button = GUICtrlCreateButton(_Get_langstr(1188),833,588,128,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Extracode_Copy_to_Clipboard")
+GUICtrlSetResizing(-1,836)
+Button_AddIcon(-1, $smallIconsdll, 1311,0)
+_Control_set_DPI_Scaling($Codeausschnitt_Code_Kopieren_Button)
+$Codeausschnitt_Code_Save_as_au3_Button = GUICtrlCreateButton(_Get_langstr(1187),671,588,156,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Extracode_Save_AS_Au3")
+GUICtrlSetResizing(-1,836)
+Button_AddIcon(-1, $smallIconsdll, 1785,0)
+_Control_set_DPI_Scaling($Codeausschnitt_Code_Save_as_au3_Button)
+GUICtrlCreatePic("",11,7,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,720+1,32,32)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_Get_langstr(810)
+breite=975
+hoehe=627
+style=$WS_SIZEBOX+$WS_CAPTION+$WS_MAXIMIZEBOX+$WS_SYSMENU
+exstyle=$WS_EX_MDICHILD+$WS_EX_TOPMOST
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$Codeausschnitt_GUI
+parent=$StudioFenster
+code=_Control_set_DPI_Scaling($Codeausschnitt_GUI)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$Codeausschnitt_GUI)[BREAK]_CenterOnMonitor($Codeausschnitt_GUI ,"", $Runonmonitor)[BREAK]_GUISetIcon($Codeausschnitt_GUI, $smallIconsdll,1785)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$Codeausschnitt_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,975,50,$WS_CLIPSIBLINGS)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetResizing (-1, 550)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,627-50,975,50,$WS_CLIPSIBLINGS)[BREAK]GUICtrlSetResizing (-1, 582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetResizing (-1, $GUI_DOCKBOTTOM+$GUI_DOCKHEIGHT)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Hide_Codeausschnitt_GUI
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00102C32]
+handle=405
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=53
+y=6
+width=911
+height=30
+text=Code ausschnitt
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=$Codeausschnitt_GUI_titel
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+textmode=text
+locked=0
+resize=550
+iconindex=
+[0x000C2C34]
+handle=406
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=6
+y=587
+width=100
+height=30
+text=_Get_langstr(7)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$Codeausschnitt_OK_Button
+func=_Codeausschnitt_GUI_OK
+bgimage=
+order=3
+tabpage=-1
+tooltip=
+textmode=func
+resize=834
+iconindex=
+[0x000D2C3E]
+handle=407
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=111
+y=587
+width=100
+height=30
+text=_Get_langstr(8)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$Codeausschnitt_Abbrechen_Button
+func=_Hide_Codeausschnitt_GUI
+bgimage=
+order=3
+tabpage=-1
+tooltip=
+textmode=func
+locked=0
+resize=834
+iconindex=
+[0x000A2C42]
+handle=408
+code=GUICtrlSetFont(-1,13,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=54
+y=37
+width=908
+height=46
+text=test.au3
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=13
+fontstyle=400
+fontattribute=0
+id=$Codeausschnitt_GUI_titel2
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+textmode=text
+locked=0
+resize=550
+iconindex=
+[0x00092C3A]
+handle=409
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=225
+y=588
+width=736
+height=15
+text=Datei:
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$Codeausschnitt_GUI_Dateilabel
+func=
+bgimage=
+order=6
+tabpage=-1
+textmode=text
+iconindex=
+resize=834
+[0x000C2C40]
+handle=410
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=225
+y=603
+width=736
+height=15
+text=Bereich: Zeile 4 bis 10
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Codeausschnitt_GUI_bereichlabel
+func=
+bgimage=
+order=6
+tabpage=-1
+textmode=text
+resize=834
+iconindex=
+[0x00121340]
+handle=411
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]GUICtrlSetState(-1,$GUI_HIDE)
+type=input
+x=20
+y=640
+width=150
+height=20
+text=Mein Text
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_READONLY
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=codeausschnitt_vonZEILE
+func=
+bgimage=
+order=8
+tabpage=-1
+textmode=text
+[0x00152830]
+handle=412
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]GUICtrlSetState(-1,$GUI_HIDE)
+type=input
+x=180
+y=640
+width=150
+height=20
+text=Mein Text
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_READONLY
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=codeausschnitt_bisZEILE
+func=
+bgimage=
+order=8
+tabpage=-1
+textmode=text
+[0x00162BD2]
+handle=413
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]GUICtrlSetState(-1,$GUI_HIDE)
+type=input
+x=340
+y=640
+width=150
+height=20
+text=Mein Text
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_READONLY
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$codeausschnitt_Dateipfad
+func=
+bgimage=
+order=8
+tabpage=-1
+textmode=text
+iconindex=
+resize=832
+[0x002F270E]
+handle=414
+locked=0
+resize=
+code=$scintilla_Codeausschnitt = SCI_CreateEditorAu3($Codeausschnitt_GUI,10*$DPI,93*$DPI,953*$DPI,475*$DPI)[BREAK]SendMessage($scintilla_Codeausschnitt, $SCI_SETLEXER, $SCLEX_AU3, 0)
+type=dummy
+x=10
+y=86
+width=951
+height=493
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=10
+tabpage=-1
+iconindex=
+textmode=text
+[0x001727EE]
+handle=415
+code=Button_AddIcon(-1, $smallIconsdll, 1311,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=833
+y=588
+width=128
+height=30
+text=_Get_langstr(1188)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$Codeausschnitt_Code_Kopieren_Button
+func=_Extracode_Copy_to_Clipboard
+bgimage=
+tabpage=-1
+tooltip=
+textmode=func
+resize=836
+iconindex=
+locked=0
+order=11
+[0x000C2B88]
+handle=416
+code=Button_AddIcon(-1, $smallIconsdll, 1785,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=671
+y=588
+width=156
+height=30
+text=_Get_langstr(1187)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$Codeausschnitt_Code_Save_as_au3_Button
+func=_Extracode_Save_AS_Au3
+bgimage=
+tabpage=-1
+tooltip=
+textmode=func
+resize=836
+iconindex=
+locked=0
+order=12
+[0x000C2B82]
+handle=417
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,720+1,32,32)
+type=image
+x=11
+y=7
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=13
+tabpage=-1
+iconindex=
+textmode=text
+#ce

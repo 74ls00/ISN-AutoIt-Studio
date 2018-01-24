@@ -1,0 +1,722 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <UpDownConstants.au3>
+#include <EditConstants.au3>
+
+$Formstudio_controleditor_GUI = GUICreate("Control Editor",332,707,-9000,5,$WS_POPUP,-1,$StudioFenster_inside)
+$BGimage_controleditor = GUICtrlCreatePic(@scriptdir&"\Data\side2.jpg",0,0,$breite_des_Controleditors,2000)
+guictrlsetstate(-1,$GUI_DISABLE)
+winmove($Formstudio_controleditor_GUI,"",-9000,5,$breite_des_Controleditors,$hoehe_des_Controleditors)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$Formstudio_controleditor_GUI)
+
+
+;Tabseiten
+
+Global $Control_Editor_Allgemein_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(139),5,30*$DPI)
+GUICtrlSetOnEvent($Control_Editor_Allgemein_Tab[3],"_Minieditor_select_allgemein")
+$pos_vorherige_tabseite = ControlGetPos ($Formstudio_controleditor_GUI, "", $Control_Editor_Allgemein_Tab[1])
+if IsArray($pos_vorherige_tabseite) then
+Global $Control_Editor_Darstellung_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(140),5,($pos_vorherige_tabseite[1]+$pos_vorherige_tabseite[3])+5)
+GUICtrlSetOnEvent($Control_Editor_Darstellung_Tab[3],"_Minieditor_select_aussehen")
+endif
+
+$pos_vorherige_tabseite = ControlGetPos ($Formstudio_controleditor_GUI, "", $Control_Editor_Darstellung_Tab[1])
+if IsArray($pos_vorherige_tabseite) then
+Global $Control_Editor_Style_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(96),5,($pos_vorherige_tabseite[1]+$pos_vorherige_tabseite[3])+5)
+GUICtrlSetOnEvent($Control_Editor_Style_Tab[3],"_Minieditor_select_style")
+endif
+
+$pos_vorherige_tabseite = ControlGetPos ($Formstudio_controleditor_GUI, "", $Control_Editor_Style_Tab[1])
+if IsArray($pos_vorherige_tabseite) then
+Global $Control_Editor_ExStyle_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(141),5,($pos_vorherige_tabseite[1]+$pos_vorherige_tabseite[3])+5)
+GUICtrlSetOnEvent($Control_Editor_ExStyle_Tab[3],"_Minieditor_select_exstyle")
+endif
+
+$pos_vorherige_tabseite = ControlGetPos ($Formstudio_controleditor_GUI, "", $Control_Editor_ExStyle_Tab[1])
+if IsArray($pos_vorherige_tabseite) then
+Global $Control_Editor_State_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(142),5,($pos_vorherige_tabseite[1]+$pos_vorherige_tabseite[3])+5)
+GUICtrlSetOnEvent($Control_Editor_State_Tab[3],"_Minieditor_select_state")
+endif
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(42),0,4,343,21,BitOr($SS_CENTER,$SS_CENTERIMAGE),-1)
+GUICtrlSetOnEvent(-1,"_ControlEditor_zusammenklappen")
+GUICtrlSetFont(-1,9,800,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetFont(-1,9,800,0,$Default_font)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)
+GUICtrlSetCursor (-1, 0)
+_Control_Add_ToolTip(-1,_ISNPlugin_Get_langstring(234))
+$MiniEditor_Handle_label = GUICtrlCreateLabel(_ISNPlugin_Get_langstring(3),39,91,103,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+GUICtrlSetData($MiniEditor_Handle_label,stringreplace(_ISNPlugin_Get_langstring(3),"$",""))
+_Control_Add_ToolTip($MiniEditor_Handle_label,_ISNPlugin_Get_langstring(145))
+$MiniEditor_position_label = GUICtrlCreateLabel(_ISNPlugin_Get_langstring(5),40,41,81,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+_Control_Add_ToolTip($MiniEditor_position_label,_ISNPlugin_Get_langstring(153))
+$MiniEditor_Controltype = GUICtrlCreateLabel("",31,387,295,21,$SS_CENTER,-1)
+GUICtrlSetFont(-1,10,400,2,"Segoe UI")
+GUICtrlSetBkColor(-1,"0xD7D7D7")
+_Control_set_DPI_Scaling(-1)
+_Control_Add_ToolTip($MiniEditor_Controltype,_ISNPlugin_Get_langstring(149))
+$MiniEditor_breite_label = GUICtrlCreateLabel(_ISNPlugin_Get_langstring(6),40,66,81,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+_Control_Add_ToolTip($MiniEditor_breite_label,_ISNPlugin_Get_langstring(156))
+$MiniEditorX = GUICtrlCreateInput("",148,38,70,20, -1,$WS_EX_CLIENTEDGE)
+$MiniEditorX_Updown = GUICtrlCreateUpdown(-1,-1)
+$control_positionen = ControlGetPos($Formstudio_controleditor_GUI, "", $MiniEditorX)
+		If IsArray($control_positionen) Then	
+				GUICtrlSetPos($MiniEditorX, $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)
+			   winmove($MiniEditorX_Updown,"", $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)
+		EndIf
+GUICtrlSetStyle ($MiniEditorX,$ES_Number)
+$MiniEditorY = GUICtrlCreateInput("",249,38,70,20, -1,$WS_EX_CLIENTEDGE)
+$MiniEditorY_Updown = GUICtrlCreateUpdown(-1,$ES_NUMBER)
+$control_positionen = ControlGetPos($Formstudio_controleditor_GUI, "", $MiniEditorY)
+		If IsArray($control_positionen) Then	
+				GUICtrlSetPos($MiniEditorY, $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)
+			   winmove($MiniEditorY_Updown,"", $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)
+		EndIf
+GUICtrlSetStyle ($MiniEditorY,$ES_Number)
+$MiniEditor_breite = GUICtrlCreateInput("",148,64,70,20, -1,$WS_EX_CLIENTEDGE)
+$MiniEditor_breite_Updown = GUICtrlCreateUpdown(-1,$ES_NUMBER)
+$control_positionen = ControlGetPos($Formstudio_controleditor_GUI, "", $MiniEditor_breite)
+		If IsArray($control_positionen) Then	
+				GUICtrlSetPos($MiniEditor_breite, $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)
+			   winmove($MiniEditor_breite_Updown,"", $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)
+		EndIf
+GUICtrlSetStyle ($MiniEditor_breite,$ES_Number)
+$MiniEditor_hoehe = GUICtrlCreateInput("",249,64,70,20, -1,$WS_EX_CLIENTEDGE)
+$MiniEditor_hoehe_Updown = GUICtrlCreateUpdown(-1,$ES_NUMBER)
+$control_positionen = ControlGetPos($Formstudio_controleditor_GUI, "", $MiniEditor_hoehe)
+		If IsArray($control_positionen) Then	
+				GUICtrlSetPos($MiniEditor_hoehe, $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)
+			   winmove($MiniEditor_hoehe_Updown,"", $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)
+		EndIf
+GUICtrlSetStyle ($MiniEditor_hoehe,$ES_Number)
+$MiniEditor_ControlID = GUICtrlCreateInput("",148,88,171,19,-1,$WS_EX_CLIENTEDGE)
+_Control_set_DPI_Scaling(-1)
+$MiniEditor_x_label = GUICtrlCreateLabel(_ISNPlugin_Get_langstring(8),126,41,17,15,$SS_RIGHT,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+$MiniEditor_y_label = GUICtrlCreateLabel(_ISNPlugin_Get_langstring(7),227,41,17,15,$SS_RIGHT,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+$MiniEditor_b_label = GUICtrlCreateLabel(_ISNPlugin_Get_langstring(9),126,67,17,15,$SS_RIGHT,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+$MiniEditor_h_label = GUICtrlCreateLabel(_ISNPlugin_Get_langstring(10),227,67,17,15,$SS_RIGHT,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+GUICtrlCreateLabel("",39,116,282,9,$SS_ETCHEDHORZ,-1)
+GUICtrlSetState(-1,BitOr($GUI_SHOW,$GUI_DISABLE))
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel("",10,454,319,9,$SS_ETCHEDHORZ,-1)
+GUICtrlSetState(-1,BitOr($GUI_SHOW,$GUI_DISABLE))
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel("",30,30,298,378,$SS_ETCHEDFRAME,-1)
+GUICtrlSetState(-1,BitOr($GUI_SHOW,$GUI_DISABLE))
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(43),0,459,343,21,BitOr($SS_CENTER,$SS_CENTERIMAGE),-1)
+GUICtrlSetFont(-1,9,800,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetFont(-1,9,800,0,$Default_font)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)
+GUICtrlSetBkColor(-1,"-2")
+$Control_Editor_collapse_label = GUICtrlCreateLabel("-",0,4,325,21,BitOr($SS_RIGHT,$SS_CENTERIMAGE),-1)
+GUICtrlSetOnEvent(-1,"_ControlEditor_zusammenklappen")
+GUICtrlSetFont(-1,9,800,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetFont(-1,9,800,0,$Default_font)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)
+GUICtrlSetCursor (-1, 0)
+_Control_Add_ToolTip($Control_Editor_collapse_label,_ISNPlugin_Get_langstring(234))
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Control Editor
+breite=332
+hoehe=707
+style=$WS_POPUP
+exstyle=-1
+bgcolour=0xF0F0F0
+bgimage=none
+handle=Formstudio_controleditor_GUI
+parent=$StudioFenster_inside
+code=$BGimage_controleditor = GUICtrlCreatePic(@scriptdir&"\Data\side2.jpg",0,0,$breite_des_Controleditors,2000)[BREAK]guictrlsetstate(-1,$GUI_DISABLE)[BREAK]winmove($Formstudio_controleditor_GUI,"",-9000,5,$breite_des_Controleditors,$hoehe_des_Controleditors)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$Formstudio_controleditor_GUI)[BREAK][BREAK][BREAK];Tabseiten[BREAK][BREAK]Global $Control_Editor_Allgemein_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(139),5,30*$DPI)[BREAK]GUICtrlSetOnEvent($Control_Editor_Allgemein_Tab[3],"_Minieditor_select_allgemein")[BREAK]$pos_vorherige_tabseite = ControlGetPos ($Formstudio_controleditor_GUI, "", $Control_Editor_Allgemein_Tab[1])[BREAK]if IsArray($pos_vorherige_tabseite) then[BREAK]Global $Control_Editor_Darstellung_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(140),5,($pos_vorherige_tabseite[1]+$pos_vorherige_tabseite[3])+5)[BREAK]GUICtrlSetOnEvent($Control_Editor_Darstellung_Tab[3],"_Minieditor_select_aussehen")[BREAK]endif[BREAK][BREAK]$pos_vorherige_tabseite = ControlGetPos ($Formstudio_controleditor_GUI, "", $Control_Editor_Darstellung_Tab[1])[BREAK]if IsArray($pos_vorherige_tabseite) then[BREAK]Global $Control_Editor_Style_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(96),5,($pos_vorherige_tabseite[1]+$pos_vorherige_tabseite[3])+5)[BREAK]GUICtrlSetOnEvent($Control_Editor_Style_Tab[3],"_Minieditor_select_style")[BREAK]endif[BREAK][BREAK]$pos_vorherige_tabseite = ControlGetPos ($Formstudio_controleditor_GUI, "", $Control_Editor_Style_Tab[1])[BREAK]if IsArray($pos_vorherige_tabseite) then[BREAK]Global $Control_Editor_ExStyle_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(141),5,($pos_vorherige_tabseite[1]+$pos_vorherige_tabseite[3])+5)[BREAK]GUICtrlSetOnEvent($Control_Editor_ExStyle_Tab[3],"_Minieditor_select_exstyle")[BREAK]endif[BREAK][BREAK]$pos_vorherige_tabseite = ControlGetPos ($Formstudio_controleditor_GUI, "", $Control_Editor_ExStyle_Tab[1])[BREAK]if IsArray($pos_vorherige_tabseite) then[BREAK]Global $Control_Editor_State_Tab =  _Erstelle_Tabseite(_ISNPlugin_Get_langstring(142),5,($pos_vorherige_tabseite[1]+$pos_vorherige_tabseite[3])+5)[BREAK]GUICtrlSetOnEvent($Control_Editor_State_Tab[3],"_Minieditor_select_state")[BREAK]endif
+codebeforegui=
+xpos=-9000
+ypos=5
+center_gui=false
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00072518]
+handle=406
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetFont(-1,9,800,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)[BREAK]GUICtrlSetCursor (-1, 0)[BREAK]_Control_Add_ToolTip($control_handle,_ISNPlugin_Get_langstring(234))
+type=label
+x=0
+y=4
+width=343
+height=21
+text=_ISNPlugin_Get_langstring(42)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER+$SS_CENTERIMAGE
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=9
+fontstyle=800
+fontattribute=0
+id=
+func=_ControlEditor_zusammenklappen
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=func
+[0x0001251A]
+handle=407
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)[BREAK]GUICtrlSetData($control_handle,stringreplace(_ISNPlugin_Get_langstring(3),"$",""))[BREAK]_Control_Add_ToolTip($control_handle,_ISNPlugin_Get_langstring(145))
+type=label
+x=39
+y=91
+width=103
+height=15
+text=_ISNPlugin_Get_langstring(3)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_Handle_label
+func=
+bgimage=
+order=1
+tabpage=-1
+iconindex=
+textmode=func
+[0x0001251C]
+handle=408
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)[BREAK]_Control_Add_ToolTip($control_handle,_ISNPlugin_Get_langstring(153))
+type=label
+x=40
+y=41
+width=81
+height=15
+text=_ISNPlugin_Get_langstring(5)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_position_label
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=2
+[0x0001251E]
+handle=409
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)[BREAK]_Control_Add_ToolTip($control_handle,_ISNPlugin_Get_langstring(156))
+type=label
+x=40
+y=66
+width=81
+height=15
+text=_ISNPlugin_Get_langstring(6)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_breite_label
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=4
+[0x00012520]
+handle=410
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]_Control_Add_ToolTip($control_handle,_ISNPlugin_Get_langstring(149))
+type=label
+x=31
+y=387
+width=295
+height=21
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xD7D7D7
+font=Segoe UI
+fontsize=10
+fontstyle=400
+fontattribute=2
+id=MiniEditor_Controltype
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=3
+[0x00012522]
+handle=411
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)
+type=input
+x=148
+y=88
+width=171
+height=19
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_ControlID
+func=
+bgimage=
+order=9
+tabpage=-1
+iconindex=
+textmode=text
+[0x00012524]
+handle=412
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+type=label
+x=126
+y=41
+width=17
+height=15
+text=_ISNPlugin_Get_langstring(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_RIGHT
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_x_label
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=10
+[0x00012526]
+handle=413
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+type=label
+x=227
+y=41
+width=17
+height=15
+text=_ISNPlugin_Get_langstring(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_RIGHT
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_y_label
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=11
+[0x00012528]
+handle=414
+locked=0
+resize=
+code=$control_positionen = ControlGetPos($Formstudio_controleditor_GUI, "", $control_handle)[BREAK]		If IsArray($control_positionen) Then	[BREAK]				GUICtrlSetPos($control_handle, $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)[BREAK]			   winmove($MiniEditorY_Updown,"", $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)[BREAK]		EndIf[BREAK]GUICtrlSetStyle ($control_handle,$ES_Number)
+type=updown
+x=249
+y=38
+width=70
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_NUMBER
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditorY
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=6
+[0x0001252A]
+handle=415
+locked=0
+resize=
+code=$control_positionen = ControlGetPos($Formstudio_controleditor_GUI, "", $control_handle)[BREAK]		If IsArray($control_positionen) Then	[BREAK]				GUICtrlSetPos($control_handle, $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)[BREAK]			   winmove($MiniEditorX_Updown,"", $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)[BREAK]		EndIf[BREAK]GUICtrlSetStyle ($control_handle,$ES_Number)
+type=updown
+x=148
+y=38
+width=70
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditorX
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=5
+[0x0001252C]
+handle=416
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+type=label
+x=126
+y=67
+width=17
+height=15
+text=_ISNPlugin_Get_langstring(9)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_RIGHT
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_b_label
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=12
+[0x0001252E]
+handle=417
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+type=label
+x=227
+y=67
+width=17
+height=15
+text=_ISNPlugin_Get_langstring(10)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_RIGHT
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_h_label
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=13
+[0x00012530]
+handle=418
+locked=0
+resize=
+code=$control_positionen = ControlGetPos($Formstudio_controleditor_GUI, "", $control_handle)[BREAK]		If IsArray($control_positionen) Then	[BREAK]				GUICtrlSetPos($control_handle, $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)[BREAK]			   winmove($MiniEditor_hoehe_Updown,"", $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)[BREAK]		EndIf[BREAK]GUICtrlSetStyle ($control_handle,$ES_Number)
+type=updown
+x=249
+y=64
+width=70
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_NUMBER
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_hoehe
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=8
+[0x00012532]
+handle=419
+locked=0
+resize=
+code=$control_positionen = ControlGetPos($Formstudio_controleditor_GUI, "", $control_handle)[BREAK]		If IsArray($control_positionen) Then	[BREAK]				GUICtrlSetPos($control_handle, $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)[BREAK]			   winmove($MiniEditor_breite_Updown,"", $control_positionen[0] * $DPI, $control_positionen[1] * $DPI, $control_positionen[2] * $DPI, $control_positionen[3] * $DPI)[BREAK]		EndIf[BREAK]GUICtrlSetStyle ($control_handle,$ES_Number)
+type=updown
+x=148
+y=64
+width=70
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_NUMBER
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_breite
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=7
+[0x00012536]
+handle=421
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)
+type=label
+x=30
+y=30
+width=298
+height=378
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_DISABLE
+style=$SS_ETCHEDFRAME
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=17
+tabpage=-1
+iconindex=
+textmode=text
+[0x00012538]
+handle=422
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)
+type=label
+x=39
+y=116
+width=282
+height=9
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_DISABLE
+style=$SS_ETCHEDHORZ
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=14
+[0x0001253A]
+handle=423
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)
+type=label
+x=10
+y=454
+width=319
+height=9
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_DISABLE
+style=$SS_ETCHEDHORZ
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=15
+[0x0001253C]
+handle=424
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetFont(-1,9,800,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)[BREAK]GUICtrlSetBkColor(-1,"-2")
+type=label
+x=0
+y=459
+width=343
+height=21
+text=_ISNPlugin_Get_langstring(43)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER+$SS_CENTERIMAGE
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=9
+fontstyle=800
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=22
+[0x0001253E]
+handle=425
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetFont(-1,9,800,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)[BREAK]GUICtrlSetCursor (-1, 0)[BREAK]_Control_Add_ToolTip($control_handle,_ISNPlugin_Get_langstring(234))
+type=label
+x=0
+y=4
+width=325
+height=21
+text=-
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_RIGHT+$SS_CENTERIMAGE
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=9
+fontstyle=800
+fontattribute=0
+id=Control_Editor_collapse_label
+func=_ControlEditor_zusammenklappen
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=25
+#ce

@@ -1,0 +1,165 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+#include <GuiTab.au3>
+
+$hGUI = GUICreate("Simple file viewer",800,600,-1,-1,$WS_POPUP,BitOr($WS_EX_CLIENTEDGE,$WS_EX_TOOLWINDOW))
+if $filetype = "ico" OR  $filetype = "bmp" OR $filetype = "jpg" OR $filetype = "jpeg" Then _GUIScrollbars_Generate($hGUI, 3000, 2000)
+$tab_control = GUICtrlCreatetab(362,0,141,20,$TCS_BOTTOM,-1)
+GuiCtrlSetState(-1,2048)
+$tabpage_dll = GUICtrlCreateTabItem("dll")
+$tabpage_audio = GUICtrlCreateTabItem("audio")
+$tabpage_image = GUICtrlCreateTabItem("image")
+ControlHide($hGUI,"",$tab_control)
+GUICtrlCreateTabItem("")
+_GUICtrlTab_SetCurFocus($tab_control,-1)
+$statusbar = GUICtrlCreateLabel("",0,0,801,20,$SS_CENTERIMAGE,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUISwitch($hGUI,_GUICtrlTab_SetCurFocus($tab_control,0)&GUICtrlRead ($tab_control, 1))
+$Fotos_Thubnails = GUICtrlCreatelistview("data",0,20,800,580,$LVS_NOCOLUMNHEADER,BitOr($LVS_EX_DOUBLEBUFFER,$WS_EX_CLIENTEDGE))
+GUICtrlSetResizing(-1,102)
+Global $contextmenu = GUICtrlCreateContextMenu($Fotos_Thubnails)
+Global $item1 = GUICtrlCreateMenuItem(_ISNPlugin_Get_langstring(3), $contextmenu)
+_GUICtrlTab_SetCurFocus($tab_control,0)
+
+
+
+#cs
+[tab]
+type=tab
+x=362
+y=0
+width=141
+height=20
+text=
+tooltip=
+pages=3
+state=$GUI_SHOW+$GUI_ENABLE
+style=$TCS_BOTTOM
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$tab_control
+func=
+bgimage=
+handle=405
+code=ControlHide($hGUI,"",$tab_control)
+tabpage=-1
+iconindex=
+resize=
+textmode=text
+order=0
+[0x000B2516]
+order=0
+[TABPAGE3]
+page=3
+text=image
+textmode=text
+handle=tabpage_image
+[TABPAGE2]
+page=2
+text=audio
+textmode=text
+handle=tabpage_audio
+[TABPAGE1]
+page=1
+text=dll
+textmode=text
+handle=tabpage_dll
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Simple file viewer
+breite=800
+hoehe=600
+style=$WS_POPUP
+exstyle=$WS_EX_CLIENTEDGE+$WS_EX_TOOLWINDOW
+bgcolour=0xF0F0F0
+bgimage=none
+handle=$hGUI
+parent=
+code=if $filetype = "ico" OR  $filetype = "bmp" OR $filetype = "jpg" OR $filetype = "jpeg" Then _GUIScrollbars_Generate($hGUI, 3000, 2000)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x0004251A]
+handle=406
+locked=0
+resize=550
+code=
+type=label
+x=0
+y=0
+width=801
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTERIMAGE
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$statusbar
+func=
+bgimage=
+order=2
+tabpage=-1
+iconindex=
+textmode=text
+[0x0003251C]
+handle=407
+locked=0
+resize=102
+code=Global $contextmenu = GUICtrlCreateContextMenu($Fotos_Thubnails)[BREAK]Global $item1 = GUICtrlCreateMenuItem(_ISNPlugin_Get_langstring(3), $contextmenu)[BREAK]
+type=listview
+x=0
+y=20
+width=800
+height=580
+text=data
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_NOCOLUMNHEADER
+exstyle=$LVS_EX_DOUBLEBUFFER+$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$Fotos_Thubnails
+func=
+bgimage=
+order=3
+tabpage=0
+iconindex=
+textmode=text
+#ce

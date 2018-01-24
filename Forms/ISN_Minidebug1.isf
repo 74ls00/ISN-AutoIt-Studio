@@ -1,0 +1,56 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$minidebug_GUI_sec = GUICreate("Minidebug",350,350,-1,-1,$WS_POPUP,BitOr($WS_EX_LAYERED,$WS_EX_TOOLWINDOW))
+$pngSrc2 = @ScriptDir & "\Data\debug_bg.png"
+Global $hImagedebug = _GDIPlus_ImageLoadFromFile($pngSrc2)
+$width = _GDIPlus_ImageGetWidth($hImagedebug)
+$height = _GDIPlus_ImageGetHeight($hImagedebug)
+GUISetBkColor(0xFFFFFF,$minidebug_GUI_sec)
+WinSetTitle($minidebug_GUI_sec,"","")
+WinMove($minidebug_GUI_sec,"",$width, $height, (@DesktopWidth-$width)-10, (@DesktopHeight-$height)-40)
+SetBitmap($minidebug_GUI_sec,$hImagedebug, 0)
+GUISetState()
+WinSetOnTop($minidebug_GUI_sec, "", 1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Minidebug
+breite=350
+hoehe=350
+style=$WS_POPUP
+exstyle=$WS_EX_LAYERED+$WS_EX_TOOLWINDOW
+bgcolour=0xF0F0F0
+bgimage=none
+handle=$minidebug_GUI_sec
+parent=
+code=$pngSrc2 = @ScriptDir & "\Data\debug_bg.png"[BREAK]Global $hImagedebug = _GDIPlus_ImageLoadFromFile($pngSrc2)[BREAK]$width = _GDIPlus_ImageGetWidth($hImagedebug)[BREAK]$height = _GDIPlus_ImageGetHeight($hImagedebug)[BREAK]GUISetBkColor(0xFFFFFF,$GUI_HANDLE)[BREAK]WinSetTitle($minidebug_GUI_sec,"","")[BREAK]WinMove($minidebug_GUI_sec,"",$width, $height, (@DesktopWidth-$width)-10, (@DesktopHeight-$height)-40)[BREAK]SetBitmap($minidebug_GUI_sec,$hImagedebug, 0)[BREAK]GUISetState()[BREAK]WinSetOnTop($minidebug_GUI_sec, "", 1)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[tab]
+code=; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;[BREAK]#include <StaticConstants.au3>[BREAK]#include <GUIConstantsEx.au3>[BREAK]#include <WindowsConstants.au3>[BREAK]#Include <GuiButton.au3>[BREAK][BREAK]$minidebug_GUI_sec = GUICreate("Minidebug",350,350,-1,-1,$WS_POPUP,BitOr($WS_EX_LAYERED,$WS_EX_TOOLWINDOW))[BREAK]$pngSrc2 = @ScriptDir & "\Data\debug_bg.png"[BREAK]Global $hImagedebug = _GDIPlus_ImageLoadFromFile($pngSrc2)[BREAK]$width = _GDIPlus_ImageGetWidth($hImagedebug)[BREAK]$height = _GDIPlus_ImageGetHeight($hImagedebug)[BREAK][BREAK]WinSetTitle($minidebug_GUI_sec,"","")[BREAK]WinMove($minidebug_GUI_sec,"",$width, $height, (@DesktopWidth-$width)-10, (@DesktopHeight-$height)-40)[BREAK]SetBitmap($minidebug_GUI_sec,$hImagedebug, 0)[BREAK]GUISetState()[BREAK]WinSetOnTop($minidebug_GUI_sec, "", 1)[BREAK]
+#ce

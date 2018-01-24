@@ -1,0 +1,283 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$bitwise_operations_GUI = GUICreate(_Get_langstr(813),718,445,-1,-1,BitOr($WS_SYSMENU,$WS_CAPTION,$WS_POPUPWINDOW,$WS_BORDER,$WS_CLIPSIBLINGS,$DS_MODALFRAME),BitOr($WS_EX_TOOLWINDOW,$WS_EX_WINDOWEDGE,$WS_EX_MDICHILD),$StudioFenster)
+GUISetBkColor(0xFFFFFF,$bitwise_operations_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Toggle_Bitoperation_rechner", $bitwise_operations_GUI)
+_Control_set_DPI_Scaling($bitwise_operations_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe,$bitwise_operations_GUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$bitwise_operations_GUI)
+_CenterOnMonitor($bitwise_operations_GUI,"", $Runonmonitor)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,718,50)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,445-45,718,45)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+
+$cArrowDown = GUICtrlCreateGraphic(190*$DPI, 110*$DPI, 32, 32)
+_GraphicDrawLines($cArrowDown, $aArrowDown, 2, 0xbbaabb)
+$cArrowUp = GUICtrlCreateGraphic(560*$DPI, 110*$DPI, 32, 32)
+_GraphicDrawLines($cArrowUp, $aArrowUp, 2, 0xbbaabb)
+GUICtrlCreateLabel(_Get_langstr(813),10,10,694,34,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(814),10,50,692,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+$cResult = GUICtrlCreateInput("",470,80,237,20,-1,$WS_EX_CLIENTEDGE)
+_Control_set_DPI_Scaling($cResult)
+$cInput = GUICtrlCreateInput("",10,80,411,20,-1,$WS_EX_CLIENTEDGE)
+_Control_set_DPI_Scaling($cInput)
+GUICtrlCreateButton("=",430,80,32,20,-1,-1)
+GUICtrlSetOnEvent(-1,"_BitWisor")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(96),10,408,117,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Toggle_Bitoperation_rechner")
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+$cCalc = GUICtrlCreateEdit("",10,149,695,241,$ES_READONLY,-1)
+GUICtrlSetFont(-1,9,800,0,"Courier New")
+_Control_set_DPI_Scaling($cCalc)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_Get_langstr(813)
+breite=718
+hoehe=445
+style=$WS_SYSMENU+$WS_CAPTION+$WS_POPUPWINDOW+$WS_BORDER+$WS_CLIPSIBLINGS+$DS_MODALFRAME
+exstyle=$WS_EX_TOOLWINDOW+$WS_EX_WINDOWEDGE+$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=bitwise_operations_GUI
+parent=$StudioFenster
+code=_Control_set_DPI_Scaling($bitwise_operations_GUI)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$bitwise_operations_GUI)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$bitwise_operations_GUI)[BREAK]_CenterOnMonitor($bitwise_operations_GUI,"", $Runonmonitor)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,718,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,445-45,718,45)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK][BREAK]$cArrowDown = GUICtrlCreateGraphic(190*$DPI, 110*$DPI, 32, 32)[BREAK]_GraphicDrawLines($cArrowDown, $aArrowDown, 2, 0xbbaabb)[BREAK]$cArrowUp = GUICtrlCreateGraphic(560*$DPI, 110*$DPI, 32, 32)[BREAK]_GraphicDrawLines($cArrowUp, $aArrowUp, 2, 0xbbaabb)
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Toggle_Bitoperation_rechner
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00691ECE]
+handle=401
+locked=0
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=694
+height=34
+text=_Get_langstr(813)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x00272B6A]
+handle=402
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=50
+width=692
+height=15
+text=_Get_langstr(814)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x00572182]
+handle=403
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=input
+x=10
+y=80
+width=411
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=cInput
+func=
+bgimage=
+order=3
+tabpage=-1
+textmode=text
+iconindex=
+resize=
+[0x004C2E4C]
+handle=404
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=input
+x=470
+y=80
+width=237
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=cResult
+func=
+bgimage=
+order=3
+tabpage=-1
+textmode=text
+iconindex=
+resize=
+[0x00432C72]
+handle=405
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=button
+x=430
+y=80
+width=32
+height=20
+text==
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_BitWisor
+bgimage=
+order=5
+tabpage=-1
+textmode=text
+iconindex=
+resize=
+[0x005528BE]
+handle=406
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=edit
+x=10
+y=149
+width=695
+height=241
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_READONLY
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=Courier New
+fontsize=9
+fontstyle=800
+fontattribute=0
+id=cCalc
+func=
+bgimage=
+order=7
+tabpage=-1
+textmode=text
+iconindex=
+resize=
+[0x005020E4]
+handle=407
+locked=0
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=408
+width=117
+height=30
+text=_Get_langstr(96)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Toggle_Bitoperation_rechner
+bgimage=
+order=7
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+#ce

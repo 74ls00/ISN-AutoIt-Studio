@@ -1,0 +1,81 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$Druckvorschau_GUI = GUICreate("printpreview",493,340,-1,-1,BitOr($WS_POPUP,$WS_CHILD,$WS_CAPTION),BitOr($WS_EX_MDICHILD,$WS_EX_WINDOWEDGE),$Studiofenster)
+GUISetBkColor(0xFFFFFF,$Druckvorschau_GUI)
+_Control_set_DPI_Scaling($Druckvorschau_GUI)
+_CenterOnMonitor($Druckvorschau_GUI ,"", $Runonmonitor)
+GUICtrlCreateDummy()
+;Druckvorschau IE Objekt erstellen
+$Druckvorschau_oIE = ObjCreate("Shell.Explorer.2")
+$Druckvorschau_IEObject = GUICtrlCreateObj($Druckvorschau_oIE, -5000, -5000, 1, 1)
+GUICtrlSetResizing($Druckvorschau_IEObject, $GUI_DOCKALL)
+GUICtrlSetState($Druckvorschau_IEObject, $GUI_HIDE)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=printpreview
+breite=493
+hoehe=340
+style=$WS_POPUP+$WS_CHILD+$WS_CAPTION
+exstyle=$WS_EX_MDICHILD+$WS_EX_WINDOWEDGE
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Druckvorschau_GUI
+parent=$Studiofenster
+code=_Control_set_DPI_Scaling($GUI_HANDLE)[BREAK]_CenterOnMonitor($GUI_HANDLE ,"", $Runonmonitor)[BREAK]
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00172922]
+handle=406
+locked=0
+resize=
+code=;Druckvorschau IE Objekt erstellen[BREAK]$Druckvorschau_oIE = ObjCreate("Shell.Explorer.2")[BREAK]$Druckvorschau_IEObject = GUICtrlCreateObj($Druckvorschau_oIE, -5000, -5000, 1, 1)[BREAK]GUICtrlSetResizing($Druckvorschau_IEObject, $GUI_DOCKALL)[BREAK]GUICtrlSetState($Druckvorschau_IEObject, $GUI_HIDE)
+type=dummy
+x=50
+y=40
+width=25
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=text
+#ce

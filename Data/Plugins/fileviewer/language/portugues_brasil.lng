@@ -1,0 +1,13 @@
+[plugin]
+language=Portugues-Brasil
+version=1.0
+author=ISI360 odaylton.prof@gmail.com
+
+
+str1=Icon(s) existentes
+str2=Icons está carrefado
+str3=Extrair icon
+str4=Info
+str5=extraído com sucesso!
+str6=não foi possível extrair!
+str7=Erro

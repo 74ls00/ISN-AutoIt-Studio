@@ -1,0 +1,437 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+
+$ToDoList_Category_Manager = GUICreate(_Get_langstr(1271),714,491,-1,-1,BitOr($WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_CLIPSIBLINGS,$WS_BORDER,$WS_MAXIMIZEBOX,$WS_POPUPWINDOW,$DS_MODALFRAME),BitOr($WS_EX_MDICHILD,$WS_EX_WINDOWEDGE),$ToDoList_Manager)
+GUISetBkColor(0xFFFFFF,$ToDoList_Category_Manager)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_ToDo_Liste_Kategorien_verwalten_Manager_ausblenden", $ToDoList_Category_Manager)
+GUISetOnEvent($GUI_EVENT_MINIMIZE, "_ToDo_Liste_Kategorien_verwalten_GUI_Resize", $ToDoList_Category_Manager)
+GUISetOnEvent($GUI_EVENT_RESTORE, "_ToDo_Liste_Kategorien_verwalten_GUI_Resize", $ToDoList_Category_Manager)
+GUISetOnEvent($GUI_EVENT_MAXIMIZE, "_ToDo_Liste_Kategorien_verwalten_GUI_Resize", $ToDoList_Category_Manager)
+GUISetOnEvent($GUI_EVENT_RESIZED, "_ToDo_Liste_Kategorien_verwalten_GUI_Resize", $ToDoList_Category_Manager)
+_Control_set_DPI_Scaling($ToDoList_Category_Manager)
+_GUISetIcon($ToDoList_Category_Manager, $smallIconsdll,1524)
+_CenterOnMonitor($ToDoList_Category_Manager ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ToDoList_Category_Manager)
+GUISetBkColor($Fenster_Hintergrundfarbe,$ToDoList_Category_Manager)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,714,50)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,491-50,714,50)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+
+
+GUICtrlCreateLabel(_Get_langstr(1271),10,10,689,31,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,53,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,53,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1487+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1487,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Neue_Kategorie")
+GUICtrlSetTip (-1,_Get_langstr(1274))
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,88,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,88,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1220+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1220,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Markierte_Kategorie_bearbeiten")
+GUICtrlSetTip (-1,_Get_langstr(1275))
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(1279),145,451,554,30,$SS_CENTERIMAGE,-1)
+GUICtrlSetColor(-1,"0x808080")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(7),10,451,128,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Manager_ausblenden")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,168,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,168,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1606+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1606,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Markierte_Kategorie_nach_oben_verschieben")
+GUICtrlSetTip (-1,_Get_langstr(1277))
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,203,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,203,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1604+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1604,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Markierte_Kategorie_nach_unten_verschieben")
+GUICtrlSetTip (-1,_Get_langstr(1278))
+_Control_set_DPI_Scaling(-1)
+
+
+
+
+$Category_Manager_Listview = GUICtrlCreatelistview('catid|'&_Get_langstr(1273),48,53,651,370,BitOr($LVS_SINGLESEL,$LVS_SHOWSELALWAYS),BitOr($LVS_EX_FULLROWSELECT,$LVS_EX_GRIDLINES))
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($Category_Manager_Listview)
+_GUICtrlListView_HideColumn($Category_Manager_Listview,0)
+GUICtrlCreateGroup("",10,153,30,10,-1,-1)
+GUICtrlSetResizing(-1,802)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,123,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,123,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1173+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1173,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_Markierte_Kategorie_loeschen")
+GUICtrlSetTip (-1,_Get_langstr(1276))
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(1271)
+breite=714
+hoehe=491
+style=$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_CLIPSIBLINGS+$WS_BORDER+$WS_MAXIMIZEBOX+$WS_POPUPWINDOW+$DS_MODALFRAME
+exstyle=$WS_EX_MDICHILD+$WS_EX_WINDOWEDGE
+bgcolour=0xFFFFFF
+bgimage=none
+handle=ToDoList_Category_Manager
+parent=$ToDoList_Manager
+code=_Control_set_DPI_Scaling($GUI_HANDLE)[BREAK]_GUISetIcon($GUI_HANDLE, $smallIconsdll,1524)[BREAK]_CenterOnMonitor($GUI_HANDLE ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$GUI_HANDLE)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$GUI_HANDLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,714,50)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,491-50,714,50)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK][BREAK][BREAK]
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_ToDo_Liste_Kategorien_verwalten_Manager_ausblenden
+gui_event_minimize=_ToDo_Liste_Kategorien_verwalten_GUI_Resize
+gui_event_restore=_ToDo_Liste_Kategorien_verwalten_GUI_Resize
+gui_event_maximize=_ToDo_Liste_Kategorien_verwalten_GUI_Resize
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=_ToDo_Liste_Kategorien_verwalten_GUI_Resize
+gui_event_dropped=
+[0x002A1DF6]
+handle=406
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=689
+height=31
+text=_Get_langstr(1271)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=0
+locked=0
+resize=550
+iconindex=
+textmode=func
+[0x002F2024]
+handle=407
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=451
+width=128
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_ToDo_Liste_Kategorien_verwalten_Manager_ausblenden
+bgimage=
+tabpage=-1
+order=10
+textmode=func
+iconindex=
+resize=834
+locked=0
+[0x003B1F00]
+handle=408
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,53,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1487+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1487,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Kategorien_verwalten_Neue_Kategorie")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1274))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK]
+type=button
+x=10
+y=53
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=7
+[0x00231F50]
+handle=409
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_GUICtrlListView_HideColumn($control_handle,0)[BREAK]
+type=listview
+x=48
+y=53
+width=651
+height=370
+text='catid|'&_Get_langstr(1273)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_SINGLESEL+$LVS_SHOWSELALWAYS
+exstyle=$LVS_EX_FULLROWSELECT+$LVS_EX_GRIDLINES
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Category_Manager_Listview
+func=
+bgimage=
+order=12
+tabpage=-1
+iconindex=
+textmode=func
+[0x00352252]
+handle=410
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,88,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1220+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1220,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Kategorien_verwalten_Markierte_Kategorie_bearbeiten")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1275))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK]
+type=button
+x=10
+y=88
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=10
+[0x00201F60]
+handle=411
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,168,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1606+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1606,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Kategorien_verwalten_Markierte_Kategorie_nach_oben_verschieben")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1277))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK]
+type=button
+x=10
+y=168
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=11
+[0x00302480]
+handle=412
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,203,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1604+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1604,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Kategorien_verwalten_Markierte_Kategorie_nach_unten_verschieben")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1278))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK][BREAK][BREAK][BREAK][BREAK]
+type=button
+x=10
+y=203
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=12
+[0x002A1F22]
+handle=413
+locked=0
+resize=802
+code=_Control_set_DPI_Scaling($control_handle)
+type=group
+x=10
+y=153
+width=30
+height=10
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=14
+tabpage=-1
+iconindex=
+textmode=text
+[0x003D1C74]
+handle=414
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,123,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1173+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1173,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Kategorien_verwalten_Markierte_Kategorie_loeschen")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1276))[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=123
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=17
+[0x00251E00]
+handle=415
+locked=0
+resize=582
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=145
+y=451
+width=554
+height=30
+text=_Get_langstr(1279)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTERIMAGE
+exstyle=
+textcolour=0x808080
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=10
+tabpage=-1
+iconindex=
+textmode=func
+#ce

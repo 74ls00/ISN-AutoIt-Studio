@@ -1,0 +1,242 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+GUICtrlCreateLabel("",10,454,319,9,$SS_ETCHEDHORZ,-1)
+GUICtrlSetState(-1,BitOr($GUI_SHOW,$GUI_DISABLE))
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+$MiniEditor_lock_Button = GUICtrlCreateButton("",4,383,25,25,-1,-1)
+GUICtrlSetOnEvent(-1,"_Toggle_Lock_Control")
+Button_AddIcon($MiniEditor_lock_Button, $smallIconsdll, 1828,4)
+If $Current_ISN_Skin <> "#none#" AND $Use_ISN_Skin = "true" Then
+	GUICtrlDelete($MiniEditor_lock_Button)
+	$MiniEditor_lock_Button = GUICtrlCreatePic("", 4, 383, 25, 25, $SS_NOTIFY + $SS_CENTERIMAGE, $WS_EX_CLIENTEDGE)
+	_SetIconAlpha($MiniEditor_lock_Button, $smallIconsdll, 1828+1, 16, 16)
+	GUICtrlSetOnEvent($MiniEditor_lock_Button,"_Toggle_Lock_Control")
+Endif
+_Control_Add_ToolTip($MiniEditor_lock_Button,_ISNPlugin_Get_langstring(167))
+_Control_set_DPI_Scaling($MiniEditor_lock_Button)
+$MiniEditor_Uebernehmen_Button = GUICtrlCreateButton(_ISNPlugin_Get_langstring(19),4,417,100,27,-1,-1)
+GUICtrlSetOnEvent(-1,"_Mini_Editor_Einstellungen_Uebernehmen")
+GUICtrlSetState(-1,BitOr($GUI_SHOW,$GUI_ENABLE,$GUI_DEFBUTTON))
+Button_AddIcon($MiniEditor_Uebernehmen_Button, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+_Control_Add_ToolTip($MiniEditor_Uebernehmen_Button,_ISNPlugin_Get_langstring(154))
+$MiniEditor_Code_Button = GUICtrlCreateButton(_ISNPlugin_Get_langstring(20),111,417,91,27,-1,-1)
+GUICtrlSetOnEvent(-1,"_Show_Extracode")
+Button_AddIcon(-1, $smallIconsdll, 1787,0)
+_Control_set_DPI_Scaling(-1)
+_Control_Add_ToolTip($MiniEditor_Code_Button,_ISNPlugin_Get_langstring(155))
+$MiniEditor_Weitere_Aktionen_Button = GUICtrlCreateButton(_ISNPlugin_Get_langstring(193),208,417,119,27,-1,-1)
+GUICtrlSetOnEvent(-1,"MiniEditor_Weitere_Aktionen")
+Button_AddIcon($MiniEditor_Weitere_Aktionen_Button, $smallIconsdll, 142,0)
+_Control_set_DPI_Scaling(-1)
+$ControlList = GUICtrlCreatelistview(_ISNPlugin_Get_langstring(2)&'|order',4,484,323,219,$LVS_NOSORTHEADER,BitOr($LVS_EX_FULLROWSELECT,$LVS_EX_GRIDLINES))
+_Control_set_DPI_Scaling(-1)
+_GUICtrlListView_SetImageList($ControlList, $hToolBarImageListNorm,1)
+GUICtrlSetFont (-1, 8,400,-1,"Tahoma")
+_GUICtrlListView_HideColumn ($ControlList, 3)
+_GUICtrlListView_HideColumn ($ControlList, 4)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Control Editor
+breite=332
+hoehe=707
+style=-1
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Formstudio_controleditor_GUI
+parent=
+code=
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=true
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00183D74]
+handle=406
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)
+type=label
+x=10
+y=454
+width=319
+height=9
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_DISABLE
+style=$SS_ETCHEDHORZ
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=0
+[0x00194286]
+handle=407
+locked=0
+resize=
+code=Button_AddIcon($MiniEditor_Uebernehmen_Button, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]_Control_Add_ToolTip($control_handle,_ISNPlugin_Get_langstring(154))
+type=button
+x=4
+y=417
+width=100
+height=27
+text=_ISNPlugin_Get_langstring(19)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE+$GUI_DEFBUTTON
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_Uebernehmen_Button
+func=_Mini_Editor_Einstellungen_Uebernehmen
+bgimage=
+order=2
+tabpage=-1
+iconindex=
+textmode=func
+[0x00134278]
+handle=408
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 1787,0)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]_Control_Add_ToolTip($control_handle,_ISNPlugin_Get_langstring(155))
+type=button
+x=111
+y=417
+width=91
+height=27
+text=_ISNPlugin_Get_langstring(20)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_Code_Button
+func=_Show_Extracode
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=3
+[0x00124270]
+handle=409
+locked=0
+resize=
+code=Button_AddIcon($MiniEditor_Weitere_Aktionen_Button, $smallIconsdll, 142,0)[BREAK]_Control_set_DPI_Scaling(-1)
+type=button
+x=208
+y=417
+width=119
+height=27
+text=_ISNPlugin_Get_langstring(193)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_Weitere_Aktionen_Button
+func=MiniEditor_Weitere_Aktionen
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=4
+[0x00144272]
+handle=410
+locked=0
+resize=
+code=Button_AddIcon($MiniEditor_lock_Button, $smallIconsdll, 1828,4)[BREAK]If $Current_ISN_Skin <> "#none#" AND $Use_ISN_Skin = "true" Then[BREAK]	GUICtrlDelete($control_handle)[BREAK]	$MiniEditor_lock_Button = GUICtrlCreatePic("", 4, 383, 25, 25, $SS_NOTIFY + $SS_CENTERIMAGE, $WS_EX_CLIENTEDGE)[BREAK]	_SetIconAlpha($MiniEditor_lock_Button, $smallIconsdll, 1828+1, 16, 16)[BREAK]	GUICtrlSetOnEvent($MiniEditor_lock_Button,"_Toggle_Lock_Control")[BREAK]Endif[BREAK]_Control_Add_ToolTip($control_handle,_ISNPlugin_Get_langstring(167))[BREAK]_Control_set_DPI_Scaling($MiniEditor_lock_Button)
+type=button
+x=4
+y=383
+width=25
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=MiniEditor_lock_Button
+func=_Toggle_Lock_Control
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=1
+[0x001B41EA]
+handle=411
+locked=0
+resize=
+code=_Control_set_DPI_Scaling(-1)[BREAK]_GUICtrlListView_SetImageList($ControlList, $hToolBarImageListNorm,1)[BREAK]GUICtrlSetFont (-1, 8,400,-1,"Tahoma")[BREAK]_GUICtrlListView_HideColumn ($ControlList, 3)[BREAK]_GUICtrlListView_HideColumn ($ControlList, 4)
+type=listview
+x=4
+y=484
+width=323
+height=219
+text=_ISNPlugin_Get_langstring(2)&'|order'
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_NOSORTHEADER
+exstyle=$LVS_EX_FULLROWSELECT+$LVS_EX_GRIDLINES
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ControlList
+func=
+bgimage=
+order=5
+tabpage=-1
+iconindex=
+textmode=func
+#ce

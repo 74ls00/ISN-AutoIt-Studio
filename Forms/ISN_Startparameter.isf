@@ -1,0 +1,258 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$parameter_GUI = GUICreate(_Get_langstr(490),604,299,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$Studiofenster)
+GUISetBkColor(0xFFFFFF,$parameter_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_HIDE_Parameterconfig_without_save", $parameter_GUI)
+_GUISetIcon($parameter_GUI, $smallIconsdll,1376)
+_Control_set_DPI_Scaling($parameter_GUI)
+_CenterOnMonitor($parameter_GUI ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$parameter_GUI )
+GUISetBkColor($Fenster_Hintergrundfarbe,$parameter_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,604,70)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetResizing(-1,550)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,299-50,604,50)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetResizing(-1,582)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlCreateLabel(_Get_langstr(490),53,11,533,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(492),10,47,583,18,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$startparameter_input = GUICtrlCreateEdit("",10,70,583,170,-1,-1)
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($startparameter_input)
+GUICtrlCreateButton(_Get_langstr(7),10,259,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_HIDE_Parameterconfig")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),120,259,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_HIDE_Parameterconfig_without_save")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreatePic("",13,11,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,507+1,32,32)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(490)
+breite=604
+hoehe=299
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=parameter_GUI
+parent=$Studiofenster
+code=_GUISetIcon($parameter_GUI, $smallIconsdll,1376)[BREAK]_Control_set_DPI_Scaling($parameter_GUI)[BREAK]_CenterOnMonitor($parameter_GUI ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$parameter_GUI )[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$parameter_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,604,70)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,299-50,604,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_HIDE_Parameterconfig_without_save
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x000A3644]
+handle=406
+code=GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=53
+y=11
+width=533
+height=32
+text=_Get_langstr(490)
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+iconindex=
+resize=550
+textmode=func
+locked=0
+[0x0005363E]
+handle=407
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=47
+width=583
+height=18
+text=_Get_langstr(492)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+locked=0
+resize=550
+tooltip=
+tabpage=-1
+iconindex=
+textmode=func
+[0x00063622]
+handle=408
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=259
+width=100
+height=30
+text=_Get_langstr(7)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_HIDE_Parameterconfig
+bgimage=
+order=4
+locked=0
+resize=834
+tooltip=
+tabpage=-1
+iconindex=
+textmode=func
+[0x00043646]
+handle=409
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)
+type=edit
+x=10
+y=70
+width=583
+height=170
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=startparameter_input
+func=
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=text
+[0x0004369C]
+handle=410
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=120
+y=259
+width=100
+height=30
+text=_Get_langstr(8)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_HIDE_Parameterconfig_without_save
+bgimage=
+locked=0
+resize=834
+tooltip=
+tabpage=-1
+iconindex=
+textmode=func
+order=5
+[0x000736FA]
+handle=411
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,507+1,32,32)
+type=image
+x=13
+y=11
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=6
+tabpage=-1
+iconindex=
+textmode=text
+#ce

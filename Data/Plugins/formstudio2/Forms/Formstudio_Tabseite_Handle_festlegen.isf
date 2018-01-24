@@ -1,0 +1,220 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$formstudio_tabseite_handle_festlegen = GUICreate(_ISNPlugin_Get_langstring(230),437,140,-1,-1,BitOr($WS_POPUP,$WS_CAPTION),$WS_EX_TOOLWINDOW,$StudioFenster_inside)
+GUISetBkColor(0xFFFFFF,$formstudio_tabseite_handle_festlegen)
+_Control_set_DPI_Scaling($formstudio_tabseite_handle_festlegen)
+_CenterOnMonitor($formstudio_tabseite_handle_festlegen,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$formstudio_tabseite_handle_festlegen)
+guictrlcreatepic($Window_TOP_IMG,0,0,437,50)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)
+guictrlcreatepic($Window_Row_Bottom_IMG,0,140-50,437,50)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)
+GUISetBkColor($ISN_Hintergrundfarbe,$formstudio_tabseite_handle_festlegen)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(230),10,10,414,30,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(3),10,61,78,15,$SS_RIGHT,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+$tabseite_handle_festlegen_textinput = GUICtrlCreateInput("",100,58,324,20,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(58),120,100,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Handle_fuer_tabpage_festlegen_Abbrechen")
+_Control_set_DPI_Scaling(-1)
+Button_AddIcon(-1, $smallIconsdll, 922,0)
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(57),10,100,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Handle_fuer_tabpage_festlegen_OK")
+_Control_set_DPI_Scaling(-1)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_ISNPlugin_Get_langstring(230)
+breite=437
+hoehe=140
+style=$WS_POPUP+$WS_CAPTION
+exstyle=$WS_EX_TOOLWINDOW
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$formstudio_tabseite_handle_festlegen
+parent=$StudioFenster_inside
+code=_Control_set_DPI_Scaling($formstudio_tabseite_handle_festlegen)[BREAK]_CenterOnMonitor($formstudio_tabseite_handle_festlegen,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$formstudio_tabseite_handle_festlegen)[BREAK]guictrlcreatepic($Window_TOP_IMG,0,0,437,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)[BREAK]guictrlcreatepic($Window_Row_Bottom_IMG,0,140-50,437,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)[BREAK]GUISetBkColor($ISN_Hintergrundfarbe,$formstudio_tabseite_handle_festlegen)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x001C2042]
+handle=400
+locked=0
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)[BREAK]_Control_set_DPI_Scaling(-1)
+type=label
+x=10
+y=10
+width=414
+height=30
+text=_ISNPlugin_Get_langstring(230)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+textmode=func
+resize=
+iconindex=
+[0x0018254E]
+handle=401
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+type=label
+x=10
+y=61
+width=78
+height=15
+text=_ISNPlugin_Get_langstring(3)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_RIGHT
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+textmode=func
+resize=
+iconindex=
+[0x001B2038]
+handle=402
+locked=0
+code=_Control_set_DPI_Scaling(-1)
+type=input
+x=100
+y=58
+width=324
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=tabseite_handle_festlegen_textinput
+func=
+bgimage=
+order=6
+tabpage=-1
+textmode=text
+resize=
+iconindex=
+[0x001925B4]
+handle=403
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]Button_AddIcon(-1, $smallIconsdll, 314,0)
+type=button
+x=10
+y=100
+width=100
+height=30
+text=_ISNPlugin_Get_langstring(57)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Handle_fuer_tabpage_festlegen_OK
+bgimage=
+order=7
+tabpage=-1
+textmode=func
+resize=
+iconindex=
+[0x0019205A]
+handle=404
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]Button_AddIcon(-1, $smallIconsdll, 922,0)
+type=button
+x=120
+y=100
+width=100
+height=30
+text=_ISNPlugin_Get_langstring(58)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Handle_fuer_tabpage_festlegen_Abbrechen
+bgimage=
+order=7
+tabpage=-1
+textmode=func
+resize=
+iconindex=
+#ce

@@ -1,0 +1,116 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <ProgressConstants.au3>
+
+$ISN_warte_auf_Plugin = GUICreate(_Get_langstr(1195),278,68,-1,-1,BitOr($WS_POPUP,$WS_CAPTION),-1,$Studiofenster)
+GUISetBkColor(0xFFFFFF,$ISN_warte_auf_Plugin)
+_Control_set_DPI_Scaling($ISN_warte_auf_Plugin)
+_CenterOnMonitor($ISN_warte_auf_Plugin ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ISN_warte_auf_Plugin)
+GUISetBkColor($Fenster_Hintergrundfarbe,$ISN_warte_auf_Plugin)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,278,30)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlCreateLabel(_Get_langstr(1195),10,10,262,19,$SS_CENTER,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateProgress(10,40,259,12,$PBS_MARQUEE,-1)
+_SendMessage(guictrlgethandle(-1), $PBM_SETMARQUEE, True, 50)
+GUICtrlSetData(-1,30)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(1195)
+breite=278
+hoehe=68
+style=$WS_POPUP+$WS_CAPTION
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=ISN_warte_auf_Plugin
+parent=$Studiofenster
+code=_Control_set_DPI_Scaling($ISN_warte_auf_Plugin)[BREAK]_CenterOnMonitor($ISN_warte_auf_Plugin ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$ISN_warte_auf_Plugin)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$ISN_warte_auf_Plugin)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,278,30)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x000F0DAE]
+handle=404
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=262
+height=19
+text=_Get_langstr(1195)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=func
+[0x00090D86]
+handle=405
+locked=0
+resize=
+code=_SendMessage(guictrlgethandle(-1), $PBM_SETMARQUEE, True, 50)[BREAK]GUICtrlSetData(-1,30)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=progress
+x=10
+y=40
+width=259
+height=12
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$PBS_MARQUEE
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+iconindex=
+textmode=text
+#ce

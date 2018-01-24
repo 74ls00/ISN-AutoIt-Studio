@@ -1,0 +1,436 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$edit_hotkey_GUI = GUICreate(_Get_langstr(687),421,310,-1,-1,BitOr($WS_CAPTION,$WS_POPUP),$WS_EX_MDICHILD,$Config_GUI)
+GUISetBkColor(0xFFFFFF,$edit_hotkey_GUI)
+_GUISetIcon($edit_hotkey_GUI, $smallIconsdll,1082)
+_Control_set_DPI_Scaling($edit_hotkey_GUI)
+_CenterOnMonitor($edit_hotkey_GUI ,"", $Runonmonitor)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,421,50)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,310-50,421,50)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUISetBkColor($Fenster_Hintergrundfarbe,$edit_hotkey_GUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$edit_hotkey_GUI)
+GUICtrlCreateLabel(_Get_langstr(687),14,14,391,29,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(249),13,270,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_save_Edit_Hotkey")
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),125,270,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_hide_Edit_Hotkey")
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateGroup(_Get_langstr(690),13,141,392,107,$BS_CENTER,-1)
+GUICtrlSetFont(-1,8,800,0,"MS Sans Serif")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(450),30,204,110,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_aendere_Hotkey")
+Button_AddIcon(-1, $smallIconsdll, 1135,0)
+_Control_set_DPI_Scaling(-1)
+$edit_hotkey_hotkey = GUICtrlCreateLabel("STRG + ALT + S",19,168,379,24,$SS_CENTER,-1)
+GUICtrlSetFont(-1,12,400,0,"Tahoma")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($edit_hotkey_hotkey)
+GUICtrlCreateButton(_Get_langstr(686),280,204,110,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Set_no_Hotkey")
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateGroup(_Get_langstr(689),10,60,395,74,$BS_CENTER,-1)
+GUICtrlSetFont(-1,8,800,0,"MS Sans Serif")
+_Control_set_DPI_Scaling(-1)
+$edit_hotkey_funktion_label = GUICtrlCreateLabel("Funktion Text",20,80,376,45,$SS_CENTER,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($edit_hotkey_funktion_label)
+$edit_hotkey_section = GUICtrlCreateLabel("hotkey_section",299,270,129,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($edit_hotkey_section)
+if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+GUICtrlCreateButton(_Get_langstr(248),155,204,110,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Set_Hotkey_to_default")
+Button_AddIcon(-1, $smallIconsdll, 268,0)
+_Control_set_DPI_Scaling(-1)
+$edit_hotkey_keycode = GUICtrlCreateLabel("hotkey_keycode",252,290,129,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($edit_hotkey_keycode)
+if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(687)
+breite=421
+hoehe=310
+style=$WS_CAPTION+$WS_POPUP
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=edit_hotkey_GUI
+parent=$Config_GUI
+code=_GUISetIcon($edit_hotkey_GUI, $smallIconsdll,1082)[BREAK]_Control_set_DPI_Scaling($edit_hotkey_GUI)[BREAK]_CenterOnMonitor($edit_hotkey_GUI ,"", $Runonmonitor)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,421,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,310-50,421,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$edit_hotkey_GUI)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$edit_hotkey_GUI)
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x001928B6]
+handle=401
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=14
+y=14
+width=391
+height=29
+text=_Get_langstr(687)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=0
+locked=0
+resize=
+iconindex=
+textmode=func
+[0x00101D22]
+handle=402
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=13
+y=270
+width=100
+height=30
+text=_Get_langstr(249)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_save_Edit_Hotkey
+bgimage=
+tabpage=-1
+order=2
+iconindex=
+resize=
+textmode=func
+[0x001A1ED2]
+handle=403
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=125
+y=270
+width=100
+height=30
+text=_Get_langstr(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_hide_Edit_Hotkey
+bgimage=
+tabpage=-1
+order=3
+iconindex=
+resize=
+textmode=func
+[0x001901DE]
+handle=404
+code=_Control_set_DPI_Scaling($control_handle)
+type=group
+x=13
+y=141
+width=392
+height=107
+text=_Get_langstr(690)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=800
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=4
+iconindex=
+resize=
+textmode=func
+locked=0
+[0x00451DBA]
+handle=405
+code=Button_AddIcon(-1, $smallIconsdll, 1135,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=30
+y=204
+width=110
+height=30
+text=_Get_langstr(450)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_aendere_Hotkey
+bgimage=
+tabpage=-1
+order=5
+iconindex=
+resize=
+textmode=func
+[0x00231F12]
+handle=406
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=19
+y=168
+width=379
+height=24
+text=STRG + ALT + S
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Tahoma
+fontsize=12
+fontstyle=400
+fontattribute=0
+id=edit_hotkey_hotkey
+func=
+bgimage=
+tabpage=-1
+order=6
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x00161D68]
+handle=407
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=280
+y=204
+width=110
+height=30
+text=_Get_langstr(686)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Set_no_Hotkey
+bgimage=
+tabpage=-1
+order=7
+iconindex=
+resize=
+textmode=func
+[0x0036095E]
+handle=408
+code=_Control_set_DPI_Scaling($control_handle)
+type=group
+x=10
+y=60
+width=395
+height=74
+text=_Get_langstr(689)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=800
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=8
+iconindex=
+resize=
+textmode=func
+locked=0
+[0x001D20D4]
+handle=409
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=20
+y=80
+width=376
+height=45
+text=Funktion Text
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=edit_hotkey_funktion_label
+func=
+bgimage=
+tabpage=-1
+order=9
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x002A1D64]
+handle=410
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+type=label
+x=299
+y=270
+width=129
+height=15
+text=hotkey_section
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=edit_hotkey_section
+func=
+bgimage=
+tabpage=-1
+order=10
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x00181E1C]
+handle=411
+code=Button_AddIcon(-1, $smallIconsdll, 268,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=155
+y=204
+width=110
+height=30
+text=_Get_langstr(248)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Set_Hotkey_to_default
+bgimage=
+tabpage=-1
+order=11
+iconindex=
+resize=
+textmode=func
+[0x00210822]
+handle=412
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+type=label
+x=252
+y=290
+width=129
+height=15
+text=hotkey_keycode
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=edit_hotkey_keycode
+func=
+bgimage=
+tabpage=-1
+iconindex=
+resize=
+textmode=text
+locked=0
+order=12
+#ce

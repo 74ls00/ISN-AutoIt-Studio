@@ -1,0 +1,78 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$Detailinfos_zu_aktuellem_Wort_GUI = GUICreate("wort_info_GUI",70,15,-1,-1,BitOr($WS_POPUP,$WS_BORDER),$WS_EX_MDICHILD,$StudioFenster)
+GUISetBkColor(0xFFFFFF,$Detailinfos_zu_aktuellem_Wort_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Detailinfos_zu_aktuellem_Wort_GUI)
+_Control_set_DPI_Scaling($Detailinfos_zu_aktuellem_Wort_GUI)
+$Detailinfos_zu_aktuellem_Wort_Label = GUICtrlCreateLabel("Text",0,0,70,15,BitOr($SS_CENTER,$SS_CENTERIMAGE),-1)
+GUICtrlSetFont(-1,9,400,0,"Arial")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($Detailinfos_zu_aktuellem_Wort_Label)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=wort_info_GUI
+breite=70
+hoehe=15
+style=$WS_POPUP+$WS_BORDER
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Detailinfos_zu_aktuellem_Wort_GUI
+parent=$StudioFenster
+code=GUISetBkColor($Fenster_Hintergrundfarbe,$Detailinfos_zu_aktuellem_Wort_GUI)[BREAK]_Control_set_DPI_Scaling($Detailinfos_zu_aktuellem_Wort_GUI)
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00101C1E]
+handle=401
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=0
+y=0
+width=70
+height=15
+text=Text
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER+$SS_CENTERIMAGE
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Arial
+fontsize=9
+fontstyle=400
+fontattribute=0
+id=Detailinfos_zu_aktuellem_Wort_Label
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=text
+#ce

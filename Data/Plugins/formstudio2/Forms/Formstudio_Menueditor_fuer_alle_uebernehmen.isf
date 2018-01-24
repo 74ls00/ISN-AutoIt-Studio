@@ -1,0 +1,320 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$menueditor_fueralleuebernehmen_GUI = GUICreate(_ISNPlugin_Get_langstring(201),391,251,-1,-1,BitOr($WS_POPUP,$WS_CAPTION),$WS_EX_TOOLWINDOW,$menueditorGUI)
+GUISetBkColor(0xFFFFFF,$menueditor_fueralleuebernehmen_GUI)
+_Control_set_DPI_Scaling($menueditor_fueralleuebernehmen_GUI)
+_CenterOnMonitor($menueditor_fueralleuebernehmen_GUI,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$menueditor_fueralleuebernehmen_GUI)
+GUISetBkColor($ISN_Hintergrundfarbe,$menueditor_fueralleuebernehmen_GUI)
+guictrlcreatepic($Window_TOP_IMG,0,0,391,50)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)
+guictrlcreatepic($Window_Row_Bottom_IMG,0,251-50,391,50)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(201),10,10,368,38,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(212),10,50,368,18,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+$menueditor_fueralleGUI_Iconpfad_checkbox = GUICtrlCreateCheckbox(stringreplace(_ISNPlugin_Get_langstring(211),':',''),20,140,347,20,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUICheckBoxSetColor($menueditor_fueralleGUI_Iconpfad_checkbox,"0x000000",$GUI_BKCOLOR_TRANSPARENT)
+GUICtrlSetColor($menueditor_fueralleGUI_Iconpfad_checkbox,$ISN_Schriftfarbe)
+$menueditor_fueralleGUI_IconID_checkbox = GUICtrlCreateCheckbox(stringreplace(_ISNPlugin_Get_langstring(208),':',''),20,170,347,20,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUICheckBoxSetColor($menueditor_fueralleGUI_IconID_checkbox,"0x000000",$GUI_BKCOLOR_TRANSPARENT)
+GUICtrlSetColor($menueditor_fueralleGUI_IconID_checkbox,$ISN_Schriftfarbe)
+$menueditor_fueralleGUI_text_checkbox = GUICtrlCreateCheckbox(stringreplace(_ISNPlugin_Get_langstring(210),':',''),20,80,347,20,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUICheckBoxSetColor($menueditor_fueralleGUI_text_checkbox,"0x000000",$GUI_BKCOLOR_TRANSPARENT)
+GUICtrlSetColor($menueditor_fueralleGUI_text_checkbox,$ISN_Schriftfarbe)
+$menueditor_fueralleGUI_Eigenschaften_checkbox = GUICtrlCreateCheckbox(stringreplace(_ISNPlugin_Get_langstring(202),':',''),20,110,347,20,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUICheckBoxSetColor($menueditor_fueralleGUI_Eigenschaften_checkbox,"0x000000",$GUI_BKCOLOR_TRANSPARENT)
+GUICtrlSetColor($menueditor_fueralleGUI_Eigenschaften_checkbox,$ISN_Schriftfarbe)
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(58),120,210,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Menueditor_uebernehmen_fuer_verstecken")
+_Control_set_DPI_Scaling(-1)
+Button_AddIcon(-1, $smallIconsdll, 922,0)
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(57),10,210,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Menueditor_uebernehmen_fuer_Speichern")
+_Control_set_DPI_Scaling(-1)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_ISNPlugin_Get_langstring(201)
+breite=391
+hoehe=251
+style=$WS_POPUP+$WS_CAPTION
+exstyle=$WS_EX_TOOLWINDOW
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$menueditor_fueralleuebernehmen_GUI
+parent=$menueditorGUI
+code=_Control_set_DPI_Scaling($menueditor_fueralleuebernehmen_GUI)[BREAK]_CenterOnMonitor($menueditor_fueralleuebernehmen_GUI,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$menueditor_fueralleuebernehmen_GUI)[BREAK]GUISetBkColor($ISN_Hintergrundfarbe,$menueditor_fueralleuebernehmen_GUI)[BREAK]guictrlcreatepic($Window_TOP_IMG,0,0,391,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)[BREAK]guictrlcreatepic($Window_Row_Bottom_IMG,0,251-50,391,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x003C25EE]
+handle=398
+locked=0
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)[BREAK]_Control_set_DPI_Scaling(-1)
+type=label
+x=10
+y=10
+width=368
+height=38
+text=_ISNPlugin_Get_langstring(201)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x00221FFE]
+handle=399
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+type=label
+x=10
+y=50
+width=368
+height=18
+text=_ISNPlugin_Get_langstring(212)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x00262692]
+handle=400
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUICheckBoxSetColor($control_handle,"0x000000",$GUI_BKCOLOR_TRANSPARENT)[BREAK]GUICtrlSetColor($control_handle,$ISN_Schriftfarbe)
+type=checkbox
+x=20
+y=80
+width=347
+height=20
+text=stringreplace(_ISNPlugin_Get_langstring(210),':','')
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$menueditor_fueralleGUI_text_checkbox
+func=
+bgimage=
+order=3
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x001C26CC]
+handle=401
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUICheckBoxSetColor($control_handle,"0x000000",$GUI_BKCOLOR_TRANSPARENT)[BREAK]GUICtrlSetColor($control_handle,$ISN_Schriftfarbe)
+type=checkbox
+x=20
+y=110
+width=347
+height=20
+text=stringreplace(_ISNPlugin_Get_langstring(202),':','')
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$menueditor_fueralleGUI_Eigenschaften_checkbox
+func=
+bgimage=
+order=3
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x002A25A0]
+handle=402
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUICheckBoxSetColor($control_handle,"0x000000",$GUI_BKCOLOR_TRANSPARENT)[BREAK]GUICtrlSetColor($control_handle,$ISN_Schriftfarbe)
+type=checkbox
+x=20
+y=140
+width=347
+height=20
+text=stringreplace(_ISNPlugin_Get_langstring(211),':','')
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$menueditor_fueralleGUI_Iconpfad_checkbox
+func=
+bgimage=
+order=3
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x003322AC]
+handle=403
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUICheckBoxSetColor($control_handle,"0x000000",$GUI_BKCOLOR_TRANSPARENT)[BREAK]GUICtrlSetColor($control_handle,$ISN_Schriftfarbe)
+type=checkbox
+x=20
+y=170
+width=347
+height=20
+text=stringreplace(_ISNPlugin_Get_langstring(208),':','')
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$menueditor_fueralleGUI_IconID_checkbox
+func=
+bgimage=
+order=3
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x002F21AA]
+handle=404
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]Button_AddIcon(-1, $smallIconsdll, 314,0)
+type=button
+x=10
+y=210
+width=100
+height=30
+text=_ISNPlugin_Get_langstring(57)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Menueditor_uebernehmen_fuer_Speichern
+bgimage=
+order=8
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x004A099C]
+handle=405
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]Button_AddIcon(-1, $smallIconsdll, 922,0)
+type=button
+x=120
+y=210
+width=100
+height=30
+text=_ISNPlugin_Get_langstring(58)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Menueditor_uebernehmen_fuer_verstecken
+bgimage=
+order=8
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+#ce

@@ -1,0 +1,493 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+
+$ruleseditor = GUICreate(_Get_langstr(519),804,454,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$StudioFenster)
+GUISetBkColor(0xFFFFFF,$ruleseditor)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Hide_Ruleeditor", $ruleseditor)
+GUISetOnEvent($GUI_EVENT_RESTORE, "_Elemente_an_Fesntergroesse_anpassen", $ruleseditor)
+GUISetOnEvent($GUI_EVENT_MAXIMIZE, "_Elemente_an_Fesntergroesse_anpassen", $ruleseditor)
+GUISetOnEvent($GUI_EVENT_RESIZED, "_Elemente_an_Fesntergroesse_anpassen", $ruleseditor)
+_CenterOnMonitor($ruleseditor ,"", $Runonmonitor)
+_Control_set_DPI_Scaling($ruleseditor)
+_GUISetIcon($ruleseditor, $smallIconsdll, 1548)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ruleseditor)
+GUISetBkColor($Fenster_Hintergrundfarbe,$ruleseditor)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,804,55)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,454-30,804,30)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, "")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlCreateLabel(_Get_langstr(519),58,11,737,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateGroup(_Get_langstr(521),10,80,783,246,$BS_CENTER,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling(-1)
+$listview_projectrules = GUICtrlCreatelistview(_Get_langstr(526),20,100,758,212,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($listview_projectrules)
+_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))
+_GUICtrlListView_SetImageList($listview_projectrules, $hImage,1)
+_GUICtrlListView_HideColumn(-1,2)
+GUICtrlCreateButton(_Get_langstr(520),10,340,188,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Show_new_rule_event")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1109,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(523),210,340,188,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Editiere_Regel")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1220,0)
+_Control_set_DPI_Scaling(-1)
+$btn_toggle_rulestatus = GUICtrlCreateButton(_Get_langstr(514),410,340,188,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Rule_toggle_active")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling($btn_toggle_rulestatus)
+GUICtrlCreateButton(_Get_langstr(524),610,340,185,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Loesche_Regel")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1594,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(165),10,380,188,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Hide_Ruleeditor")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(590),210,380,188,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_import_Rules")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1089,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(589),410,380,188,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Export_Rules")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 143,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(525),10,428,780,21,$SS_CENTERIMAGE,-1)
+GUICtrlSetColor(-1,"0x808080")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(522),10,54,780,19,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreatePic("",13,11,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,382+1,32,32)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(519)
+breite=804
+hoehe=454
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=ruleseditor
+parent=$StudioFenster
+code=_CenterOnMonitor($ruleseditor ,"", $Runonmonitor)[BREAK]_Control_set_DPI_Scaling($ruleseditor)[BREAK]_GUISetIcon($ruleseditor, $smallIconsdll, 1548)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$ruleseditor)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$ruleseditor)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,804,55)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,454-30,804,30)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, "")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Hide_Ruleeditor
+gui_event_minimize=
+gui_event_restore=_Elemente_an_Fesntergroesse_anpassen
+gui_event_maximize=_Elemente_an_Fesntergroesse_anpassen
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=_Elemente_an_Fesntergroesse_anpassen
+gui_event_dropped=
+[0x000F2290]
+handle=406
+locked=0
+resize=550
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=58
+y=11
+width=737
+height=32
+text=_Get_langstr(519)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=func
+[0x00092292]
+handle=407
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)
+type=group
+x=10
+y=80
+width=783
+height=246
+text=_Get_langstr(521)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=func
+[0x0008228C]
+handle=408
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))[BREAK]_GUICtrlListView_SetImageList($listview_projectrules, $hImage,1)[BREAK]_GUICtrlListView_HideColumn(-1,2)
+type=listview
+x=20
+y=100
+width=758
+height=212
+text=_Get_langstr(526)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=listview_projectrules
+func=
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=func
+[0x002D128C]
+handle=409
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1109,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=340
+width=188
+height=30
+text=_Get_langstr(520)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Show_new_rule_event
+bgimage=
+order=5
+tabpage=-1
+iconindex=
+textmode=func
+[0x000A1FE4]
+handle=410
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1220,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=210
+y=340
+width=188
+height=30
+text=_Get_langstr(523)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Editiere_Regel
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=6
+[0x000720A0]
+handle=411
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=410
+y=340
+width=188
+height=30
+text=_Get_langstr(514)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=btn_toggle_rulestatus
+func=_Rule_toggle_active
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=7
+[0x001A0C98]
+handle=412
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1594,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=610
+y=340
+width=185
+height=30
+text=_Get_langstr(524)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Loesche_Regel
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=8
+[0x000620A2]
+handle=413
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=380
+width=188
+height=30
+text=_Get_langstr(165)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Hide_Ruleeditor
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=9
+[0x0008209E]
+handle=414
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1089,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=210
+y=380
+width=188
+height=30
+text=_Get_langstr(590)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_import_Rules
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=10
+[0x000A07D0]
+handle=415
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 143,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=410
+y=380
+width=188
+height=30
+text=_Get_langstr(589)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Export_Rules
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=11
+[0x0006209C]
+handle=416
+locked=0
+resize=582
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=428
+width=780
+height=21
+text=_Get_langstr(525)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTERIMAGE
+exstyle=
+textcolour=0x808080
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=12
+tabpage=-1
+iconindex=
+textmode=func
+[0x000720E2]
+handle=417
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,382+1,32,32)
+type=image
+x=13
+y=11
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=13
+tabpage=-1
+iconindex=
+textmode=text
+[0x000820EA]
+handle=418
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=54
+width=780
+height=19
+text=_Get_langstr(522)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=13
+tabpage=-1
+iconindex=
+textmode=func
+#ce

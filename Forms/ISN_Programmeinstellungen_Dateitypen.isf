@@ -1,0 +1,357 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+GUICtrlCreateGroup("",210,60,782,581,-1,-1)
+if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+GUICtrlCreatePic("",230,80,32,32,-1,-1)
+GUICtrlSetResizing(-1,802)
+_Control_set_DPI_Scaling(-1,true)
+_SetIconAlpha(-1, $bigiconsdll,492,32,32)
+GUICtrlCreateLabel(_Get_langstr(1109),271,84,692,25,-1,-1)
+GUICtrlSetFont(-1,12,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,546)
+GUICtrlSetFont(-1,12,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+$Einstellungen_Skripteditor_Dateitypen_Listview = GUICtrlCreatelistview(_Get_langstr(1109),262,198,719,431,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($Einstellungen_Skripteditor_Dateitypen_Listview)
+_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))
+_GUICtrlListView_SetImageList($Einstellungen_Skripteditor_Dateitypen_Listview, $hImage,1)
+$Einstellungen_Skripteditor_Dateitypen_default_Button = GUICtrlCreateButton("",225,274,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Einstellungen_Skripteditor_Dateitypen_default")
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($Einstellungen_Skripteditor_Dateitypen_default_Button)
+$Einstellungen_Skripteditor_Dateitypen_default_Button = GUICtrlCreatePic("",225,274,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,268+1,16,16)
+Else
+ Button_AddIcon(-1, $smallIconsdll, 268,4)
+endif
+ GUICtrlSetTip($Einstellungen_Skripteditor_Dateitypen_default_Button,_Get_langstr(1115))
+GUICtrlSetOnEvent($Einstellungen_Skripteditor_Dateitypen_default_Button,"_Einstellungen_Skripteditor_Dateitypen_default")
+_Control_set_DPI_Scaling($Einstellungen_Skripteditor_Dateitypen_default_Button)
+$Einstellungen_Skripteditor_Dateitypen_automatisch_radio = GUICtrlCreateRadio(_Get_langstr(1110),225,123,756,20,-1,-1)
+GUICtrlSetOnEvent(-1,"_Toggle_Filetypes_Modes")
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,546)
+_Control_set_DPI_Scaling($Einstellungen_Skripteditor_Dateitypen_automatisch_radio)
+$Einstellungen_Skripteditor_Dateitypen_Remove_Button = GUICtrlCreateButton("",225,236,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Einstellungen_Skripteditor_Dateityp_entfernen")
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($Einstellungen_Skripteditor_Dateitypen_Remove_Button)
+$Einstellungen_Skripteditor_Dateitypen_Remove_Button = GUICtrlCreatePic("",225,236,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1727+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1727,4)
+endif
+GUICtrlSetTip($Einstellungen_Skripteditor_Dateitypen_Remove_Button,_Get_langstr(1114))
+GUICtrlSetOnEvent($Einstellungen_Skripteditor_Dateitypen_Remove_Button,"_Einstellungen_Skripteditor_Dateityp_entfernen")
+_Control_set_DPI_Scaling($Einstellungen_Skripteditor_Dateitypen_Remove_Button)
+$Einstellungen_Skripteditor_Dateitypen_manuell_radio = GUICtrlCreateRadio(_Get_langstr(1111),225,159,756,20,-1,-1)
+GUICtrlSetOnEvent(-1,"_Toggle_Filetypes_Modes")
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,546)
+_Control_set_DPI_Scaling($Einstellungen_Skripteditor_Dateitypen_manuell_radio)
+$Einstellungen_Skripteditor_Dateitypen_Add_Button = GUICtrlCreateButton("",225,198,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Einstellungen_Skripteditor_Dateitypen_hinzufuegen")
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($Einstellungen_Skripteditor_Dateitypen_Add_Button)
+$Einstellungen_Skripteditor_Dateitypen_Add_Button = GUICtrlCreatePic("",225,198,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1732+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1732,4)
+endif
+GUICtrlSetOnEvent($Einstellungen_Skripteditor_Dateitypen_Add_Button,"_Einstellungen_Skripteditor_Dateitypen_hinzufuegen")
+GUICtrlSetTip($Einstellungen_Skripteditor_Dateitypen_Add_Button,_Get_langstr(1112))
+_Control_set_DPI_Scaling($Einstellungen_Skripteditor_Dateitypen_Add_Button)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Form1
+breite=1021
+hoehe=671
+style=$WS_CAPTION+$WS_SIZEBOX+$WS_MAXIMIZEBOX
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=hgui
+parent=
+code=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=true
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00B232A0]
+handle=402
+locked=0
+code=GUICtrlSetFont(-1,12,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=271
+y=84
+width=692
+height=25
+text=_Get_langstr(1109)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=12
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=9
+tabpage=-1
+textmode=func
+resize=546
+iconindex=
+[0x008A33DC]
+handle=403
+locked=1
+code=if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+type=group
+x=210
+y=60
+width=782
+height=581
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=5
+tabpage=-1
+textmode=text
+resize=
+iconindex=
+[0x001D3C7C]
+handle=404
+locked=0
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($Einstellungen_Skripteditor_Dateitypen_Add_Button)[BREAK]$Einstellungen_Skripteditor_Dateitypen_Add_Button = GUICtrlCreatePic("",225,198,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha(-1, $smallIconsdll,1732+1,16,16)[BREAK]Else[BREAK]Button_AddIcon(-1, $smallIconsdll, 1732,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($Einstellungen_Skripteditor_Dateitypen_Add_Button,"_Einstellungen_Skripteditor_Dateitypen_hinzufuegen")[BREAK]GUICtrlSetTip($Einstellungen_Skripteditor_Dateitypen_Add_Button,_Get_langstr(1112))[BREAK]_Control_set_DPI_Scaling($Einstellungen_Skripteditor_Dateitypen_Add_Button)
+type=button
+x=225
+y=198
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_Skripteditor_Dateitypen_Add_Button
+func=_Einstellungen_Skripteditor_Dateitypen_hinzufuegen
+bgimage=
+order=21
+tabpage=-1
+textmode=text
+resize=802
+iconindex=
+[0x0025298A]
+handle=405
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))[BREAK]_GUICtrlListView_SetImageList($Einstellungen_Skripteditor_Dateitypen_Listview, $hImage,1)[BREAK]
+type=listview
+x=262
+y=198
+width=719
+height=431
+text=_Get_langstr(1109)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_Skripteditor_Dateitypen_Listview
+func=
+bgimage=
+order=12
+tabpage=-1
+textmode=func
+iconindex=
+[0x004B24A6]
+handle=406
+locked=0
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($Einstellungen_Skripteditor_Dateitypen_Remove_Button)[BREAK]$Einstellungen_Skripteditor_Dateitypen_Remove_Button = GUICtrlCreatePic("",225,236,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha(-1, $smallIconsdll,1727+1,16,16)[BREAK]Else[BREAK]Button_AddIcon(-1, $smallIconsdll, 1727,4)[BREAK]endif[BREAK]GUICtrlSetTip($Einstellungen_Skripteditor_Dateitypen_Remove_Button,_Get_langstr(1114))[BREAK]GUICtrlSetOnEvent($Einstellungen_Skripteditor_Dateitypen_Remove_Button,"_Einstellungen_Skripteditor_Dateityp_entfernen")[BREAK]_Control_set_DPI_Scaling($Einstellungen_Skripteditor_Dateitypen_Remove_Button)
+type=button
+x=225
+y=236
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_Skripteditor_Dateitypen_Remove_Button
+func=_Einstellungen_Skripteditor_Dateityp_entfernen
+bgimage=
+tabpage=-1
+textmode=text
+resize=802
+order=13
+iconindex=
+[0x000D0D98]
+handle=407
+locked=0
+resize=546
+code=_Control_set_DPI_Scaling($control_handle)
+type=radio
+x=225
+y=123
+width=756
+height=20
+text=_Get_langstr(1110)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_Skripteditor_Dateitypen_automatisch_radio
+func=_Toggle_Filetypes_Modes
+bgimage=
+order=13
+tabpage=-1
+iconindex=
+textmode=func
+[0x00642608]
+handle=408
+locked=0
+resize=546
+code=_Control_set_DPI_Scaling($control_handle)
+type=radio
+x=225
+y=159
+width=756
+height=20
+text=_Get_langstr(1111)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_Skripteditor_Dateitypen_manuell_radio
+func=_Toggle_Filetypes_Modes
+bgimage=
+order=14
+tabpage=-1
+iconindex=
+textmode=func
+[0x005D2E36]
+handle=409
+locked=0
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($Einstellungen_Skripteditor_Dateitypen_default_Button)[BREAK]$Einstellungen_Skripteditor_Dateitypen_default_Button = GUICtrlCreatePic("",225,274,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha(-1, $smallIconsdll,268+1,16,16)[BREAK]Else[BREAK] Button_AddIcon(-1, $smallIconsdll, 268,4)[BREAK]endif[BREAK] GUICtrlSetTip($Einstellungen_Skripteditor_Dateitypen_default_Button,_Get_langstr(1115))[BREAK]GUICtrlSetOnEvent($Einstellungen_Skripteditor_Dateitypen_default_Button,"_Einstellungen_Skripteditor_Dateitypen_default")[BREAK]_Control_set_DPI_Scaling($Einstellungen_Skripteditor_Dateitypen_default_Button)
+type=button
+x=225
+y=274
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_Skripteditor_Dateitypen_default_Button
+func=_Einstellungen_Skripteditor_Dateitypen_default
+bgimage=
+tabpage=-1
+textmode=text
+resize=802
+iconindex=
+order=13
+[0x000E0D70]
+handle=410
+locked=0
+resize=802
+code=_Control_set_DPI_Scaling($control_handle,true)[BREAK]_SetIconAlpha(-1, $bigiconsdll,492,32,32)
+type=image
+x=230
+y=80
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=9
+tabpage=-1
+iconindex=
+textmode=text
+#ce

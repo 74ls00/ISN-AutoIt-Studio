@@ -1,0 +1,177 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <ComboConstants.au3>
+
+$Sprache_Ersteinrichtung_GUI = GUICreate("ISN AutoIt Studio",410,150,-1,-1,BitOr($WS_CAPTION,$WS_POPUP,$WS_SYSMENU),$WS_EX_TOPMOST)
+GUISetBkColor(0xFFFFFF,$Sprache_Ersteinrichtung_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Exit_Ersteinrichtung", $Sprache_Ersteinrichtung_GUI)
+GUISetBkColor(0xFFFFFF, $Sprache_Ersteinrichtung_GUI)
+_Control_set_DPI_Scaling($Sprache_Ersteinrichtung_GUI)
+GUICtrlCreatePic(@ScriptDir & "\Data\row_bottom.jpg", 0, 150 - 50, 410, 50)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1, $GUI_DISABLE)
+GUICtrlCreateLabel("Sprache auswählen / Select language",0,10,410,32,$SS_CENTER,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("OK",35,110,142,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_waehle_sprache_Ersteinrichtung")
+Button_AddIcon(-1, $smallIconsdll, 314, 0)
+_Control_set_DPI_Scaling(-1)
+$langchooser = GUICtrlCreateCombo("",60,60,295,21,$CBS_DROPDOWNLIST,-1)
+GUICtrlSetData(-1,"")
+_Control_set_DPI_Scaling($langchooser)
+GUICtrlCreateButton("Beenden / Exit",221,110,142,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Exit_Ersteinrichtung")
+Button_AddIcon(-1, $smallIconsdll, 1173, 0)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=ISN AutoIt Studio
+breite=410
+hoehe=150
+style=$WS_CAPTION+$WS_POPUP+$WS_SYSMENU
+exstyle=$WS_EX_TOPMOST
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Sprache_Ersteinrichtung_GUI
+parent=
+code=GUISetBkColor(0xFFFFFF, $Sprache_Ersteinrichtung_GUI)[BREAK]_Control_set_DPI_Scaling($Sprache_Ersteinrichtung_GUI)[BREAK]GUICtrlCreatePic(@ScriptDir & "\Data\row_bottom.jpg", 0, 150 - 50, 410, 50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1, $GUI_DISABLE)
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Exit_Ersteinrichtung
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x000E1D00]
+handle=401
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=0
+y=10
+width=410
+height=32
+text=Sprache auswählen / Select language
+state=80
+style=$SS_CENTER
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+id=
+func=
+bgimage=
+tabpage=-1
+tooltip=
+fontattribute=0
+order=0
+locked=0
+resize=
+iconindex=
+textmode=text
+[0x00071D60]
+handle=402
+code=Button_AddIcon(-1, $smallIconsdll, 314, 0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=35
+y=110
+width=142
+height=30
+text=OK
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=
+func=_waehle_sprache_Ersteinrichtung
+bgimage=
+tabpage=-1
+tooltip=
+fontattribute=0
+order=2
+iconindex=
+resize=
+textmode=text
+[0x000A1D94]
+handle=403
+code=_Control_set_DPI_Scaling($control_handle)
+type=combo
+x=60
+y=60
+width=295
+height=21
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$CBS_DROPDOWNLIST
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=langchooser
+func=
+bgimage=
+tabpage=-1
+order=3
+iconindex=
+resize=
+textmode=text
+[0x000A1D74]
+handle=404
+code=Button_AddIcon(-1, $smallIconsdll, 1173, 0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=221
+y=110
+width=142
+height=30
+text=Beenden / Exit
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=
+func=_Exit_Ersteinrichtung
+bgimage=
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=
+textmode=text
+locked=0
+order=4
+#ce

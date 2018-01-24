@@ -1,0 +1,656 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+
+$ParameterEditor_GUI = GUICreate(_Get_langstr(1037),635,581,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$Studiofenster)
+GUISetBkColor(0xFFFFFF,$ParameterEditor_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Hide_Parameter_Editor", $ParameterEditor_GUI)
+_Control_set_DPI_Scaling($ParameterEditor_GUI)
+_GUISetIcon($ParameterEditor_GUI, $smallIconsdll,1614)
+_CenterOnMonitor($ParameterEditor_GUI ,"", $Runonmonitor)
+GUISetBkColor($Fenster_Hintergrundfarbe,$ParameterEditor_GUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ParameterEditor_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,635,50)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,581-50,635,50)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+$ParameterEditor_ParameterTitel = GUICtrlCreateLabel("GuictrlgetText",10,40,614,27,$SS_CENTER,-1)
+GUICtrlSetFont(-1,13,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,13,800,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling($ParameterEditor_ParameterTitel)
+GUICtrlCreateLabel(_Get_langstr(1037),52,9,574,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+$ParameterEditor_Abbrechen_Button = GUICtrlCreateButton(_Get_langstr(8),118,542,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Hide_Parameter_Editor")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling($ParameterEditor_Abbrechen_Button)
+$ParameterEditor_OK_Button = GUICtrlCreateButton(_Get_langstr(7),10,542,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Parameter_Editor_OK")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling($ParameterEditor_OK_Button)
+$ParameterEditor_Vorschau_Fertiger_Befehl_Label = GUICtrlCreateLabel("",20,470,597,42,$SS_CENTER,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling($ParameterEditor_Vorschau_Fertiger_Befehl_Label)
+GUICtrlCreateLabel("",10,74,614,92,-1,-1)
+GUICtrlSetBkColor(-1,"0x808080")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$ParameterEditor_ListView = GUICtrlCreatelistview(_Get_langstr(1040),10,177,580,164,BitOr($LVS_REPORT,$LVS_SINGLESEL,$LVS_SHOWSELALWAYS),BitOr($LVS_EX_FULLROWSELECT,$LVS_EX_GRIDLINES,$LVS_EX_DOUBLEBUFFER))
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($ParameterEditor_ListView)
+$ParameterEditor_CallTipp_Label = GUICtrlCreateLabel("_IEFormSubmit ( ByRef $oObject [, $fWait = 1] ) "&@crlf&"Submit a specified Form (Requires: #include <IE.au3>)",14,78,606,83,$SS_CENTER,-1)
+GUICtrlSetFont(-1,9,400,2,"Segoe UI")
+GUICtrlSetBkColor(-1,"0xFFFFBB")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetBkColor(-1,$Fenster_Hintergrundfarbe)
+_Control_set_DPI_Scaling($ParameterEditor_CallTipp_Label)
+$ParameterEditor_Plus_Button = GUICtrlCreateButton("",594,177,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Parameter_Editor_Parameter_hinzufuegen")
+if $Skin_is_used = "true" Then
+GUICtrlDelete($ParameterEditor_Plus_Button)
+$ParameterEditor_Plus_Button = GUICtrlCreatePic("",594,177,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($ParameterEditor_Plus_Button, $smallIconsdll,1732+1,16,16)
+Else
+Button_AddIcon($ParameterEditor_Plus_Button, $smallIconsdll, 1732,4)
+endif
+GUICtrlSetOnEvent($ParameterEditor_Plus_Button,"_Parameter_Editor_Parameter_hinzufuegen")
+GUICtrlSetTip ($ParameterEditor_Plus_Button,_Get_langstr(1043)&" (Strg+Enter)")
+_Control_set_DPI_Scaling($ParameterEditor_Plus_Button)
+GUICtrlSetResizing(-1,804)
+$ParameterEditor_Minus_Button = GUICtrlCreateButton("",594,215,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($ParameterEditor_Minus_Button)
+$ParameterEditor_Minus_Button = GUICtrlCreatePic("",594,215,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($ParameterEditor_Minus_Button, $smallIconsdll,1523+1,16,16)
+Else
+	Button_AddIcon($ParameterEditor_Minus_Button, $smallIconsdll, 1523,4)
+Endif
+GUICtrlSetTip ($ParameterEditor_Minus_Button,_Get_langstr(1044))
+GUICtrlSetOnEvent($ParameterEditor_Minus_Button,"_Parameter_Editor_Markierten_Parameter_leeren")
+_Control_set_DPI_Scaling($ParameterEditor_Minus_Button)
+GUICtrlSetResizing(-1,804)
+$ParameterEditor_remove_Button = GUICtrlCreateButton("",594,253,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($ParameterEditor_remove_Button)
+$ParameterEditor_remove_Button = GUICtrlCreatePic("",594,253,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($ParameterEditor_remove_Button, $smallIconsdll,929+1,16,16)
+Else
+	Button_AddIcon($ParameterEditor_remove_Button, $smallIconsdll, 929,4)
+Endif
+GUICtrlSetTip ($ParameterEditor_remove_Button,_Get_langstr(1045))
+GUICtrlSetOnEvent($ParameterEditor_remove_Button,"_Parameter_Editor_Parameter_entfernen")
+_Control_set_DPI_Scaling($ParameterEditor_remove_Button)
+GUICtrlSetResizing(-1,804)
+GUICtrlCreateDummy()
+$ParameterEditor_SCIEditor = SCI_CreateEditorAu3($ParameterEditor_GUI,10*$DPI,363*$DPI,614*$DPI,60*$DPI)
+SendMessage($ParameterEditor_SCIEditor, $SCI_SETLEXER, $SCLEX_AU3, 0)
+SendMessage($ParameterEditor_SCIEditor,$SCI_SETMARGINWIDTHN, 0, 0)
+SendMessage($ParameterEditor_SCIEditor, $SCI_SETMARGINWIDTHN, $MARGIN_SCRIPT_FOLD, 0)
+SendMessage($ParameterEditor_SCIEditor, $SCI_CLEARCMDKEY, 0x09, 0); TAB
+$ParameterEditor_ClearAll_Button = GUICtrlCreateButton("",594,291,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($ParameterEditor_ClearAll_Button)
+$ParameterEditor_ClearAll_Button = GUICtrlCreatePic("",594,291,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($ParameterEditor_ClearAll_Button, $smallIconsdll,1224+1,16,16)
+Else
+	Button_AddIcon($ParameterEditor_ClearAll_Button, $smallIconsdll, 1224,4)
+Endif
+GUICtrlSetTip ($ParameterEditor_ClearAll_Button,_Get_langstr(1046))
+GUICtrlSetOnEvent($ParameterEditor_ClearAll_Button,"_Parameter_Editor_Alle_Parameter_leeren")
+_Control_set_DPI_Scaling($ParameterEditor_ClearAll_Button)
+GUICtrlSetResizing(-1,804)
+$ParameterEditor_group_unten = GUICtrlCreateGroup("",10,431,614,92,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling($ParameterEditor_group_unten)
+$ParameterEditor_ListView_buffer = GUICtrlCreatelistview(_Get_langstr(1040),384,532,233,45,BitOr($LVS_REPORT,$LVS_SINGLESEL,$LVS_SHOWSELALWAYS),BitOr($LVS_EX_FULLROWSELECT,$LVS_EX_GRIDLINES,$LVS_EX_DOUBLEBUFFER))
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($ParameterEditor_ListView_buffer)
+GUICtrlSetState($ParameterEditor_ListView_buffer,$GUI_HIDE)
+GUICtrlSetState($ParameterEditor_ListView_buffer,$GUI_DISABLE)
+GUICtrlCreatePic("",12,9,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,401+1,32,32)
+GUICtrlCreateLabel(_Get_langstr(1039),16,440,605,27,$SS_CENTER,-1)
+GUICtrlSetFont(-1,13,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+GUICtrlSetFont(-1,13,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_Get_langstr(1037)
+breite=635
+hoehe=581
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=ParameterEditor_GUI
+parent=$Studiofenster
+code=_Control_set_DPI_Scaling($ParameterEditor_GUI)[BREAK]_GUISetIcon($ParameterEditor_GUI, $smallIconsdll,1614)[BREAK]_CenterOnMonitor($ParameterEditor_GUI ,"", $Runonmonitor)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$ParameterEditor_GUI)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$ParameterEditor_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,635,50)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,581-50,635,50)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Hide_Parameter_Editor
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00072244]
+handle=406
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=52
+y=9
+width=574
+height=32
+text=_Get_langstr(1037)
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+textmode=func
+locked=0
+resize=550
+iconindex=
+[0x00012246]
+handle=407
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=542
+width=100
+height=30
+text=_Get_langstr(7)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_OK_Button
+func=_Parameter_Editor_OK
+bgimage=
+order=3
+tabpage=-1
+tooltip=
+textmode=func
+resize=834
+locked=0
+iconindex=
+[0x00012248]
+handle=408
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=118
+y=542
+width=100
+height=30
+text=_Get_langstr(8)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_Abbrechen_Button
+func=_Hide_Parameter_Editor
+bgimage=
+order=3
+tabpage=-1
+tooltip=
+textmode=func
+locked=0
+resize=834
+iconindex=
+[0x0001224A]
+handle=409
+code=GUICtrlSetFont(-1,13,800,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=40
+width=614
+height=27
+text=GuictrlgetText
+state=80
+style=$SS_CENTER
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=13
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_ParameterTitel
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+textmode=text
+locked=0
+resize=550
+iconindex=
+[0x0001224C]
+handle=410
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=20
+y=470
+width=597
+height=42
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_Vorschau_Fertiger_Befehl_Label
+func=
+bgimage=
+order=6
+tabpage=-1
+textmode=text
+resize=582
+iconindex=
+[0x0001224E]
+handle=411
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=74
+width=614
+height=92
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0x808080
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+resize=550
+order=11
+iconindex=
+[0x00012250]
+handle=412
+locked=0
+code=GUICtrlSetBkColor(-1,$Fenster_Hintergrundfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=14
+y=78
+width=606
+height=83
+text=_IEFormSubmit ( ByRef $oObject [, $fWait = 1] ) [BREAK]Submit a specified Form (Requires: #include <IE.au3>)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFBB
+font=Segoe UI
+fontsize=9
+fontstyle=400
+fontattribute=2
+id=ParameterEditor_CallTipp_Label
+func=
+bgimage=
+tabpage=-1
+textmode=text
+resize=550
+order=12
+iconindex=
+[0x00012252]
+handle=413
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)
+type=listview
+x=10
+y=177
+width=580
+height=164
+text=_Get_langstr(1040)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_REPORT+$LVS_SINGLESEL+$LVS_SHOWSELALWAYS
+exstyle=$LVS_EX_FULLROWSELECT+$LVS_EX_GRIDLINES+$LVS_EX_DOUBLEBUFFER
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_ListView
+func=
+bgimage=
+order=12
+tabpage=-1
+textmode=func
+iconindex=
+[0x00032258]
+handle=414
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($ParameterEditor_Plus_Button)[BREAK]$ParameterEditor_Plus_Button = GUICtrlCreatePic("",594,177,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($ParameterEditor_Plus_Button, $smallIconsdll,1732+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($ParameterEditor_Plus_Button, $smallIconsdll, 1732,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($ParameterEditor_Plus_Button,"_Parameter_Editor_Parameter_hinzufuegen")[BREAK]GUICtrlSetTip ($ParameterEditor_Plus_Button,_Get_langstr(1043)&" (Strg+Enter)")[BREAK]_Control_set_DPI_Scaling($ParameterEditor_Plus_Button)[BREAK]GUICtrlSetResizing(-1,804)
+type=button
+x=594
+y=177
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_Plus_Button
+func=_Parameter_Editor_Parameter_hinzufuegen
+bgimage=
+order=13
+tabpage=-1
+textmode=text
+iconindex=
+[0x0001225A]
+handle=415
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($ParameterEditor_Minus_Button)[BREAK]$ParameterEditor_Minus_Button = GUICtrlCreatePic("",594,215,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($ParameterEditor_Minus_Button, $smallIconsdll,1523+1,16,16)[BREAK]Else[BREAK]	Button_AddIcon($ParameterEditor_Minus_Button, $smallIconsdll, 1523,4)[BREAK]Endif[BREAK]GUICtrlSetTip ($ParameterEditor_Minus_Button,_Get_langstr(1044))[BREAK]GUICtrlSetOnEvent($ParameterEditor_Minus_Button,"_Parameter_Editor_Markierten_Parameter_leeren")[BREAK]_Control_set_DPI_Scaling($ParameterEditor_Minus_Button)[BREAK]GUICtrlSetResizing(-1,804)
+type=button
+x=594
+y=215
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_Minus_Button
+func=
+bgimage=
+tabpage=-1
+textmode=text
+order=14
+iconindex=
+[0x0001225C]
+handle=416
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($ParameterEditor_ClearAll_Button)[BREAK]$ParameterEditor_ClearAll_Button = GUICtrlCreatePic("",594,291,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($ParameterEditor_ClearAll_Button, $smallIconsdll,1224+1,16,16)[BREAK]Else[BREAK]	Button_AddIcon($ParameterEditor_ClearAll_Button, $smallIconsdll, 1224,4)[BREAK]Endif[BREAK]GUICtrlSetTip ($ParameterEditor_ClearAll_Button,_Get_langstr(1046))[BREAK]GUICtrlSetOnEvent($ParameterEditor_ClearAll_Button,"_Parameter_Editor_Alle_Parameter_leeren")[BREAK]_Control_set_DPI_Scaling($ParameterEditor_ClearAll_Button)[BREAK]GUICtrlSetResizing(-1,804)
+type=button
+x=594
+y=291
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_ClearAll_Button
+func=
+bgimage=
+tabpage=-1
+textmode=text
+order=15
+iconindex=
+[0x0001225E]
+handle=417
+locked=0
+resize=582
+code=_Control_set_DPI_Scaling($control_handle)
+type=group
+x=10
+y=431
+width=614
+height=92
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_group_unten
+func=
+bgimage=
+order=16
+tabpage=-1
+textmode=text
+iconindex=
+[0x00012260]
+handle=418
+code=GUICtrlSetFont(-1,13,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=16
+y=440
+width=605
+height=27
+text=_Get_langstr(1039)
+state=80
+style=$SS_CENTER
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=13
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+tooltip=
+textmode=func
+locked=0
+resize=582
+order=17
+iconindex=
+[0x00012262]
+handle=419
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($ParameterEditor_remove_Button)[BREAK]$ParameterEditor_remove_Button = GUICtrlCreatePic("",594,253,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($ParameterEditor_remove_Button, $smallIconsdll,929+1,16,16)[BREAK]Else[BREAK]	Button_AddIcon($ParameterEditor_remove_Button, $smallIconsdll, 929,4)[BREAK]Endif[BREAK]GUICtrlSetTip ($ParameterEditor_remove_Button,_Get_langstr(1045))[BREAK]GUICtrlSetOnEvent($ParameterEditor_remove_Button,"_Parameter_Editor_Parameter_entfernen")[BREAK]_Control_set_DPI_Scaling($ParameterEditor_remove_Button)[BREAK]GUICtrlSetResizing(-1,804)
+type=button
+x=594
+y=253
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_remove_Button
+func=
+bgimage=
+tabpage=-1
+textmode=text
+order=15
+iconindex=
+[0x00012264]
+handle=420
+locked=0
+resize=
+code=$ParameterEditor_SCIEditor = SCI_CreateEditorAu3($ParameterEditor_GUI,10*$DPI,363*$DPI,614*$DPI,60*$DPI)[BREAK]SendMessage($ParameterEditor_SCIEditor, $SCI_SETLEXER, $SCLEX_AU3, 0)[BREAK]SendMessage($ParameterEditor_SCIEditor,$SCI_SETMARGINWIDTHN, 0, 0)[BREAK]SendMessage($ParameterEditor_SCIEditor, $SCI_SETMARGINWIDTHN, $MARGIN_SCRIPT_FOLD, 0)[BREAK]SendMessage($ParameterEditor_SCIEditor, $SCI_CLEARCMDKEY, 0x09, 0); TAB
+type=dummy
+x=10
+y=355
+width=614
+height=71
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=15
+tabpage=-1
+iconindex=
+textmode=text
+[0x00012266]
+handle=421
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]GUICtrlSetState($control_handle,$GUI_HIDE)[BREAK]GUICtrlSetState($control_handle,$GUI_DISABLE)
+type=listview
+x=384
+y=532
+width=233
+height=45
+text=_Get_langstr(1040)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_REPORT+$LVS_SINGLESEL+$LVS_SHOWSELALWAYS
+exstyle=$LVS_EX_FULLROWSELECT+$LVS_EX_GRIDLINES+$LVS_EX_DOUBLEBUFFER
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ParameterEditor_ListView_buffer
+func=
+bgimage=
+tabpage=-1
+textmode=func
+iconindex=
+order=16
+[0x0003226C]
+handle=422
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,401+1,32,32)
+type=image
+x=12
+y=9
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=17
+tabpage=-1
+iconindex=
+textmode=text
+#ce

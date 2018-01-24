@@ -1,0 +1,517 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+#include <GuiTab.au3>
+
+$QuickView_GUI = GUICreate("QuickView GUI",300,300,-1,-1,BitOr($WS_POPUP,$WS_SYSMENU),$WS_EX_CLIENTEDGE,$Studiofenster)
+GUISetBkColor(0xFFFFFF,$QuickView_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_close_func", $QuickView_GUI)
+GUISetOnEvent($GUI_EVENT_RESTORE, "_Elemente_an_Fesntergroesse_anpassen", $QuickView_GUI)
+GUISetOnEvent($GUI_EVENT_MAXIMIZE, "_Elemente_an_Fesntergroesse_anpassen", $QuickView_GUI)
+GUISetOnEvent($GUI_EVENT_RESIZED, "_Elemente_an_Fesntergroesse_anpassen", $QuickView_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe,$QuickView_GUI)
+_Control_set_DPI_Scaling($QuickView_GUI)
+_WinAPI_SetParent($QuickView_GUI, $Studiofenster)
+$quickview_tab = GUICtrlCreatetab(0,0,307,307,$TCS_TABS,-1)
+GuiCtrlSetState(-1,2048)
+GUICtrlSetOnEvent(-1,"_QuickView_Tab_Event")
+GUICtrlSetResizing(-1,102)
+GUICtrlCreateTabItem(_Get_langstr(1263))
+GUICtrlCreateTabItem(_Get_langstr(1264))
+GUICtrlCreateTabItem(_Get_langstr(1262))
+_Control_set_DPI_Scaling($quickview_tab)
+_GUICtrlTab_SetImageList($quickview_tab, $hImage)
+_GUICtrlTab_SetItemImage($quickview_tab, 0, 118)
+_GUICtrlTab_SetItemImage($quickview_tab, 1, 117)
+_GUICtrlTab_SetItemImage($quickview_tab, 2, 116)
+GUICtrlCreateTabItem("")
+_GUICtrlTab_SetCurFocus($quickview_tab,-1)
+GUISwitch($QuickView_GUI,_GUICtrlTab_SetCurFocus($quickview_tab,0)&GUICtrlRead ($quickview_tab, 1))
+GUICtrlCreateDummy()
+Global $Programm_log = _ChatBoxCreate($QuickView_GUI, "", 200, 200, 250, 250, $Programmlog_Hintergrundfarbe, True, False) ;GUICtrlCreateEdit("",2,800,200,$size[3]-$htemp[3]-80,bitor($ES_READONLY,$WS_VSCROLL),-1)
+GUISwitch($QuickView_GUI,_GUICtrlTab_SetCurFocus($quickview_tab,1)&GUICtrlRead ($quickview_tab, 1))
+GUICtrlCreateDummy()
+$Codeablage_scintilla = SCI_CreateEditorAu3($QuickView_GUI,200, 200, 250, 250)
+SendMessage($Codeablage_scintilla, $SCI_SETLEXER, $SCLEX_AU3, 0)
+
+GUISwitch($QuickView_GUI,_GUICtrlTab_SetCurFocus($quickview_tab,2)&GUICtrlRead ($quickview_tab, 1))
+GUICtrlCreateButton("",273,25,25,25,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",273,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1797+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1797,4)
+endif
+GUICtrlSetOnEvent(-1,"_Toggle_ToDo_manager")
+GUICtrlSetTip (-1,_Get_langstr(1270))
+GUICtrlSetResizing(-1,804)
+_Control_set_DPI_Scaling(-1)
+$quick_view_ToDoList_Listview = GUICtrlCreatelistview('id|cat|'&_Get_langstr(1236),3,53,295,245,BitOr($LVS_SINGLESEL,$LVS_SHOWSELALWAYS),BitOr($LVS_EX_FULLROWSELECT,$WS_EX_CLIENTEDGE))
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($quick_view_ToDoList_Listview)
+_GUICtrlListView_HideColumn($quick_view_ToDoList_Listview,0)
+_GUICtrlListView_HideColumn($quick_view_ToDoList_Listview,1)
+_GUICtrlListView_HideColumn($quick_view_ToDoList_Listview,3)
+GUICtrlCreateButton("",70,25,25,25,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",70,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1604+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1604,4)
+endif
+GUICtrlSetOnEvent(-1,"_QuickView_Aufgabe_in_naechste_Kategorie_verschieben")
+GUICtrlSetTip (-1,_Get_langstr(1267))
+_Control_set_DPI_Scaling(-1)
+
+GUICtrlCreateGroup("",130,23,2,25,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",3,25,25,25,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",3,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1487+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1487,4)
+endif
+GUICtrlSetOnEvent(-1,"_QuickView_ToDo_Liste_Neue_Aufgabe")
+GUICtrlSetTip (-1,_Get_langstr(1265))
+_Control_set_DPI_Scaling(-1)
+
+
+GUICtrlCreateButton("",100,25,25,25,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",100,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1606+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1606,4)
+endif
+GUICtrlSetOnEvent(-1,"_QuickView_Aufgabe_in_vorherige_Kategorie_verschieben")
+GUICtrlSetTip (-1,_Get_langstr(1268))
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",33,25,25,25,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",33,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,314+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 314,4)
+endif
+GUICtrlSetOnEvent(-1,"_QuickView_Aufgabe_Abschliessen")
+GUICtrlSetTip (-1,_Get_langstr(1266))
+_Control_set_DPI_Scaling(-1)
+
+
+GUICtrlCreateButton("",137,25,25,25,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",137,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1173+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1173,4)
+endif
+GUICtrlSetOnEvent(-1,"_QuickView_Aufgabe_loeschen")
+GUICtrlSetTip (-1,_Get_langstr(1269))
+_Control_set_DPI_Scaling(-1)
+
+GUICtrlCreateGroup("",63,23,2,25,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+_GUICtrlTab_SetCurFocus($quickview_tab,0)
+
+
+
+#cs
+[tab]
+type=tab
+x=0
+y=0
+width=307
+height=307
+text=
+tooltip=
+pages=3
+state=$GUI_SHOW+$GUI_ENABLE
+style=$TCS_TABS
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=quickview_tab
+func=_QuickView_Tab_Event
+bgimage=
+handle=405
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_GUICtrlTab_SetImageList($control_handle, $hImage)[BREAK]_GUICtrlTab_SetItemImage($control_handle, 0, 118)[BREAK]_GUICtrlTab_SetItemImage($control_handle, 1, 117)[BREAK]_GUICtrlTab_SetItemImage($control_handle, 2, 116)
+tabpage=-1
+iconindex=
+resize=102
+textmode=text
+order=0
+locked=0
+[0x00072244]
+order=0
+[TABPAGE3]
+page=3
+text=_Get_langstr(1262)
+textmode=func
+handle=
+[TABPAGE2]
+page=2
+text=_Get_langstr(1264)
+textmode=func
+handle=
+[TABPAGE1]
+page=1
+text=_Get_langstr(1263)
+textmode=func
+handle=
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=QuickView GUI
+breite=300
+hoehe=300
+style=$WS_POPUP+$WS_SYSMENU
+exstyle=$WS_EX_CLIENTEDGE
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$QuickView_GUI
+parent=$Studiofenster
+code=GUISetBkColor($Fenster_Hintergrundfarbe,$gui_handle)[BREAK]_Control_set_DPI_Scaling($gui_handle)[BREAK]_WinAPI_SetParent($gui_handle, $Studiofenster)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_close_func
+gui_event_minimize=
+gui_event_restore=_Elemente_an_Fesntergroesse_anpassen
+gui_event_maximize=_Elemente_an_Fesntergroesse_anpassen
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=_Elemente_an_Fesntergroesse_anpassen
+gui_event_dropped=
+[0x0001224A]
+handle=406
+locked=0
+resize=
+code=Global $Programm_log = _ChatBoxCreate($QuickView_GUI, "", 200, 200, 250, 250, $Programmlog_Hintergrundfarbe, True, False) ;GUICtrlCreateEdit("",2,800,200,$size[3]-$htemp[3]-80,bitor($ES_READONLY,$WS_VSCROLL),-1)[BREAK]
+type=dummy
+x=0
+y=25
+width=303
+height=279
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=0
+iconindex=
+textmode=text
+[0x0001224C]
+handle=407
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_GUICtrlListView_HideColumn($control_handle,0)[BREAK]_GUICtrlListView_HideColumn($control_handle,1)[BREAK]_GUICtrlListView_HideColumn($control_handle,3)
+type=listview
+x=3
+y=53
+width=295
+height=245
+text='id|cat|'&_Get_langstr(1236)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_SINGLESEL+$LVS_SHOWSELALWAYS
+exstyle=$LVS_EX_FULLROWSELECT+$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=quick_view_ToDoList_Listview
+func=
+bgimage=
+order=5
+tabpage=2
+iconindex=
+textmode=func
+[0x00022252]
+handle=408
+locked=0
+resize=
+code=$Codeablage_scintilla = SCI_CreateEditorAu3($QuickView_GUI,200, 200, 250, 250)[BREAK]SendMessage($Codeablage_scintilla, $SCI_SETLEXER, $SCLEX_AU3, 0)[BREAK][BREAK]
+type=dummy
+x=10
+y=30
+width=284
+height=262
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=4
+tabpage=1
+iconindex=
+textmode=text
+[0x00012254]
+handle=409
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",273,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1797+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1797,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_Toggle_ToDo_manager")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1270))[BREAK]GUICtrlSetResizing($control_handle,804)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=273
+y=25
+width=25
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=5
+tabpage=2
+iconindex=
+textmode=text
+[0x00012256]
+handle=410
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",70,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1604+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1604,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_QuickView_Aufgabe_in_naechste_Kategorie_verschieben")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1267))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK][BREAK]
+type=button
+x=70
+y=25
+width=25
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=2
+iconindex=
+textmode=text
+order=6
+[0x00012258]
+handle=411
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)
+type=group
+x=130
+y=23
+width=2
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=7
+tabpage=2
+iconindex=
+textmode=text
+[0x0001225A]
+handle=412
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",3,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1487+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1487,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_QuickView_ToDo_Liste_Neue_Aufgabe")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1265))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK][BREAK][BREAK]
+type=button
+x=3
+y=25
+width=25
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=2
+iconindex=
+textmode=text
+order=8
+[0x0001225C]
+handle=413
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",100,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1606+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1606,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_QuickView_Aufgabe_in_vorherige_Kategorie_verschieben")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1268))[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=100
+y=25
+width=25
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=2
+iconindex=
+textmode=text
+order=9
+[0x0001225E]
+handle=414
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",33,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,314+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 314,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_QuickView_Aufgabe_Abschliessen")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1266))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK][BREAK][BREAK]
+type=button
+x=33
+y=25
+width=25
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=2
+iconindex=
+textmode=text
+order=10
+[0x00012260]
+handle=415
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",137,25,25,25,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1173+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1173,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_QuickView_Aufgabe_loeschen")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1269))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK][BREAK]
+type=button
+x=137
+y=25
+width=25
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=2
+iconindex=
+textmode=text
+order=11
+[0x00012262]
+handle=416
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)
+type=group
+x=63
+y=23
+width=2
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=2
+iconindex=
+textmode=text
+order=12
+#ce

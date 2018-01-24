@@ -1,0 +1,485 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+GUICtrlCreateGroup("",210,60,782,581,-1,-1)
+if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+GUICtrlCreateLabel(_Get_langstr(1121),271,84,692,25,-1,-1)
+GUICtrlSetFont(-1,12,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,12,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+ _Control_set_DPI_Scaling(-1)
+GUICtrlCreateGroup(_Get_langstr(1122),221,210,762,188,$BS_CENTER,-1)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$Einstellungen_API_Listview = GUICtrlCreatelistview(_Get_langstr(223),271,230,699,152,$LVS_NOCOLUMNHEADER,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,550)
+_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))
+_GUICtrlListView_SetImageList(-1, $hImage,1)
+ _Control_set_DPI_Scaling($Einstellungen_API_Listview)
+GUICtrlCreatePic("",230,80,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1,true)
+_SetIconAlpha(-1, $bigiconsdll,280,32,32)
+GUICtrlCreateLabel(_Get_langstr(1173),221,597,761,35,$SS_CENTER,-1)
+GUICtrlSetColor(-1,"0xFF0000")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+$Einstellungen_APIs_Remove_Button = GUICtrlCreateButton("",229,268,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Einstellungen_API_Pfad_entfernen")
+if $Skin_is_used = "true" Then
+GUICtrlDelete($Einstellungen_APIs_Remove_Button)
+$Einstellungen_APIs_Remove_Button = GUICtrlCreatePic("",229,268,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($Einstellungen_APIs_Remove_Button, $smallIconsdll,1727+1,16,16)
+Else
+	Button_AddIcon($Einstellungen_APIs_Remove_Button, $smallIconsdll, 1727,4)
+Endif
+
+GUICtrlSetOnEvent($Einstellungen_APIs_Remove_Button,"_Einstellungen_API_Pfad_entfernen")
+ _Control_set_DPI_Scaling($Einstellungen_APIs_Remove_Button)
+$Einstellungen_Properties_Listview = GUICtrlCreatelistview(_Get_langstr(223),271,422,699,152,$LVS_NOCOLUMNHEADER,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,102)
+_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))
+_GUICtrlListView_SetImageList(-1, $hImage,1)
+ _Control_set_DPI_Scaling($Einstellungen_Properties_Listview)
+GUICtrlCreateGroup(_Get_langstr(1123),221,402,762,188,$BS_CENTER,-1)
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling(-1)
+$Einstellungen_Proberties_Add_Button = GUICtrlCreateButton("",229,422,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Einstellungen_Properties_Pfad_hinzufuegen")
+if $Skin_is_used = "true" Then
+GUICtrlDelete($Einstellungen_Proberties_Add_Button)
+$Einstellungen_Proberties_Add_Button = GUICtrlCreatePic("",229,444,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($Einstellungen_Proberties_Add_Button, $smallIconsdll,1732+1,16,16)
+Else
+	Button_AddIcon($Einstellungen_Proberties_Add_Button, $smallIconsdll, 1732,4)
+endif
+GUICtrlSetOnEvent($Einstellungen_Proberties_Add_Button,"_Einstellungen_Properties_Pfad_hinzufuegen")
+ _Control_set_DPI_Scaling($Einstellungen_Proberties_Add_Button)
+
+$Einstellungen_Proberties_Remove_Button = GUICtrlCreateButton("",229,460,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Einstellungen_Properties_Pfad_entfernen")
+if $Skin_is_used = "true" Then
+GUICtrlDelete($Einstellungen_Proberties_Remove_Button)
+$Einstellungen_Proberties_Remove_Button = GUICtrlCreatePic("",229,482,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($Einstellungen_Proberties_Remove_Button, $smallIconsdll,1727+1,16,16)
+Else
+	Button_AddIcon($Einstellungen_Proberties_Remove_Button, $smallIconsdll, 1727,4)
+endif
+GUICtrlSetOnEvent($Einstellungen_Proberties_Remove_Button,"_Einstellungen_Properties_Pfad_entfernen")
+ _Control_set_DPI_Scaling($Einstellungen_Proberties_Remove_Button)
+GUICtrlCreateLabel(_Get_langstr(1120),225,124,751,84,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$Einstellungen_APIs_Add_Button = GUICtrlCreateButton("",229,230,30,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Einstellungen_API_Pfad_hinzufuegen")
+if $Skin_is_used = "true" Then
+GUICtrlDelete($Einstellungen_APIs_Add_Button)
+$Einstellungen_APIs_Add_Button = GUICtrlCreatePic("",229,230,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($Einstellungen_APIs_Add_Button, $smallIconsdll,1732+1,16,16)
+Else
+	Button_AddIcon($Einstellungen_APIs_Add_Button, $smallIconsdll, 1732,4)
+endif
+GUICtrlSetOnEvent($Einstellungen_APIs_Add_Button,"_Einstellungen_API_Pfad_hinzufuegen")
+ _Control_set_DPI_Scaling($Einstellungen_APIs_Add_Button)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Form1
+breite=1021
+hoehe=671
+style=$WS_CAPTION+$WS_SIZEBOX+$WS_MAXIMIZEBOX
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=hgui
+parent=
+code=
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=true
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00072256]
+handle=406
+locked=0
+code=GUICtrlSetFont(-1,12,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK] _Control_set_DPI_Scaling($control_handle)
+type=label
+x=271
+y=84
+width=692
+height=25
+text=_Get_langstr(1121)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=12
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=9
+tabpage=-1
+textmode=func
+resize=
+iconindex=
+[0x0001225A]
+handle=407
+locked=1
+code=if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+type=group
+x=210
+y=60
+width=782
+height=581
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=5
+tabpage=-1
+textmode=text
+resize=
+iconindex=
+[0x0001225E]
+handle=408
+locked=0
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($Einstellungen_APIs_Add_Button)[BREAK]$Einstellungen_APIs_Add_Button = GUICtrlCreatePic("",229,230,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($Einstellungen_APIs_Add_Button, $smallIconsdll,1732+1,16,16)[BREAK]Else[BREAK]	Button_AddIcon($Einstellungen_APIs_Add_Button, $smallIconsdll, 1732,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($Einstellungen_APIs_Add_Button,"_Einstellungen_API_Pfad_hinzufuegen")[BREAK] _Control_set_DPI_Scaling($Einstellungen_APIs_Add_Button)
+type=button
+x=229
+y=230
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_APIs_Add_Button
+func=_Einstellungen_API_Pfad_hinzufuegen
+bgimage=
+order=21
+tabpage=-1
+textmode=text
+resize=
+iconindex=
+[0x00012262]
+handle=409
+locked=0
+resize=550
+code=_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))[BREAK]_GUICtrlListView_SetImageList(-1, $hImage,1)[BREAK] _Control_set_DPI_Scaling($control_handle)
+type=listview
+x=271
+y=230
+width=699
+height=152
+text=_Get_langstr(223)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_NOCOLUMNHEADER
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_API_Listview
+func=
+bgimage=
+order=12
+tabpage=-1
+textmode=func
+iconindex=
+[0x0001226A]
+handle=410
+locked=0
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($Einstellungen_APIs_Remove_Button)[BREAK]$Einstellungen_APIs_Remove_Button = GUICtrlCreatePic("",229,268,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($Einstellungen_APIs_Remove_Button, $smallIconsdll,1727+1,16,16)[BREAK]Else[BREAK]	Button_AddIcon($Einstellungen_APIs_Remove_Button, $smallIconsdll, 1727,4)[BREAK]Endif[BREAK][BREAK]GUICtrlSetOnEvent($Einstellungen_APIs_Remove_Button,"_Einstellungen_API_Pfad_entfernen")[BREAK] _Control_set_DPI_Scaling($Einstellungen_APIs_Remove_Button)
+type=button
+x=229
+y=268
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_APIs_Remove_Button
+func=_Einstellungen_API_Pfad_entfernen
+bgimage=
+tabpage=-1
+textmode=text
+resize=
+order=13
+iconindex=
+[0x0001226E]
+handle=411
+locked=0
+resize=550
+code= _Control_set_DPI_Scaling($control_handle)
+type=group
+x=221
+y=210
+width=762
+height=188
+text=_Get_langstr(1122)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=12
+tabpage=-1
+iconindex=
+textmode=func
+[0x00012272]
+handle=412
+locked=0
+resize=550
+code= _Control_set_DPI_Scaling($control_handle)
+type=label
+x=225
+y=124
+width=751
+height=84
+text=_Get_langstr(1120)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=18
+tabpage=-1
+iconindex=
+textmode=func
+[0x00012276]
+handle=413
+locked=0
+resize=102
+code=_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))[BREAK]_GUICtrlListView_SetImageList(-1, $hImage,1)[BREAK] _Control_set_DPI_Scaling($control_handle)
+type=listview
+x=271
+y=422
+width=699
+height=152
+text=_Get_langstr(223)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_NOCOLUMNHEADER
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_Properties_Listview
+func=
+bgimage=
+tabpage=-1
+textmode=func
+iconindex=
+order=14
+[0x0001227E]
+handle=414
+locked=0
+resize=102
+code= _Control_set_DPI_Scaling($control_handle)
+type=group
+x=221
+y=402
+width=762
+height=188
+text=_Get_langstr(1123)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=15
+[0x00012282]
+handle=415
+locked=0
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($Einstellungen_Proberties_Add_Button)[BREAK]$Einstellungen_Proberties_Add_Button = GUICtrlCreatePic("",229,444,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($Einstellungen_Proberties_Add_Button, $smallIconsdll,1732+1,16,16)[BREAK]Else[BREAK]	Button_AddIcon($Einstellungen_Proberties_Add_Button, $smallIconsdll, 1732,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($Einstellungen_Proberties_Add_Button,"_Einstellungen_Properties_Pfad_hinzufuegen")[BREAK] _Control_set_DPI_Scaling($Einstellungen_Proberties_Add_Button)[BREAK][BREAK]
+type=button
+x=229
+y=422
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_Proberties_Add_Button
+func=_Einstellungen_Properties_Pfad_hinzufuegen
+bgimage=
+tabpage=-1
+textmode=text
+resize=
+iconindex=
+order=16
+[0x00012286]
+handle=416
+locked=0
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($Einstellungen_Proberties_Remove_Button)[BREAK]$Einstellungen_Proberties_Remove_Button = GUICtrlCreatePic("",229,482,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($Einstellungen_Proberties_Remove_Button, $smallIconsdll,1727+1,16,16)[BREAK]Else[BREAK]	Button_AddIcon($Einstellungen_Proberties_Remove_Button, $smallIconsdll, 1727,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($Einstellungen_Proberties_Remove_Button,"_Einstellungen_Properties_Pfad_entfernen")[BREAK] _Control_set_DPI_Scaling($Einstellungen_Proberties_Remove_Button)[BREAK]
+type=button
+x=229
+y=460
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Einstellungen_Proberties_Remove_Button
+func=_Einstellungen_Properties_Pfad_entfernen
+bgimage=
+tabpage=-1
+textmode=text
+resize=
+iconindex=
+order=17
+[0x0001228A]
+handle=417
+locked=0
+resize=
+code= _Control_set_DPI_Scaling($control_handle,true)[BREAK]_SetIconAlpha(-1, $bigiconsdll,280,32,32)
+type=image
+x=230
+y=80
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=13
+tabpage=-1
+iconindex=
+textmode=text
+[0x0001228E]
+handle=418
+locked=0
+resize=582
+code= _Control_set_DPI_Scaling($control_handle)
+type=label
+x=221
+y=597
+width=761
+height=35
+text=_Get_langstr(1173)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0xFF0000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=13
+tabpage=-1
+iconindex=
+textmode=func
+#ce

@@ -1,0 +1,159 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$formstudio_text = GUICreate(_ISNPlugin_Get_langstring(4),498,320,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_MAXIMIZEBOX),-1,$StudioFenster_inside)
+GUISetBkColor(0xFFFFFF,$formstudio_text)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Verstecke_Erweiterten_Text", $formstudio_text)
+_Control_set_DPI_Scaling($formstudio_text)
+_CenterOnMonitor($formstudio_text,"", $Runonmonitor)
+GUISetBkColor($ISN_Hintergrundfarbe,$formstudio_text)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$formstudio_text)
+guictrlcreatepic($Window_TOP_IMG,0,0,498,50)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetResizing(-1,550)
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic($Window_Row_Bottom_IMG,0,320-50,498,50)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetResizing(-1,582)
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(57),10,280,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Verstecke_Erweiterten_Text")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(4),10,5,475,25,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"MS Sans Serif")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)
+_Control_set_DPI_Scaling(-1)
+$formstudio_text_edit = GUICtrlCreateEdit("",10,40,480,221,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_ISNPlugin_Get_langstring(4)
+breite=498
+hoehe=320
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_MAXIMIZEBOX
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$formstudio_text
+parent=$StudioFenster_inside
+code=_Control_set_DPI_Scaling($formstudio_text)[BREAK]_CenterOnMonitor($formstudio_text,"", $Runonmonitor)[BREAK]GUISetBkColor($ISN_Hintergrundfarbe,$formstudio_text)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$formstudio_text)[BREAK]guictrlcreatepic($Window_TOP_IMG,0,0,498,50)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic($Window_Row_Bottom_IMG,0,320-50,498,50)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Verstecke_Erweiterten_Text
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00320648]
+handle=387
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling(-1)
+type=button
+x=10
+y=280
+width=100
+height=30
+text=_ISNPlugin_Get_langstring(57)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Verstecke_Erweiterten_Text
+bgimage=
+tabpage=-1
+order=0
+iconindex=
+resize=834
+textmode=func
+[0x00231F70]
+handle=388
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)[BREAK]_Control_set_DPI_Scaling(-1)
+type=label
+x=10
+y=5
+width=475
+height=25
+text=_ISNPlugin_Get_langstring(4)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=2
+iconindex=
+resize=550
+textmode=func
+locked=0
+[0x001F2602]
+handle=389
+code=_Control_set_DPI_Scaling(-1)[BREAK]
+type=edit
+x=10
+y=40
+width=480
+height=221
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=formstudio_text_edit
+func=
+bgimage=
+tabpage=-1
+order=3
+iconindex=
+resize=102
+textmode=text
+#ce

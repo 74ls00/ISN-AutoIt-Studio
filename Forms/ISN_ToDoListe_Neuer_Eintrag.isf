@@ -1,0 +1,415 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <DateTimeConstants.au3>
+#include <EditConstants.au3>
+
+$ToDo_Liste_neuer_eintrag_GUI = GUICreate(_Get_langstr(1265),625,400,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_MAXIMIZEBOX),-1,$Studiofenster)
+GUISetBkColor(0xFFFFFF,$ToDo_Liste_neuer_eintrag_GUI)
+_Control_set_DPI_Scaling($ToDo_Liste_neuer_eintrag_GUI)
+_GUISetIcon($ToDo_Liste_neuer_eintrag_GUI, $smallIconsdll,1487)
+GUISetBkColor($Fenster_Hintergrundfarbe,$ToDo_Liste_neuer_eintrag_GUI)
+_CenterOnMonitor($ToDo_Liste_neuer_eintrag_GUI,"", $Runonmonitor)
+GUISetBkColor($Fenster_Hintergrundfarbe,$ToDo_Liste_neuer_eintrag_GUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ToDo_Liste_neuer_eintrag_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,625,40)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetResizing(-1,550)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,400-45,625,45)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetResizing(-1,582)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+$todoliste_neuer_eintrag_betreff_input = GUICtrlCreateInput("",83,60,533,20,$ES_AUTOHSCROLL,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($todoliste_neuer_eintrag_betreff_input)
+$todoliste_neuer_eintrag_datum_input = GUICtrlCreateDate("Sonntag, 19. März 2017",83,89,204,21,-1,-1)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($todoliste_neuer_eintrag_datum_input)
+$todoliste_neuer_eintrag_text_edit = GUICtrlCreateEdit("",10,160,606,186,BitOr($ES_MULTILINE,$ES_WANTRETURN,$WS_VSCROLL),$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($todoliste_neuer_eintrag_text_edit)
+$todoliste_neuer_eintrag_ok_Button = GUICtrlCreateButton(_Get_langstr(7),10,363,100,30,-1,-1)
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling($todoliste_neuer_eintrag_ok_Button)
+$todoliste_neuer_eintrag_abbrechen_Button = GUICtrlCreateButton(_Get_langstr(8),115,363,122,30,-1,-1)
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling($todoliste_neuer_eintrag_abbrechen_Button)
+$todoliste_neuer_eintrag_titel_label = GUICtrlCreateLabel(_Get_langstr(1265),50,10,556,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling($todoliste_neuer_eintrag_titel_label)
+GUICtrlCreateLabel(_Get_langstr(630),10,137,601,15,$SS_CENTER,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$todoliste_neuer_eintrag_ID_label = GUICtrlCreateLabel("ITEM ID HERE",514,28,102,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($todoliste_neuer_eintrag_ID_label)
+GUICtrlSetState($todoliste_neuer_eintrag_ID_label, $GUI_HIDE)
+GUICtrlCreateLabel(_Get_langstr(921),10,93,62,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,802)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(918),10,63,62,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,802)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreatePic("",10,10,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,729+1,32,32)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_Get_langstr(1265)
+breite=625
+hoehe=400
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_MAXIMIZEBOX
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=ToDo_Liste_neuer_eintrag_GUI
+parent=$Studiofenster
+code=_Control_set_DPI_Scaling($GUI_HANDLE)[BREAK]_GUISetIcon($GUI_HANDLE, $smallIconsdll,1487)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$GUI_HANDLE)[BREAK]_CenterOnMonitor($GUI_HANDLE,"", $Runonmonitor)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$GUI_HANDLE)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$GUI_HANDLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,625,40)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,400-45,625,45)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x000E1F10]
+handle=405
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=50
+y=10
+width=556
+height=32
+text=_Get_langstr(1265)
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=todoliste_neuer_eintrag_titel_label
+func=
+bgimage=
+order=5
+tabpage=-1
+tooltip=
+textmode=func
+locked=0
+iconindex=
+resize=550
+[0x000A1F12]
+handle=406
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=363
+width=100
+height=30
+text=_Get_langstr(7)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=todoliste_neuer_eintrag_ok_Button
+func=
+bgimage=
+order=3
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+iconindex=
+resize=834
+[0x00051F14]
+handle=407
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=edit
+x=10
+y=160
+width=606
+height=186
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_MULTILINE+$ES_WANTRETURN+$WS_VSCROLL
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$todoliste_neuer_eintrag_text_edit
+func=
+bgimage=
+order=2
+tabpage=-1
+textmode=text
+iconindex=
+resize=102
+[0x00071D0A]
+handle=408
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=63
+width=62
+height=15
+text=_Get_langstr(918)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=9
+tabpage=-1
+textmode=func
+iconindex=
+resize=802
+[0x00081C90]
+handle=409
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=input
+x=83
+y=60
+width=533
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_AUTOHSCROLL
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$todoliste_neuer_eintrag_betreff_input
+func=
+bgimage=
+order=0
+tabpage=-1
+textmode=text
+iconindex=
+resize=550
+[0x00091C5E]
+handle=410
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=93
+width=62
+height=15
+text=_Get_langstr(921)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=8
+tabpage=-1
+textmode=func
+iconindex=
+resize=802
+[0x00081D24]
+handle=411
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=137
+width=601
+height=15
+text=_Get_langstr(630)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=6
+tabpage=-1
+textmode=func
+iconindex=
+resize=550
+[0x00071D26]
+handle=412
+locked=0
+code=_Control_set_DPI_Scaling($control_handle)
+type=date
+x=83
+y=89
+width=204
+height=21
+text=Sonntag, 19. März 2017
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$todoliste_neuer_eintrag_datum_input
+func=
+bgimage=
+order=1
+tabpage=-1
+textmode=text
+iconindex=
+resize=550
+[0x00091C5C]
+handle=413
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=115
+y=363
+width=122
+height=30
+text=_Get_langstr(8)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=todoliste_neuer_eintrag_abbrechen_Button
+func=
+bgimage=
+locked=0
+tooltip=
+tabpage=-1
+textmode=func
+iconindex=
+resize=834
+order=4
+[0x00061D20]
+handle=414
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]GUICtrlSetState($todoliste_neuer_eintrag_ID_label, $GUI_HIDE)
+type=label
+x=514
+y=28
+width=102
+height=15
+text=ITEM ID HERE
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=todoliste_neuer_eintrag_ID_label
+func=
+bgimage=
+order=7
+tabpage=-1
+iconindex=
+textmode=text
+[0x00071D22]
+handle=415
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,729+1,32,32)
+type=image
+x=10
+y=10
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=11
+tabpage=-1
+iconindex=
+textmode=text
+#ce

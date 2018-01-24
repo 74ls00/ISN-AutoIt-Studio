@@ -1,0 +1,543 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+
+$ToDoList_Manager = GUICreate(_Get_langstr(1262),985,606,-1,-1,BitOr($WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_CLIPSIBLINGS,$WS_BORDER,$WS_MAXIMIZEBOX,$WS_POPUPWINDOW,$DS_MODALFRAME),BitOr($WS_EX_MDICHILD,$WS_EX_WINDOWEDGE),$StudioFenster)
+GUISetBkColor(0xFFFFFF,$ToDoList_Manager)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Toggle_ToDo_manager", $ToDoList_Manager)
+GUISetOnEvent($GUI_EVENT_MINIMIZE, "_ToDo_Manager_GUI_Resize", $ToDoList_Manager)
+GUISetOnEvent($GUI_EVENT_RESTORE, "_ToDo_Manager_GUI_Resize", $ToDoList_Manager)
+GUISetOnEvent($GUI_EVENT_MAXIMIZE, "_ToDo_Manager_GUI_Resize", $ToDoList_Manager)
+GUISetOnEvent($GUI_EVENT_RESIZED, "_ToDo_Manager_GUI_Resize", $ToDoList_Manager)
+_Control_set_DPI_Scaling($ToDoList_Manager)
+_GUISetIcon($ToDoList_Manager, $smallIconsdll,1797)
+_CenterOnMonitor($ToDoList_Manager ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ToDoList_Manager)
+GUISetBkColor($Fenster_Hintergrundfarbe,$ToDoList_Manager)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,985,50)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,606-50,985,50)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+
+
+GUICtrlCreateLabel(_Get_langstr(1262),50,10,921,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,53,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,53,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1487+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1487,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Liste_Neue_Aufgabe_Manager")
+GUICtrlSetTip (-1,_Get_langstr(1265))
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,88,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,88,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,314+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 314,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Aufgabe_Abschliessen_button")
+GUICtrlSetTip (-1,_Get_langstr(1266))
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(7),10,567,128,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetOnEvent(-1,"_Toggle_ToDo_manager")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,158,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,168,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1173+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1173,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Manager_Aufgabe_loeschen")
+GUICtrlSetTip (-1,_Get_langstr(1269))
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(1271),795,567,180,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Kategorien_verwalten_zeige_Manager")
+GUICtrlSetResizing(-1,836)
+Button_AddIcon(-1, $smallIconsdll, 1524,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,208,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,203,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1606+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1606,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Aufgabe_in_vorherige_Kategorie_verschieben_button")
+GUICtrlSetTip (-1,_Get_langstr(1268))
+_Control_set_DPI_Scaling(-1)
+
+
+
+
+$ToDoList_Listview = GUICtrlCreatelistview('id|cat|'&_Get_langstr(1236),48,53,927,495,BitOr($LVS_SINGLESEL,$LVS_SHOWSELALWAYS),BitOr($LVS_EX_FULLROWSELECT,$WS_EX_CLIENTEDGE))
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($ToDoList_Listview)
+_GUICtrlListView_HideColumn($ToDoList_Listview,0)
+_GUICtrlListView_HideColumn($ToDoList_Listview,1)
+GUICtrlCreatePic("",10,10,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,729+1,32,32)
+GUICtrlCreateButton("",10,243,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,238,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1604+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1604,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Aufgabe_in_naechste_Kategorie_verschieben_button")
+GUICtrlSetTip (-1,_Get_langstr(1267))
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(1289),147,567,640,28,$SS_CENTERIMAGE,-1)
+GUICtrlSetColor(-1,"0x808080")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateGroup("",10,191,30,10,-1,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,802)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("",10,123,30,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetResizing(-1,802)
+if $Skin_is_used = "true" Then
+GUICtrlDelete(-1)
+GUICtrlCreatePic("",10,123,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha(-1, $smallIconsdll,1220+1,16,16)
+Else
+Button_AddIcon(-1, $smallIconsdll, 1220,4)
+endif
+GUICtrlSetOnEvent(-1,"_ToDo_Liste_Aufgabe_Bearbeiten_Manager")
+GUICtrlSetTip (-1,_Get_langstr(1272))
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(1262)
+breite=985
+hoehe=606
+style=$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_CLIPSIBLINGS+$WS_BORDER+$WS_MAXIMIZEBOX+$WS_POPUPWINDOW+$DS_MODALFRAME
+exstyle=$WS_EX_MDICHILD+$WS_EX_WINDOWEDGE
+bgcolour=0xFFFFFF
+bgimage=none
+handle=ToDoList_Manager
+parent=$StudioFenster
+code=_Control_set_DPI_Scaling($GUI_HANDLE)[BREAK]_GUISetIcon($GUI_HANDLE, $smallIconsdll,1797)[BREAK]_CenterOnMonitor($GUI_HANDLE ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$GUI_HANDLE)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$GUI_HANDLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,985,50)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,606-50,985,50)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK][BREAK][BREAK]
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Toggle_ToDo_manager
+gui_event_minimize=_ToDo_Manager_GUI_Resize
+gui_event_restore=_ToDo_Manager_GUI_Resize
+gui_event_maximize=_ToDo_Manager_GUI_Resize
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=_ToDo_Manager_GUI_Resize
+gui_event_dropped=
+[0x00102296]
+handle=406
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=50
+y=10
+width=921
+height=32
+text=_Get_langstr(1262)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=0
+locked=0
+resize=550
+iconindex=
+textmode=func
+[0x000B22C8]
+handle=407
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=567
+width=128
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Toggle_ToDo_manager
+bgimage=
+tabpage=-1
+order=10
+textmode=func
+iconindex=
+resize=834
+locked=0
+[0x002B0D8A]
+handle=408
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,53,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1487+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1487,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Liste_Neue_Aufgabe_Manager")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1265))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK]
+type=button
+x=10
+y=53
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=7
+[0x000B21A6]
+handle=409
+code=Button_AddIcon(-1, $smallIconsdll, 1524,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=795
+y=567
+width=180
+height=30
+text=_Get_langstr(1271)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_ToDo_Liste_Kategorien_verwalten_zeige_Manager
+bgimage=
+tabpage=-1
+textmode=func
+iconindex=
+resize=836
+locked=0
+order=11
+[0x001606E0]
+handle=410
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_GUICtrlListView_HideColumn($control_handle,0)[BREAK]_GUICtrlListView_HideColumn($control_handle,1)
+type=listview
+x=48
+y=53
+width=927
+height=495
+text='id|cat|'&_Get_langstr(1236)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_SINGLESEL+$LVS_SHOWSELALWAYS
+exstyle=$LVS_EX_FULLROWSELECT+$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=ToDoList_Listview
+func=
+bgimage=
+order=12
+tabpage=-1
+iconindex=
+textmode=func
+[0x00082464]
+handle=411
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,88,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,314+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 314,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Aufgabe_Abschliessen_button")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1266))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK]
+type=button
+x=10
+y=88
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=10
+[0x0007244C]
+handle=412
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,168,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1173+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1173,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Manager_Aufgabe_loeschen")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1269))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK]
+type=button
+x=10
+y=158
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=11
+[0x0007244E]
+handle=413
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,203,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1606+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1606,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Aufgabe_in_vorherige_Kategorie_verschieben_button")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1268))[BREAK]_Control_set_DPI_Scaling($control_handle)[BREAK][BREAK][BREAK][BREAK][BREAK]
+type=button
+x=10
+y=208
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=12
+[0x00082476]
+handle=414
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,238,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1604+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1604,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Aufgabe_in_naechste_Kategorie_verschieben_button")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1267))[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=243
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=13
+[0x00072452]
+handle=415
+locked=0
+resize=802
+code=_Control_set_DPI_Scaling($control_handle)
+type=group
+x=10
+y=191
+width=30
+height=10
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=14
+tabpage=-1
+iconindex=
+textmode=text
+[0x0007247A]
+handle=416
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($control_handle)[BREAK]GUICtrlCreatePic("",10,123,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($control_handle, $smallIconsdll,1220+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($control_handle, $smallIconsdll, 1220,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($control_handle,"_ToDo_Liste_Aufgabe_Bearbeiten_Manager")[BREAK]GUICtrlSetTip ($control_handle,_Get_langstr(1272))[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=123
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+textmode=text
+iconindex=
+resize=802
+locked=0
+order=17
+[0x00072466]
+handle=417
+locked=0
+resize=582
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=147
+y=567
+width=640
+height=28
+text=_Get_langstr(1289)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTERIMAGE
+exstyle=
+textcolour=0x808080
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=14
+tabpage=-1
+iconindex=
+textmode=func
+[0x000A2486]
+handle=418
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,729+1,32,32)
+type=image
+x=10
+y=10
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=13
+tabpage=-1
+iconindex=
+textmode=text
+#ce

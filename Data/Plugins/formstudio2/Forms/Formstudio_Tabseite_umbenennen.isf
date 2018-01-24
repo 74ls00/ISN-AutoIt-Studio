@@ -1,0 +1,320 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$formstudio_tabseite_umbenennen = GUICreate(_ISNPlugin_Get_langstring(88),437,176,-1,-1,BitOr($WS_POPUP,$WS_CAPTION),$WS_EX_TOOLWINDOW,$StudioFenster_inside)
+GUISetBkColor(0xFFFFFF,$formstudio_tabseite_umbenennen)
+_CenterOnMonitor($formstudio_tabseite_umbenennen,"", $Runonmonitor)
+_Control_set_DPI_Scaling($formstudio_tabseite_umbenennen)
+GUISetBkColor($ISN_Hintergrundfarbe,$formstudio_tabseite_umbenennen)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$formstudio_tabseite_umbenennen)
+guictrlcreatepic($Window_TOP_IMG,0,0,437,50)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)
+guictrlcreatepic($Window_Row_Bottom_IMG,0,176-50,437,50)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(88),10,10,414,30,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(4),10,93,78,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+GUICtrlCreateLabel(_ISNPlugin_Get_langstring(180),10,63,78,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+$tabseite_umbenennen_radio2 = GUICtrlCreateRadio(_ISNPlugin_Get_langstring(179),220,60,203,20,-1,-1)
+GUICtrlSetOnEvent(-1,"_Rename_tabpage_select_radio")
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUIRadioSetColor($tabseite_umbenennen_radio2,"0x000000",$GUI_BKCOLOR_TRANSPARENT)
+GUICtrlSetColor($tabseite_umbenennen_radio2,$ISN_Schriftfarbe)
+$tabseite_umbenennen_radio1 = GUICtrlCreateRadio(_ISNPlugin_Get_langstring(178),100,60,101,20,-1,-1)
+GUICtrlSetOnEvent(-1,"_Rename_tabpage_select_radio")
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUIRadioSetColor($tabseite_umbenennen_radio1,"0x000000",$GUI_BKCOLOR_TRANSPARENT)
+GUICtrlSetColor($tabseite_umbenennen_radio1,$ISN_Schriftfarbe)
+$tabseite_umbenennen_textinput = GUICtrlCreateInput("",100,90,324,20,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(58),120,136,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Rename_tabpage_Abbrechen")
+_Control_set_DPI_Scaling(-1)
+Button_AddIcon(-1, $smallIconsdll, 922,0)
+GUICtrlCreateButton(_ISNPlugin_Get_langstring(57),10,136,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Rename_tabpage_OK")
+_Control_set_DPI_Scaling(-1)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_ISNPlugin_Get_langstring(88)
+breite=437
+hoehe=176
+style=$WS_POPUP+$WS_CAPTION
+exstyle=$WS_EX_TOOLWINDOW
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$formstudio_tabseite_umbenennen
+parent=$StudioFenster_inside
+code=_CenterOnMonitor($formstudio_tabseite_umbenennen,"", $Runonmonitor)[BREAK]_Control_set_DPI_Scaling($formstudio_tabseite_umbenennen)[BREAK]GUISetBkColor($ISN_Hintergrundfarbe,$formstudio_tabseite_umbenennen)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$formstudio_tabseite_umbenennen)[BREAK]guictrlcreatepic($Window_TOP_IMG,0,0,437,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)[BREAK]guictrlcreatepic($Window_Row_Bottom_IMG,0,176-50,437,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x003D2492]
+handle=402
+locked=0
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)[BREAK]_Control_set_DPI_Scaling(-1)
+type=label
+x=10
+y=10
+width=414
+height=30
+text=_ISNPlugin_Get_langstring(88)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x002E24DE]
+handle=403
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+type=label
+x=10
+y=63
+width=78
+height=15
+text=_ISNPlugin_Get_langstring(180)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x001C2858]
+handle=404
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUIRadioSetColor($control_handle,"0x000000",$GUI_BKCOLOR_TRANSPARENT)[BREAK]GUICtrlSetColor($control_handle,$ISN_Schriftfarbe)
+type=radio
+x=100
+y=60
+width=101
+height=20
+text=_ISNPlugin_Get_langstring(178)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$tabseite_umbenennen_radio1
+func=_Rename_tabpage_select_radio
+bgimage=
+order=3
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x003024EC]
+handle=405
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" AND $Use_ISN_Skin = "false" then GUIRadioSetColor($control_handle,"0x000000",$GUI_BKCOLOR_TRANSPARENT)[BREAK]GUICtrlSetColor($control_handle,$ISN_Schriftfarbe)
+type=radio
+x=220
+y=60
+width=203
+height=20
+text=_ISNPlugin_Get_langstring(179)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$tabseite_umbenennen_radio2
+func=_Rename_tabpage_select_radio
+bgimage=
+order=3
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x002824E4]
+handle=406
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe)
+type=label
+x=10
+y=93
+width=78
+height=15
+text=_ISNPlugin_Get_langstring(4)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x001A2788]
+handle=407
+locked=0
+code=_Control_set_DPI_Scaling(-1)
+type=input
+x=100
+y=90
+width=324
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=tabseite_umbenennen_textinput
+func=
+bgimage=
+order=6
+tabpage=-1
+textmode=text
+iconindex=
+resize=
+[0x00193064]
+handle=408
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]Button_AddIcon(-1, $smallIconsdll, 314,0)
+type=button
+x=10
+y=136
+width=100
+height=30
+text=_ISNPlugin_Get_langstring(57)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Rename_tabpage_OK
+bgimage=
+order=7
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+[0x002424E2]
+handle=409
+locked=0
+code=_Control_set_DPI_Scaling(-1)[BREAK]Button_AddIcon(-1, $smallIconsdll, 922,0)
+type=button
+x=120
+y=136
+width=100
+height=30
+text=_ISNPlugin_Get_langstring(58)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Rename_tabpage_Abbrechen
+bgimage=
+order=7
+tabpage=-1
+textmode=func
+iconindex=
+resize=
+#ce

@@ -1,0 +1,221 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <ComboConstants.au3>
+
+$choose_fileoperations_extendenpaths_GUI = GUICreate(_Get_langstr(577),533,271,-1,-1,BitOr($WS_CAPTION,$WS_POPUP,$WS_SYSMENU),$WS_EX_MDICHILD,$newrule_GUI)
+GUISetBkColor(0xFFFFFF,$choose_fileoperations_extendenpaths_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_hide_Extendedpaths", $choose_fileoperations_extendenpaths_GUI)
+_Control_set_DPI_Scaling($choose_fileoperations_extendenpaths_GUI)
+_GUISetIcon($choose_fileoperations_extendenpaths_GUI, $smallIconsdll, 337)
+_CenterOnMonitor($choose_fileoperations_extendenpaths_GUI,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$choose_fileoperations_extendenpaths_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe,$choose_fileoperations_extendenpaths_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,533,55)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,271-50,533,50)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlCreateLabel(_Get_langstr(577),10,10,505,33,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+$choose_fileoperations_extendenpaths_Combolist = GUICtrlCreateCombo("",10,60,510,21,$CBS_DROPDOWNLIST,-1)
+GUICtrlSetData(-1,"")
+GUICtrlSetOnEvent(-1,"_Select_Extendedpaths")
+_GUICtrlComboBox_SetMinVisible($choose_fileoperations_extendenpaths_Combolist, 20)
+_Control_set_DPI_Scaling($choose_fileoperations_extendenpaths_Combolist)
+$choose_fileoperations_extendenpaths_Combolabel = GUICtrlCreateLabel("",10,90,510,127,$SS_CENTER,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($choose_fileoperations_extendenpaths_Combolabel)
+GUICtrlCreateButton(_Get_langstr(7),10,232,100,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetOnEvent(-1,"_Extendedpaths_OK")
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),124,232,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_hide_Extendedpaths")
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=
+Handle_deklaration_const=false
+title=_Get_langstr(577)
+breite=533
+hoehe=271
+style=$WS_CAPTION+$WS_POPUP+$WS_SYSMENU
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=choose_fileoperations_extendenpaths_GUI
+parent=$newrule_GUI
+code=_Control_set_DPI_Scaling($choose_fileoperations_extendenpaths_GUI)[BREAK]_GUISetIcon($choose_fileoperations_extendenpaths_GUI, $smallIconsdll, 337)[BREAK]_CenterOnMonitor($choose_fileoperations_extendenpaths_GUI,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$choose_fileoperations_extendenpaths_GUI)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$choose_fileoperations_extendenpaths_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,533,55)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,271-50,533,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_hide_Extendedpaths
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x003A1FD6]
+handle=401
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=505
+height=33
+text=_Get_langstr(577)
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+resize=
+textmode=func
+locked=0
+iconindex=
+[0x00131C5E]
+handle=402
+code=_GUICtrlComboBox_SetMinVisible($choose_fileoperations_extendenpaths_Combolist, 20)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=combo
+x=10
+y=60
+width=510
+height=21
+text=
+state=80
+style=$CBS_DROPDOWNLIST
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=choose_fileoperations_extendenpaths_Combolist
+func=_Select_Extendedpaths
+bgimage=
+order=2
+tabpage=-1
+tooltip=
+resize=
+textmode=text
+locked=0
+iconindex=
+[0x001A0BF0]
+handle=403
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=90
+width=510
+height=127
+text=
+state=80
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=choose_fileoperations_extendenpaths_Combolabel
+func=
+bgimage=
+order=3
+tabpage=-1
+tooltip=
+resize=
+textmode=text
+locked=0
+iconindex=
+[0x004528B8]
+handle=404
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=232
+width=100
+height=30
+text=_Get_langstr(7)
+state=80
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Extendedpaths_OK
+bgimage=
+order=4
+tabpage=-1
+tooltip=
+resize=
+textmode=func
+iconindex=
+[0x001C2A6A]
+handle=405
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=124
+y=232
+width=100
+height=30
+text=_Get_langstr(8)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_hide_Extendedpaths
+bgimage=
+order=5
+tabpage=-1
+tooltip=
+resize=
+textmode=func
+locked=0
+iconindex=
+#ce

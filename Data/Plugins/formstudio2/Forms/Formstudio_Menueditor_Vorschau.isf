@@ -1,0 +1,86 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$menueditor_vorschauGUI = GUICreate("vorschau",834,108,16,504,BitOr($WS_SYSMENU,$WS_POPUPWINDOW),-1,$menueditorGUI)
+_GUIScrollBars_Init($menueditor_vorschauGUI)
+_GUIScrollBars_ShowScrollBar($menueditor_vorschauGUI,  $SB_BOTH ,false)
+GUISetBkColor($ISN_Hintergrundfarbe,$menueditor_vorschauGUI)
+_WinAPI_SetParent($menueditor_vorschauGUI, $menueditorGUI)
+; Dummy Menu
+Global $MenuEditor_Vorschaumenue = _GUICtrlMenu_CreateMenu ()
+_GUICtrlMenu_SetMenu ($menueditor_vorschauGUI, $MenuEditor_Vorschaumenue)
+$iDummy = GUICtrlCreateDummy()
+$menueditor_treeviewmenu = GUICtrlCreateContextMenu($iDummy)
+$menueditor_treeviewmenu_Handle = GUICtrlGetHandle($menueditor_treeviewmenu)
+$menueditor_treeviewmenu0 = GUICtrlCreateMenuItem(_ISNPlugin_Get_langstring(247), $menueditor_treeviewmenu)
+$menueditor_treeviewmenu1 = GUICtrlCreateMenuItem(_ISNPlugin_Get_langstring(248), $menueditor_treeviewmenu)
+$menueditor_treeviewmenu2= GUICtrlCreateMenuItem(_ISNPlugin_Get_langstring(249), $menueditor_treeviewmenu)
+_GUICtrlMenu_SetMenuStyle($menueditor_treeviewmenu_Handle, $MNS_NOCHECK)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=vorschau
+breite=834
+hoehe=108
+style=$WS_SYSMENU+$WS_POPUPWINDOW
+exstyle=-1
+bgcolour=0xF0F0F0
+bgimage=none
+handle=$menueditor_vorschauGUI
+parent=$menueditorGUI
+code=_GUIScrollBars_Init($menueditor_vorschauGUI)[BREAK]_GUIScrollBars_ShowScrollBar($menueditor_vorschauGUI,  $SB_BOTH ,false)[BREAK]GUISetBkColor($ISN_Hintergrundfarbe,$menueditor_vorschauGUI)[BREAK]_WinAPI_SetParent($menueditor_vorschauGUI, $menueditorGUI)[BREAK]; Dummy Menu[BREAK]Global $MenuEditor_Vorschaumenue = _GUICtrlMenu_CreateMenu ()[BREAK]_GUICtrlMenu_SetMenu ($menueditor_vorschauGUI, $MenuEditor_Vorschaumenue)
+codebeforegui=
+xpos=16
+ypos=504
+center_gui=false
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x001526E6]
+handle=391
+locked=0
+resize=
+code=$menueditor_treeviewmenu = GUICtrlCreateContextMenu($iDummy)[BREAK]$menueditor_treeviewmenu_Handle = GUICtrlGetHandle($menueditor_treeviewmenu)[BREAK]$menueditor_treeviewmenu0 = GUICtrlCreateMenuItem(_ISNPlugin_Get_langstring(247), $menueditor_treeviewmenu)[BREAK]$menueditor_treeviewmenu1 = GUICtrlCreateMenuItem(_ISNPlugin_Get_langstring(248), $menueditor_treeviewmenu)[BREAK]$menueditor_treeviewmenu2= GUICtrlCreateMenuItem(_ISNPlugin_Get_langstring(249), $menueditor_treeviewmenu)[BREAK]_GUICtrlMenu_SetMenuStyle($menueditor_treeviewmenu_Handle, $MNS_NOCHECK)
+type=dummy
+x=140
+y=40
+width=25
+height=25
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$iDummy
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=text
+#ce

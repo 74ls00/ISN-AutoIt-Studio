@@ -1,0 +1,247 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$minidebug_GUI_main = GUICreate("Minidebug2",343,88,10,7,$WS_POPUP,BitOr($WS_EX_MDICHILD,$WS_EX_LAYERED),$minidebug_GUI_sec)
+GUISetBkColor(0xFFFFFF,$minidebug_GUI_main)
+GUISetFont (8.5,400, 0,"Segoe UI",$minidebug_GUI_main)
+GUISetBkColor(0xFFFFFF,$minidebug_GUI_main)
+WinSetOnTop($minidebug_GUI_main, "", 1)
+$DEBUGGUI_TITLE = GUICtrlCreateLabel("",29,7,252,19,BitOr($SS_CENTER,$SS_CENTERIMAGE),-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,8.5,800, 0,"Arial")
+if $ISN_Dark_Mode = "true" Then GUICtrlSetColor(-1,$Fenster_Hintergrundfarbe)
+$DEBUGGUI_TEXT = GUICtrlCreateLabel(_Get_langstr(23),29,28,252,31,$SS_CENTER,-1)
+GUICtrlSetBkColor(-1,"-2")
+if $ISN_Dark_Mode = "true" Then GUICtrlSetColor(-1,$Fenster_Hintergrundfarbe)
+GUICtrlCreateButton("",4,7,23,23,-1,-1)
+Button_AddIcon(-1, $smallIconsdll, 534,0)
+If $Skin_is_used = "true" Then
+	GUICtrlDelete(-1)
+	GUICtrlCreatePic("", 4, 7, 23, 23, $SS_NOTIFY + $SS_CENTERIMAGE, $WS_EX_CLIENTEDGE)
+	_SetIconAlpha(-1, $smallIconsdll, 534 + 1, 16, 16)
+Endif	
+GUICtrlSetTip (-1,_Get_langstr(106))
+GUICtrlSetOnEvent(-1,"_STOPSCRIPT")
+$Debug_gui_Laufzeit = GUICtrlCreateLabel("",208,69,131,16,BitOr($SS_RIGHT,$SS_CENTERIMAGE),-1)
+GUICtrlSetBkColor(-1,"-2")
+if $ISN_Dark_Mode = "true" Then GUICtrlSetColor(-1,$Fenster_Hintergrundfarbe)
+GUICtrlCreateButton("",4,36,23,23,-1,-1)
+Button_AddIcon(-1, $smallIconsdll, 808,0)
+If $Skin_is_used = "true" Then
+	GUICtrlDelete(-1)
+	GUICtrlCreatePic("", 4, 36, 23, 23, $SS_NOTIFY + $SS_CENTERIMAGE, $WS_EX_CLIENTEDGE)
+	_SetIconAlpha(-1, $smallIconsdll, 808 + 1, 16, 16)
+Endif	
+GUICtrlSetTip (-1,_Get_langstr(139))
+GUICtrlSetOnEvent(-1,"_Testscript_Show_Detail_GUI")
+$Debug_gui_PID = GUICtrlCreateLabel("",7,69,131,16,$SS_CENTERIMAGE,-1)
+GUICtrlSetBkColor(-1,"-2")
+if $ISN_Dark_Mode = "true" Then GUICtrlSetColor(-1,$Fenster_Hintergrundfarbe)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Minidebug2
+breite=343
+hoehe=88
+style=$WS_POPUP
+exstyle=$WS_EX_MDICHILD+$WS_EX_LAYERED
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$minidebug_GUI_main
+parent=$minidebug_GUI_sec
+code=GUISetFont (8.5,400, 0,"Segoe UI",$minidebug_GUI_main)[BREAK]GUISetBkColor(0xFFFFFF,$minidebug_GUI_main)[BREAK]WinSetOnTop($minidebug_GUI_main, "", 1)[BREAK]
+codebeforegui=
+xpos=10
+ypos=7
+center_gui=false
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00162426]
+handle=405
+locked=0
+resize=
+code=GUICtrlSetFont(-1,8.5,800, 0,"Arial")[BREAK]if $ISN_Dark_Mode = "true" Then GUICtrlSetColor(-1,$Fenster_Hintergrundfarbe)
+type=label
+x=29
+y=7
+width=252
+height=19
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER+$SS_CENTERIMAGE
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$DEBUGGUI_TITLE
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=text
+[0x001D23AA]
+handle=406
+locked=0
+resize=
+code=if $ISN_Dark_Mode = "true" Then GUICtrlSetColor(-1,$Fenster_Hintergrundfarbe)
+type=label
+x=29
+y=28
+width=252
+height=31
+text=_Get_langstr(23)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$DEBUGGUI_TEXT
+func=
+bgimage=
+order=2
+tabpage=-1
+iconindex=
+textmode=func
+[0x000B266A]
+handle=407
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 534,0)[BREAK]If $Skin_is_used = "true" Then[BREAK]	GUICtrlDelete($control_handle)[BREAK]	GUICtrlCreatePic("", 4, 7, 23, 23, $SS_NOTIFY + $SS_CENTERIMAGE, $WS_EX_CLIENTEDGE)[BREAK]	_SetIconAlpha(-1, $smallIconsdll, 534 + 1, 16, 16)[BREAK]Endif	[BREAK]GUICtrlSetTip (-1,_Get_langstr(106))[BREAK]GUICtrlSetOnEvent(-1,"_STOPSCRIPT")
+type=button
+x=4
+y=7
+width=23
+height=23
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=text
+[0x0008266C]
+handle=408
+locked=0
+resize=
+code=if $ISN_Dark_Mode = "true" Then GUICtrlSetColor(-1,$Fenster_Hintergrundfarbe)
+type=label
+x=208
+y=69
+width=131
+height=16
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_RIGHT+$SS_CENTERIMAGE
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$Debug_gui_Laufzeit
+func=
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=text
+[0x00162494]
+handle=409
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 808,0)[BREAK]If $Skin_is_used = "true" Then[BREAK]	GUICtrlDelete($control_handle)[BREAK]	GUICtrlCreatePic("", 4, 36, 23, 23, $SS_NOTIFY + $SS_CENTERIMAGE, $WS_EX_CLIENTEDGE)[BREAK]	_SetIconAlpha(-1, $smallIconsdll, 808 + 1, 16, 16)[BREAK]Endif	[BREAK]GUICtrlSetTip (-1,_Get_langstr(139))[BREAK]GUICtrlSetOnEvent(-1,"_Testscript_Show_Detail_GUI")[BREAK]
+type=button
+x=4
+y=36
+width=23
+height=23
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=5
+[0x00072620]
+handle=410
+locked=0
+resize=
+code=if $ISN_Dark_Mode = "true" Then GUICtrlSetColor(-1,$Fenster_Hintergrundfarbe)
+type=label
+x=7
+y=69
+width=131
+height=16
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTERIMAGE
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$Debug_gui_PID
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=6
+#ce

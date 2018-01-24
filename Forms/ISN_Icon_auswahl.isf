@@ -1,0 +1,233 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$gui_select_icon = GUICreate(_Get_langstr(623),385,470,-1,-1,BitOr($WS_POPUP,$WS_CAPTION),BitOr($WS_EX_MDICHILD,$WS_EX_TOPMOST),$StudioFenster)
+GUISetBkColor(0xFFFFFF,$gui_select_icon)
+_GUISetIcon($gui_select_icon, $smallIconsdll,19)
+_Control_set_DPI_Scaling($gui_select_icon)
+_CenterOnMonitor($gui_select_icon ,"", $Runonmonitor)
+GUISetBkColor($Fenster_Hintergrundfarbe,$gui_select_icon)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$gui_select_icon)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,385,50)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\windown.jpg",0,470-30,385,30)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+
+; This code build two arrays of ID's of icons and labels for easily update
+For $iCntRow = 0 To 4
+		For $iCntCol = 0 To 5
+			$iCurIndex = $iCntRow * 6 + $iCntCol
+			$ahIcons[$iCurIndex] = GUICtrlCreateIcon($sFilename, ($iOrdinal * ($iCurIndex + 1))*$DPI, (60 * $iCntCol + 25)*$DPI, (70 * $iCntRow + 80)*$DPI)
+			GUICtrlSetState(-1,$GUI_DISABLE)
+			$ahLabels[$iCurIndex] = GUICtrlCreateLabel(($iOrdinal * ($iCurIndex + 1))*$DPI, (60 * $iCntCol + 20)*$DPI, (70 * $iCntRow + 75)*$DPI, 42*$DPI, 42*$DPI)
+			GUICtrlSetColor(-1,0xFFFFFF)
+			GUICtrlSetFont (-1, 1, 50, 0,"Arial" )
+			GUICtrlSetBkColor(-1,"-2")
+			GUICtrlSetOnEvent(-1,"_hit_icon")
+		Next
+Next
+GUICtrlCreateLabel(_Get_langstr(623),10,6,370,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateGroup("",5,50,375,380,-1,-1)
+_Control_set_DPI_Scaling(-1)
+$hPrev = GUICtrlCreateButton(_Get_langstr(363),10,45,90,24,-1,-1)
+GUICtrlSetOnEvent(-1,"_select_icons_prev")
+GUICtrlSetState(-1,BitOr($GUI_SHOW,$GUI_DISABLE))
+Button_AddIcon(-1, $smallIconsdll, 1527,0)
+_Control_set_DPI_Scaling($hPrev)
+GUICtrlCreateButton(_Get_langstr(622),105,45,90,24,-1,-1)
+GUICtrlSetOnEvent(-1,"_select_icons_next")
+Button_AddIcon(-1, $smallIconsdll, 265,1)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),5,435,117,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Makroslot_Icon_Abbrechen")
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(623)
+breite=385
+hoehe=470
+style=$WS_POPUP+$WS_CAPTION
+exstyle=$WS_EX_MDICHILD+$WS_EX_TOPMOST
+bgcolour=0xFFFFFF
+bgimage=none
+handle=gui_select_icon
+parent=$StudioFenster
+code=_GUISetIcon($gui_select_icon, $smallIconsdll,19)[BREAK]_Control_set_DPI_Scaling($gui_select_icon)[BREAK]_CenterOnMonitor($gui_select_icon ,"", $Runonmonitor)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$gui_select_icon)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$gui_select_icon)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,385,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\windown.jpg",0,470-30,385,30)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK][BREAK]; This code build two arrays of ID's of icons and labels for easily update[BREAK]For $iCntRow = 0 To 4[BREAK]		For $iCntCol = 0 To 5[BREAK]			$iCurIndex = $iCntRow * 6 + $iCntCol[BREAK]			$ahIcons[$iCurIndex] = GUICtrlCreateIcon($sFilename, ($iOrdinal * ($iCurIndex + 1))*$DPI, (60 * $iCntCol + 25)*$DPI, (70 * $iCntRow + 80)*$DPI)[BREAK]			GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]			$ahLabels[$iCurIndex] = GUICtrlCreateLabel(($iOrdinal * ($iCurIndex + 1))*$DPI, (60 * $iCntCol + 20)*$DPI, (70 * $iCntRow + 75)*$DPI, 42*$DPI, 42*$DPI)[BREAK]			GUICtrlSetColor(-1,0xFFFFFF)[BREAK]			GUICtrlSetFont (-1, 1, 50, 0,"Arial" )[BREAK]			GUICtrlSetBkColor(-1,"-2")[BREAK]			GUICtrlSetOnEvent(-1,"_hit_icon")[BREAK]		Next[BREAK]Next
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00131D92]
+handle=401
+locked=0
+resize=
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=6
+width=370
+height=32
+text=_Get_langstr(623)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=func
+[0x001D1EAE]
+handle=402
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)
+type=group
+x=5
+y=50
+width=375
+height=380
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+iconindex=
+textmode=text
+[0x00161E14]
+handle=403
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 1527,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=45
+width=90
+height=24
+text=_Get_langstr(363)
+tooltip=
+state=$GUI_SHOW+$GUI_DISABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=hPrev
+func=_select_icons_prev
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=func
+[0x00191F4E]
+handle=404
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 265,1)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=105
+y=45
+width=90
+height=24
+text=_Get_langstr(622)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_select_icons_next
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=func
+[0x000D1D3C]
+handle=405
+locked=0
+resize=
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=5
+y=435
+width=117
+height=30
+text=_Get_langstr(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Makroslot_Icon_Abbrechen
+bgimage=
+order=5
+tabpage=-1
+iconindex=
+textmode=func
+#ce

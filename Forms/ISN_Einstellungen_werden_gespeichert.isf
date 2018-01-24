@@ -1,0 +1,124 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$Einstellungen_werden_gespeichert_GUI = GUICreate(_Get_langstr(688),314,109,-1,-1,BitOr($WS_CAPTION,$WS_POPUP),$WS_EX_MDICHILD,$Config_GUI)
+GUISetBkColor(0xFFFFFF,$Einstellungen_werden_gespeichert_GUI)
+_Control_set_DPI_Scaling($Einstellungen_werden_gespeichert_GUI)
+_GUISetIcon($Einstellungen_werden_gespeichert_GUI, $smallIconsdll,1082)
+_CenterOnMonitor($Einstellungen_werden_gespeichert_GUI ,"", $Runonmonitor)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Einstellungen_werden_gespeichert_GUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$Einstellungen_werden_gespeichert_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,314,30)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\windown.jpg",0,109-30,314,30)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, "")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlCreateIcon("",-1,141,55,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1,true)
+GUICtrlSetImage(-1,$Loading1_Ani)
+GUICtrlCreateLabel(_Get_langstr(688),10,10,293,36,$SS_CENTER,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(688)
+breite=314
+hoehe=109
+style=$WS_CAPTION+$WS_POPUP
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Einstellungen_werden_gespeichert_GUI
+parent=$Config_GUI
+code=_Control_set_DPI_Scaling($Einstellungen_werden_gespeichert_GUI)[BREAK]_GUISetIcon($Einstellungen_werden_gespeichert_GUI, $smallIconsdll,1082)[BREAK]_CenterOnMonitor($Einstellungen_werden_gespeichert_GUI ,"", $Runonmonitor)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$Einstellungen_werden_gespeichert_GUI)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$Einstellungen_werden_gespeichert_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,314,30)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\windown.jpg",0,109-30,314,30)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, "")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x0008264A]
+handle=406
+code=_Control_set_DPI_Scaling($control_handle,true)[BREAK]GUICtrlSetImage(-1,$Loading1_Ani)[BREAK]
+type=icon
+x=141
+y=55
+width=32
+height=32
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=0
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x0003264C]
+handle=407
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=293
+height=36
+text=_Get_langstr(688)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=2
+iconindex=
+resize=
+textmode=func
+locked=0
+#ce

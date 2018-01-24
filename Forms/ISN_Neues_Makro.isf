@@ -1,0 +1,816 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+#include <EditConstants.au3>
+
+$newrule_GUI = GUICreate("Neues Makro",958,480,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$StudioFenster)
+GUISetBkColor(0xFFFFFF,$newrule_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Neues_Makro_Abbrechen", $newrule_GUI)
+GUISetOnEvent($GUI_EVENT_RESTORE, "_Elemente_an_Fesntergroesse_anpassen", $newrule_GUI)
+GUISetOnEvent($GUI_EVENT_MAXIMIZE, "_Elemente_an_Fesntergroesse_anpassen", $newrule_GUI)
+GUISetOnEvent($GUI_EVENT_RESIZED, "_Elemente_an_Fesntergroesse_anpassen", $newrule_GUI)
+_Control_set_DPI_Scaling($newrule_GUI)
+_GUISetIcon($newrule_GUI, $smallIconsdll, 1548)
+_CenterOnMonitor($newrule_GUI ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$newrule_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe,$newrule_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,958,55)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,480-45,958,45)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+$new_rule_title = GUICtrlCreateLabel("Titel",53,10,892,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling($new_rule_title)
+GUICtrlCreateLabel(_Get_langstr(527),10,54,112,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,546)
+_Control_set_DPI_Scaling(-1)
+$rule_name_input = GUICtrlCreateInput("",130,50,225,19,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($rule_name_input)
+$rule_ID = GUICtrlCreateInput("",768,46,224,20,$ES_READONLY,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,804)
+_Control_set_DPI_Scaling($rule_ID)
+if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+GUICtrlCreateGroup(_Get_langstr(528),10,80,345,344,$BS_CENTER,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,354)
+GUICtrlSetFont(-1,9,800,0,$Default_font)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateGroup(_Get_langstr(529),400,80,543,344,$BS_CENTER,-1)
+GUICtrlSetBkColor(-1,"0xFFFFFF")
+GUICtrlSetResizing(-1,102)
+GUICtrlSetFont(-1,9,800,0,$Default_font)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(">",360,80,33,344,BitOr($SS_CENTER,$SS_CENTERIMAGE),-1)
+GUICtrlSetFont(-1,40,400,0,"Arial")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,802)
+GUICtrlSetFont(-1,40,400,0,"Arial")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(9),10,443,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Speichere_Neue_Regel")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),115,443,120,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Neues_Makro_Abbrechen")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll,  1173,0)
+_Control_set_DPI_Scaling(-1)
+$new_rule_triggerlist = GUICtrlCreatelistview("row|rwo1",20,100,296,316,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,354)
+GUICtrlSetData(-1,_Get_langstr(83)&"|id")
+_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))
+_GUICtrlListView_SetImageList($new_rule_triggerlist, $hImage,1)
+_GUICtrlListView_HideColumn(-1,1)
+_Control_set_DPI_Scaling($new_rule_triggerlist)
+$new_rule_actionlist = GUICtrlCreatelistview(_Get_langstr(530),410,100,497,316,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,102)
+_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))
+_GUICtrlListView_SetImageList($new_rule_actionlist, $hImage,1)
+_GUICtrlListView_HideColumn(-1,2)
+_Control_set_DPI_Scaling($new_rule_actionlist)
+GUICtrlCreateLabel(_Get_langstr(543),240,443,780,30,$SS_CENTERIMAGE,-1)
+GUICtrlSetColor(-1,"0x808080")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+$macro_delete_trigger_button = GUICtrlCreateButton("",320,130,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($macro_delete_trigger_button)
+$macro_delete_trigger_button = GUICtrlCreatePic("",320,130,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($macro_delete_trigger_button, $smallIconsdll,1727+1,16,16)
+Else
+Button_AddIcon($macro_delete_trigger_button, $smallIconsdll, 1727,4)
+endif
+GUICtrlSetOnEvent($macro_delete_trigger_button,"_delete_trigger_from_list")
+GUICtrlSetTip ($macro_delete_trigger_button,_Get_langstr(532))
+_Control_set_DPI_Scaling($macro_delete_trigger_button)
+GUICtrlSetResizing($macro_delete_trigger_button,802)
+$macro_Add_trigger_button = GUICtrlCreateButton("",320,100,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($macro_Add_trigger_button)
+$macro_Add_trigger_button = GUICtrlCreatePic("",320,100,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($macro_Add_trigger_button, $smallIconsdll,1732+1,16,16)
+Else
+Button_AddIcon($macro_Add_trigger_button, $smallIconsdll, 1732,4)
+endif
+GUICtrlSetOnEvent($macro_Add_trigger_button,"_Show_Add_Trigger")
+GUICtrlSetTip ($macro_Add_trigger_button,_Get_langstr(531))
+_Control_set_DPI_Scaling($macro_Add_trigger_button)
+GUICtrlSetResizing($macro_Add_trigger_button,802)
+$macro_edit_trigger_button = GUICtrlCreateButton("",320,160,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($macro_edit_trigger_button)
+$macro_edit_trigger_button = GUICtrlCreatePic("",320,160,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($macro_edit_trigger_button, $smallIconsdll,1220+1,16,16)
+Else
+Button_AddIcon($macro_edit_trigger_button, $smallIconsdll, 1220,4)
+endif
+GUICtrlSetOnEvent($macro_edit_trigger_button,"_edit_trigger")
+GUICtrlSetTip ($macro_edit_trigger_button,_Get_langstr(620))
+_Control_set_DPI_Scaling($macro_edit_trigger_button)
+GUICtrlSetResizing($macro_edit_trigger_button,802)
+$macro_Add_action_button = GUICtrlCreateButton("",910,100,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($macro_Add_action_button)
+$macro_Add_action_button = GUICtrlCreatePic("",910,100,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($macro_Add_action_button, $smallIconsdll,1732+1,16,16)
+Else
+Button_AddIcon($macro_Add_action_button, $smallIconsdll, 1732,4)
+endif
+GUICtrlSetOnEvent($macro_Add_action_button,"_Show_Add_action")
+GUICtrlSetTip ($macro_Add_action_button,_Get_langstr(534))
+_Control_set_DPI_Scaling($macro_Add_action_button)
+GUICtrlSetResizing($macro_Add_action_button,804)
+$macro_Remove_action_button = GUICtrlCreateButton("",910,130,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($macro_Remove_action_button)
+$macro_Remove_action_button = GUICtrlCreatePic("",910,130,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($macro_Remove_action_button, $smallIconsdll,1727+1,16,16)
+Else
+Button_AddIcon($macro_Remove_action_button, $smallIconsdll, 1727,4)
+endif
+GUICtrlSetOnEvent($macro_Remove_action_button,"_remove_action")
+GUICtrlSetTip ($macro_Remove_action_button,_Get_langstr(533))
+_Control_set_DPI_Scaling($macro_Remove_action_button)
+GUICtrlSetResizing($macro_Remove_action_button,804)
+$macro_move_action_up_button = GUICtrlCreateButton("",910,160,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($macro_move_action_up_button)
+$macro_move_action_up_button = GUICtrlCreatePic("",910,160,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($macro_move_action_up_button, $smallIconsdll,1737+1,16,16)
+Else
+Button_AddIcon($macro_move_action_up_button, $smallIconsdll, 1737,4)
+endif
+GUICtrlSetOnEvent($macro_move_action_up_button,"_Move_actionitem_up")
+GUICtrlSetTip ($macro_move_action_up_button,_Get_langstr(535))
+_Control_set_DPI_Scaling($macro_move_action_up_button)
+GUICtrlSetResizing($macro_move_action_up_button,804)
+$macro_move_action_down_button = GUICtrlCreateButton("",910,190,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($macro_move_action_down_button)
+$macro_move_action_down_button = GUICtrlCreatePic("",910,190,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($macro_move_action_down_button, $smallIconsdll,1736+1,16,16)
+Else
+Button_AddIcon($macro_move_action_down_button, $smallIconsdll, 1736,4)
+endif
+GUICtrlSetOnEvent($macro_move_action_down_button,"_Move_actionitem_down")
+GUICtrlSetTip ($macro_move_action_down_button,_Get_langstr(536))
+_Control_set_DPI_Scaling($macro_move_action_down_button)
+GUICtrlSetResizing($macro_move_action_down_button,804)
+$macro_Edit_action_button = GUICtrlCreateButton("",910,220,30,30,-1,-1)
+if $Skin_is_used = "true" Then
+GUICtrlDelete($macro_Edit_action_button)
+$macro_Edit_action_button = GUICtrlCreatePic("",910,220,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)
+_SetIconAlpha($macro_Edit_action_button, $smallIconsdll,1220+1,16,16)
+Else
+Button_AddIcon($macro_Edit_action_button, $smallIconsdll, 1220,4)
+endif
+GUICtrlSetOnEvent($macro_Edit_action_button,"_edit_action")
+GUICtrlSetTip ($macro_Edit_action_button,_Get_langstr(537))
+_Control_set_DPI_Scaling($macro_Edit_action_button)
+GUICtrlSetResizing($macro_Edit_action_button,804)
+GUICtrlCreatePic("",13,10,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,382+1,32,32)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=Neues Makro
+breite=958
+hoehe=480
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=newrule_GUI
+parent=$StudioFenster
+code=_Control_set_DPI_Scaling($newrule_GUI)[BREAK]_GUISetIcon($gui_handle, $smallIconsdll, 1548)[BREAK]_CenterOnMonitor($newrule_GUI ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$newrule_GUI)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$newrule_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,958,55)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,480-45,958,45)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=normal
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Neues_Makro_Abbrechen
+gui_event_minimize=
+gui_event_restore=_Elemente_an_Fesntergroesse_anpassen
+gui_event_maximize=_Elemente_an_Fesntergroesse_anpassen
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=_Elemente_an_Fesntergroesse_anpassen
+gui_event_dropped=
+[0x00092826]
+handle=406
+locked=0
+resize=550
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=53
+y=10
+width=892
+height=32
+text=Titel
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=new_rule_title
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=text
+[0x00032828]
+handle=407
+locked=0
+resize=546
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=54
+width=112
+height=15
+text=_Get_langstr(527)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=2
+tabpage=-1
+iconindex=
+textmode=func
+[0x0003282A]
+handle=408
+locked=0
+resize=550
+code=_Control_set_DPI_Scaling($control_handle)
+type=input
+x=130
+y=50
+width=225
+height=19
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=rule_name_input
+func=
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=text
+[0x00032820]
+handle=409
+locked=0
+resize=804
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]if $SHOW_DEBUG_CONSOLE = "false" then GUICtrlSetState(-1,$GUI_HIDE)
+type=input
+x=768
+y=46
+width=224
+height=20
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$ES_READONLY
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=rule_ID
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=4
+[0x0003281E]
+handle=410
+locked=0
+resize=354
+code=GUICtrlSetFont(-1,9,800,0,$Default_font)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=group
+x=10
+y=80
+width=345
+height=344
+text=_Get_langstr(528)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=5
+tabpage=-1
+iconindex=
+textmode=func
+[0x00032818]
+handle=411
+locked=0
+resize=102
+code=GUICtrlSetFont(-1,9,800,0,$Default_font)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=group
+x=400
+y=80
+width=543
+height=344
+text=_Get_langstr(529)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=6
+[0x0003281A]
+handle=412
+locked=0
+resize=802
+code=GUICtrlSetFont(-1,40,400,0,"Arial")[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=360
+y=80
+width=33
+height=344
+text=>
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER+$SS_CENTERIMAGE
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Arial
+fontsize=40
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=7
+tabpage=-1
+iconindex=
+textmode=text
+[0x0003281C]
+handle=413
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=443
+width=100
+height=30
+text=_Get_langstr(9)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Speichere_Neue_Regel
+bgimage=
+order=8
+tabpage=-1
+iconindex=
+textmode=func
+[0x00032816]
+handle=414
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll,  1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=115
+y=443
+width=120
+height=30
+text=_Get_langstr(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Neues_Makro_Abbrechen
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=9
+[0x00032814]
+handle=415
+locked=0
+resize=354
+code=GUICtrlSetData(-1,_Get_langstr(83)&"|id")[BREAK]_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))[BREAK]_GUICtrlListView_SetImageList($new_rule_triggerlist, $hImage,1)[BREAK]_GUICtrlListView_HideColumn(-1,1)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=listview
+x=20
+y=100
+width=296
+height=316
+text=row|rwo1
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=new_rule_triggerlist
+func=
+bgimage=
+order=10
+tabpage=-1
+iconindex=
+textmode=text
+[0x00042808]
+handle=416
+locked=0
+resize=102
+code=_GUICtrlListView_SetExtendedListViewStyle(-1, BitOR($LVS_EX_FULLROWSELECT, $LVS_EX_GRIDLINES, $LVS_EX_DOUBLEBUFFER))[BREAK]_GUICtrlListView_SetImageList($new_rule_actionlist, $hImage,1)[BREAK]_GUICtrlListView_HideColumn(-1,2)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=listview
+x=410
+y=100
+width=497
+height=316
+text=_Get_langstr(530)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=new_rule_actionlist
+func=
+bgimage=
+order=11
+tabpage=-1
+iconindex=
+textmode=func
+[0x000427F4]
+handle=417
+locked=0
+resize=582
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=240
+y=443
+width=780
+height=30
+text=_Get_langstr(543)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTERIMAGE
+exstyle=
+textcolour=0x808080
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=12
+tabpage=-1
+iconindex=
+textmode=func
+[0x000327EC]
+handle=418
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($macro_delete_trigger_button)[BREAK]$macro_delete_trigger_button = GUICtrlCreatePic("",320,130,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($macro_delete_trigger_button, $smallIconsdll,1727+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($macro_delete_trigger_button, $smallIconsdll, 1727,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($macro_delete_trigger_button,"_delete_trigger_from_list")[BREAK]GUICtrlSetTip ($macro_delete_trigger_button,_Get_langstr(532))[BREAK]_Control_set_DPI_Scaling($macro_delete_trigger_button)[BREAK]GUICtrlSetResizing($macro_delete_trigger_button,802)
+type=button
+x=320
+y=130
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=macro_delete_trigger_button
+func=
+bgimage=
+order=13
+tabpage=-1
+iconindex=
+textmode=text
+[0x000327EA]
+handle=419
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($macro_Add_trigger_button)[BREAK]$macro_Add_trigger_button = GUICtrlCreatePic("",320,100,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($macro_Add_trigger_button, $smallIconsdll,1732+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($macro_Add_trigger_button, $smallIconsdll, 1732,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($macro_Add_trigger_button,"_Show_Add_Trigger")[BREAK]GUICtrlSetTip ($macro_Add_trigger_button,_Get_langstr(531))[BREAK]_Control_set_DPI_Scaling($macro_Add_trigger_button)[BREAK]GUICtrlSetResizing($macro_Add_trigger_button,802)
+type=button
+x=320
+y=100
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=macro_Add_trigger_button
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=14
+[0x000327F2]
+handle=420
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($macro_edit_trigger_button)[BREAK]$macro_edit_trigger_button = GUICtrlCreatePic("",320,160,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($macro_edit_trigger_button, $smallIconsdll,1220+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($macro_edit_trigger_button, $smallIconsdll, 1220,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($macro_edit_trigger_button,"_edit_trigger")[BREAK]GUICtrlSetTip ($macro_edit_trigger_button,_Get_langstr(620))[BREAK]_Control_set_DPI_Scaling($macro_edit_trigger_button)[BREAK]GUICtrlSetResizing($macro_edit_trigger_button,802)
+type=button
+x=320
+y=160
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=macro_edit_trigger_button
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=15
+[0x000427FA]
+handle=421
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($macro_Add_action_button)[BREAK]$macro_Add_action_button = GUICtrlCreatePic("",910,100,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($macro_Add_action_button, $smallIconsdll,1732+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($macro_Add_action_button, $smallIconsdll, 1732,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($macro_Add_action_button,"_Show_Add_action")[BREAK]GUICtrlSetTip ($macro_Add_action_button,_Get_langstr(534))[BREAK]_Control_set_DPI_Scaling($macro_Add_action_button)[BREAK]GUICtrlSetResizing($macro_Add_action_button,804)
+type=button
+x=910
+y=100
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=macro_Add_action_button
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=16
+[0x000327F6]
+handle=422
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($macro_Remove_action_button)[BREAK]$macro_Remove_action_button = GUICtrlCreatePic("",910,130,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($macro_Remove_action_button, $smallIconsdll,1727+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($macro_Remove_action_button, $smallIconsdll, 1727,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($macro_Remove_action_button,"_remove_action")[BREAK]GUICtrlSetTip ($macro_Remove_action_button,_Get_langstr(533))[BREAK]_Control_set_DPI_Scaling($macro_Remove_action_button)[BREAK]GUICtrlSetResizing($macro_Remove_action_button,804)
+type=button
+x=910
+y=130
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=macro_Remove_action_button
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=17
+[0x000327F8]
+handle=423
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($macro_move_action_up_button)[BREAK]$macro_move_action_up_button = GUICtrlCreatePic("",910,160,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($macro_move_action_up_button, $smallIconsdll,1737+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($macro_move_action_up_button, $smallIconsdll, 1737,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($macro_move_action_up_button,"_Move_actionitem_up")[BREAK]GUICtrlSetTip ($macro_move_action_up_button,_Get_langstr(535))[BREAK]_Control_set_DPI_Scaling($macro_move_action_up_button)[BREAK]GUICtrlSetResizing($macro_move_action_up_button,804)
+type=button
+x=910
+y=160
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=macro_move_action_up_button
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=18
+[0x000327FC]
+handle=424
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($macro_move_action_down_button)[BREAK]$macro_move_action_down_button = GUICtrlCreatePic("",910,190,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($macro_move_action_down_button, $smallIconsdll,1736+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($macro_move_action_down_button, $smallIconsdll, 1736,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($macro_move_action_down_button,"_Move_actionitem_down")[BREAK]GUICtrlSetTip ($macro_move_action_down_button,_Get_langstr(536))[BREAK]_Control_set_DPI_Scaling($macro_move_action_down_button)[BREAK]GUICtrlSetResizing($macro_move_action_down_button,804)
+type=button
+x=910
+y=190
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=macro_move_action_down_button
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=19
+[0x00032800]
+handle=425
+locked=0
+resize=
+code=if $Skin_is_used = "true" Then[BREAK]GUICtrlDelete($macro_Edit_action_button)[BREAK]$macro_Edit_action_button = GUICtrlCreatePic("",910,220,30,30,$SS_NOTIFY+$SS_CENTERIMAGE,$WS_EX_CLIENTEDGE)[BREAK]_SetIconAlpha($macro_Edit_action_button, $smallIconsdll,1220+1,16,16)[BREAK]Else[BREAK]Button_AddIcon($macro_Edit_action_button, $smallIconsdll, 1220,4)[BREAK]endif[BREAK]GUICtrlSetOnEvent($macro_Edit_action_button,"_edit_action")[BREAK]GUICtrlSetTip ($macro_Edit_action_button,_Get_langstr(537))[BREAK]_Control_set_DPI_Scaling($macro_Edit_action_button)[BREAK]GUICtrlSetResizing($macro_Edit_action_button,804)
+type=button
+x=910
+y=220
+width=30
+height=30
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=macro_Edit_action_button
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=text
+order=20
+[0x00032802]
+handle=426
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,382+1,32,32)
+type=image
+x=13
+y=10
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=21
+tabpage=-1
+iconindex=
+textmode=text
+#ce

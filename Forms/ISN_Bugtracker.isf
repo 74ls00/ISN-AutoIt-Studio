@@ -1,0 +1,427 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$bugtracker = GUICreate(_Get_langstr(1),1020,692,-1,-1,BitOr($WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),-1,$studiofenster)
+GUISetBkColor(0xFFFFFF,$bugtracker)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Hide_bugtracker", $bugtracker)
+WinSetTitle($bugtracker,"",_Get_langstr(1)&" - "&_Get_langstr(434))
+_Control_set_DPI_Scaling($bugtracker)
+_GUISetIcon($bugtracker, $smallIconsdll,1789)
+_CenterOnMonitor($bugtracker ,"", $Runonmonitor)
+GUISetBkColor(0xFFFFFF,$bugtracker)
+GUISetFont (8.5,400, 0,"Segoe UI",$bugtracker)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,1020,50)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetResizing (-1, 550)
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\windown.jpg",0,692-70,1020,70)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetResizing (-1, 582)
+GUICtrlSetState(-1,$GUI_DISABLE)
+
+$oIE = ObjCreate("Shell.Explorer.2")
+$GUIActiveX = GUICtrlCreateObj($oIE, 4*$DPI,50*$DPI,1010*$DPI,543*$DPI)
+GUICtrlSetResizing ($GUIActiveX, 102)
+GUICtrlSetState ($GUIActiveX, $GUI_ONTOP)
+$bugtracker_busyicon = GUICtrlCreateIcon("",-1,976,647,32,32,-1,-1)
+GUICtrlSetResizing(-1,836)
+GUICtrlSetImage(-1,$Loading1_Ani)
+_Control_set_DPI_Scaling($bugtracker_busyicon,true)
+GUICtrlCreateButton(_Get_langstr(435),20,620,172,24,-1,-1)
+GUICtrlSetOnEvent(-1,"_Bugtracker_newaccount")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1030,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel("Mein Text",10,12,989,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"MS Sans Serif")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetData(-1,_Get_langstr(1)&" - "&_Get_langstr(434))
+GUICtrlSetFont(-1,16,400,default,"Segoe UI")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetColor(-1,0x003399)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(436),20,650,172,24,-1,-1)
+GUICtrlSetOnEvent(-1,"_Bugtracker_lostpassword")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1489,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateGroup(_Get_langstr(266),10,600,1001,83,$BS_CENTER,-1)
+GUICtrlSetResizing(-1,582)
+GUICtrlSetFont(-1,9,700,default,"Segoe UI")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(437),210,620,172,24,-1,-1)
+GUICtrlSetOnEvent(-1,"_Bugtracker_newticket")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll,1212,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(438),210,650,172,24,-1,-1)
+GUICtrlSetOnEvent(-1,"_Bugtracker_showalltikets")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1177,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(439),390,620,172,24,-1,-1)
+GUICtrlSetOnEvent(-1,"_Show_Bugtracker")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 337,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateGroup("",570,610,4,68,-1,-1)
+GUICtrlSetResizing(-1,834)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(440),390,650,172,24,-1,-1)
+GUICtrlSetOnEvent(-1,"_Bugtracker_to_Browser")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 762,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(441),580,620,420,52,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(1)
+breite=1020
+hoehe=692
+style=$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=bugtracker
+parent=$studiofenster
+code=WinSetTitle($bugtracker,"",_Get_langstr(1)&" - "&_Get_langstr(434))[BREAK]_Control_set_DPI_Scaling($bugtracker)[BREAK]_GUISetIcon($bugtracker, $smallIconsdll,1789)[BREAK]_CenterOnMonitor($bugtracker ,"", $Runonmonitor)[BREAK]GUISetBkColor(0xFFFFFF,$bugtracker)[BREAK]GUISetFont (8.5,400, 0,"Segoe UI",$bugtracker)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,1020,50)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetResizing (-1, 550)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\windown.jpg",0,692-70,1020,70)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetResizing (-1, 582)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK][BREAK]$oIE = ObjCreate("Shell.Explorer.2")[BREAK]$GUIActiveX = GUICtrlCreateObj($oIE, 4*$DPI,50*$DPI,1010*$DPI,543*$DPI)[BREAK]GUICtrlSetResizing ($GUIActiveX, 102)[BREAK]GUICtrlSetState ($GUIActiveX, $GUI_ONTOP)[BREAK]
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Hide_bugtracker
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00072BE6]
+handle=406
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1030,0)[BREAK]_Control_set_DPI_Scaling($Control_handle)
+type=button
+x=20
+y=620
+width=172
+height=24
+text=_Get_langstr(435)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Bugtracker_newaccount
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=func
+[0x00012BE8]
+handle=407
+locked=0
+resize=836
+code=GUICtrlSetImage(-1,$Loading1_Ani)[BREAK]_Control_set_DPI_Scaling($Control_handle,true)
+type=icon
+x=976
+y=647
+width=32
+height=32
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=bugtracker_busyicon
+func=
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=text
+[0x00012BEA]
+handle=408
+locked=0
+resize=550
+code=GUICtrlSetData(-1,_Get_langstr(1)&" - "&_Get_langstr(434))[BREAK]GUICtrlSetFont(-1,16,400,default,"Segoe UI")[BREAK]GUICtrlSetBkColor(-1,"-2")[BREAK]GUICtrlSetColor(-1,0x003399)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=12
+width=989
+height=32
+text=Mein Text
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=text
+[0x00012BEC]
+handle=409
+locked=0
+resize=582
+code=GUICtrlSetFont(-1,9,700,default,"Segoe UI")[BREAK]_Control_set_DPI_Scaling($Control_handle)
+type=group
+x=10
+y=600
+width=1001
+height=83
+text=_Get_langstr(266)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$BS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=5
+tabpage=-1
+iconindex=
+textmode=func
+[0x00012BEE]
+handle=410
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1489,0)[BREAK]_Control_set_DPI_Scaling($Control_handle)
+type=button
+x=20
+y=650
+width=172
+height=24
+text=_Get_langstr(436)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Bugtracker_lostpassword
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=5
+[0x00012BF0]
+handle=411
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll,1212,0)[BREAK]_Control_set_DPI_Scaling($Control_handle)
+type=button
+x=210
+y=620
+width=172
+height=24
+text=_Get_langstr(437)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Bugtracker_newticket
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=6
+[0x00012BF2]
+handle=412
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1177,0)[BREAK]_Control_set_DPI_Scaling($Control_handle)
+type=button
+x=210
+y=650
+width=172
+height=24
+text=_Get_langstr(438)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Bugtracker_showalltikets
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=7
+[0x00012BF4]
+handle=413
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 337,0)[BREAK]_Control_set_DPI_Scaling($Control_handle)
+type=button
+x=390
+y=620
+width=172
+height=24
+text=_Get_langstr(439)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Show_Bugtracker
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=8
+[0x00012BF6]
+handle=414
+locked=0
+resize=834
+code=_Control_set_DPI_Scaling($Control_handle)
+type=group
+x=570
+y=610
+width=4
+height=68
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xFFFFFF
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=9
+tabpage=-1
+iconindex=
+textmode=text
+[0x00012BF8]
+handle=415
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 762,0)[BREAK]_Control_set_DPI_Scaling($Control_handle)
+type=button
+x=390
+y=650
+width=172
+height=24
+text=_Get_langstr(440)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Bugtracker_to_Browser
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=10
+[0x00012BFA]
+handle=416
+locked=0
+resize=582
+code=_Control_set_DPI_Scaling($Control_handle)
+type=label
+x=580
+y=620
+width=420
+height=52
+text=_Get_langstr(441)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=11
+tabpage=-1
+iconindex=
+textmode=func
+#ce

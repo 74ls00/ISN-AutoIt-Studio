@@ -1,0 +1,13 @@
+[plugin]
+language=French
+version=1.0
+author=Swirti
+
+
+str1=Icône(s) trouvé(s)
+str2=Chargement des icônes...
+str3=Extraire l'icône
+str4=Info
+str5=a été extrait avec succès !
+str6=n'a pas pu être extrait !
+str7=Erreur

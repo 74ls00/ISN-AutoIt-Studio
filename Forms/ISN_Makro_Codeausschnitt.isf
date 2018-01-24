@@ -1,0 +1,194 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$Makro_Codeausschnitt_GUI = GUICreate(_Get_langstr(973),975,627,-1,-1,BitOr($WS_MAXIMIZEBOX,$WS_SIZEBOX,$WS_CAPTION,$WS_POPUP,$WS_SYSMENU),$WS_EX_MDICHILD,$newrule_GUI)
+GUISetBkColor(0xFFFFFF,$Makro_Codeausschnitt_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_cancel_any_config", $Makro_Codeausschnitt_GUI)
+_Control_set_DPI_Scaling($Makro_Codeausschnitt_GUI)
+_GUISetIcon($Makro_Codeausschnitt_GUI, $smallIconsdll,337)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Makro_Codeausschnitt_GUI)
+_CenterOnMonitor($Makro_Codeausschnitt_GUI ,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$Makro_Codeausschnitt_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,975,50,$WS_CLIPSIBLINGS)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetResizing (-1, 550)
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,627-50,975,50,$WS_CLIPSIBLINGS)
+GUICtrlSetResizing (-1, 582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlCreateLabel(_Get_langstr(973),10,10,955,30,-1,-1)
+GUICtrlSetFont(-1,13,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),116,586,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_cancel_any_config")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateDummy()
+$Makro_Codeausschnitt_GUI_scintilla = SCI_CreateEditorAu3($Makro_Codeausschnitt_GUI,10*$DPI,76*$DPI, 953*$DPI,491*$DPI)
+SendMessage($Makro_Codeausschnitt_GUI_scintilla, $SCI_SETLEXER, $SCLEX_AU3, 0)
+GUICtrlCreateButton(_Get_langstr(7),6,586,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Save_Config_codeausschnitt_einfuegen")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(973)
+breite=975
+hoehe=627
+style=$WS_MAXIMIZEBOX+$WS_SIZEBOX+$WS_CAPTION+$WS_POPUP+$WS_SYSMENU
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Makro_Codeausschnitt_GUI
+parent=$newrule_GUI
+code=_Control_set_DPI_Scaling($Makro_Codeausschnitt_GUI)[BREAK]_GUISetIcon($Makro_Codeausschnitt_GUI, $smallIconsdll,337)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$Makro_Codeausschnitt_GUI)[BREAK]_CenterOnMonitor($Makro_Codeausschnitt_GUI ,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$Makro_Codeausschnitt_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,975,50,$WS_CLIPSIBLINGS)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetResizing (-1, 550)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,627-50,975,50,$WS_CLIPSIBLINGS)[BREAK]GUICtrlSetResizing (-1, 582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_cancel_any_config
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x002828C4]
+handle=406
+locked=0
+resize=550
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=955
+height=30
+text=_Get_langstr(973)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=13
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=2
+[0x002128E0]
+handle=407
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=116
+y=586
+width=100
+height=30
+text=_Get_langstr(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_cancel_any_config
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=func
+[0x00302F88]
+handle=408
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=6
+y=586
+width=100
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Save_Config_codeausschnitt_einfuegen
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=4
+[0x002028B2]
+handle=409
+locked=0
+resize=
+code=$Makro_Codeausschnitt_GUI_scintilla = SCI_CreateEditorAu3($Makro_Codeausschnitt_GUI,10*$DPI,76*$DPI, 953*$DPI,491*$DPI)[BREAK]SendMessage($Makro_Codeausschnitt_GUI_scintilla, $SCI_SETLEXER, $SCLEX_AU3, 0)
+type=dummy
+x=10
+y=50
+width=945
+height=532
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=text
+#ce

@@ -1,0 +1,226 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <GuiListView.au3>
+#include <EditConstants.au3>
+
+$Funclist_GUI = GUICreate(_Get_langstr(185),359,485,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$Studiofenster)
+GUISetBkColor(0xFFFFFF,$Funclist_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_close_func", $Funclist_GUI)
+GUISetOnEvent($GUI_EVENT_RESTORE, "_Elemente_an_Fesntergroesse_anpassen", $Funclist_GUI)
+GUISetOnEvent($GUI_EVENT_MAXIMIZE, "_Elemente_an_Fesntergroesse_anpassen", $Funclist_GUI)
+GUISetOnEvent($GUI_EVENT_RESIZED, "_Elemente_an_Fesntergroesse_anpassen", $Funclist_GUI)
+_Control_set_DPI_Scaling($Funclist_GUI)
+_CenterOnMonitor($Funclist_GUI,"", $Runonmonitor)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$Funclist_GUI)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Funclist_GUI)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,400,50)
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+guictrlcreatepic(@scriptdir&"\Data\row_Bottom.jpg",0,485-50,640,50)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+$FuncText = GUICtrlCreateLabel(_Get_langstr(185),10,10,340,22,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1, 12, 400, 0, $Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling($FuncText)
+$FuncListview = GUICtrlCreatelistview("_Get_langstr(186)",10,40,341,357,BitOr($LVS_NOCOLUMNHEADER,$LVS_SINGLESEL,$LVS_SHOWSELALWAYS),BitOr($LVS_EX_FULLROWSELECT,$LVS_EX_GRIDLINES,$LVS_EX_DOUBLEBUFFER))
+GUICtrlSetResizing(-1,102)
+_Control_set_DPI_Scaling($FuncListview)
+$Funcinput = GUICtrlCreateInput("",10,405,341,21,-1,$WS_EX_CLIENTEDGE)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling($Funcinput)
+GUICtrlCreateButton(_Get_langstr(7),10,445,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_func_select_ok")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(8),120,445,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_close_func")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(185)
+breite=359
+hoehe=485
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=Funclist_GUI
+parent=$Studiofenster
+code=_Control_set_DPI_Scaling($Funclist_GUI)[BREAK]_CenterOnMonitor($Funclist_GUI,"", $Runonmonitor)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$Funclist_GUI)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$Funclist_GUI)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,400,50)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_Bottom.jpg",0,485-50,640,50)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_close_func
+gui_event_minimize=
+gui_event_restore=_Elemente_an_Fesntergroesse_anpassen
+gui_event_maximize=_Elemente_an_Fesntergroesse_anpassen
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=_Elemente_an_Fesntergroesse_anpassen
+gui_event_dropped=
+[0x000D233C]
+handle=401
+locked=0
+resize=550
+code=GUICtrlSetFont(-1, 12, 400, 0, $Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=10
+width=340
+height=22
+text=_Get_langstr(185)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=FuncText
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=func
+[0x00052340]
+handle=402
+locked=0
+resize=102
+code=_Control_set_DPI_Scaling($control_handle)
+type=listview
+x=10
+y=40
+width=341
+height=357
+text=_Get_langstr(186)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$LVS_NOCOLUMNHEADER+$LVS_SINGLESEL+$LVS_SHOWSELALWAYS
+exstyle=$LVS_EX_FULLROWSELECT+$LVS_EX_GRIDLINES+$LVS_EX_DOUBLEBUFFER
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=FuncListview
+func=
+bgimage=
+order=2
+tabpage=-1
+iconindex=
+textmode=text
+[0x00052348]
+handle=403
+locked=0
+resize=582
+code=_Control_set_DPI_Scaling($control_handle)
+type=input
+x=10
+y=405
+width=341
+height=21
+text=
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=$WS_EX_CLIENTEDGE
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Funcinput
+func=
+bgimage=
+order=3
+tabpage=-1
+iconindex=
+textmode=text
+[0x0005234C]
+handle=404
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=445
+width=100
+height=30
+text=_Get_langstr(7)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_func_select_ok
+bgimage=
+order=4
+tabpage=-1
+iconindex=
+textmode=func
+[0x00052350]
+handle=405
+locked=0
+resize=834
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=120
+y=445
+width=100
+height=30
+text=_Get_langstr(8)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_close_func
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=5
+#ce

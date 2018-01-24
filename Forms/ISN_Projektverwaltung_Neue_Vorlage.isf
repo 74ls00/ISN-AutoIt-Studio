@@ -1,0 +1,324 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+#include <EditConstants.au3>
+
+$TemplateNEU = GUICreate(_Get_langstr(388),350,220,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_SYSMENU,$WS_MAXIMIZEBOX),$WS_EX_MDICHILD,$projectmanager)
+GUISetBkColor(0xFFFFFF,$TemplateNEU)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_hide_new_Template", $TemplateNEU)
+_Control_set_DPI_Scaling($TemplateNEU)
+_GUISetIcon($TemplateNEU, $smallIconsdll,1095)
+_CenterOnMonitor($TemplateNEU ,"", $Runonmonitor)
+GUISetBkColor($Fenster_Hintergrundfarbe,$TemplateNEU)
+GUISetFont (8.5,400, 0,$Default_font,$TemplateNEU)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,350,50)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,220-50,350,50)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+
+
+
+
+GUICtrlCreateLabel(_Get_langstr(388),50,10,292,30,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,default,$Default_font)
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(381),10,57,313,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$INPUT_VORLAGENAME = GUICtrlCreateInput("",10,77,332,20,-1,512)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($INPUT_VORLAGENAME)
+GUICtrlCreateLabel(_Get_langstr(132),10,107,313,15,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+$INPUT_VORLAGEAUTHOR = GUICtrlCreateInput("",10,127,332,20,-1,512)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling($INPUT_VORLAGEAUTHOR)
+GUICtrlCreateButton(_Get_langstr(7),10,180,100,30,$BS_DEFPUSHBUTTON,-1)
+GUICtrlSetOnEvent(-1,"_Create_Template")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreatePic("",10,10,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,346+1,32,32)
+GUICtrlCreateButton(_Get_langstr(8),115,180,100,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_hide_new_Template")
+GUICtrlSetResizing(-1,834)
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(388)
+breite=350
+hoehe=220
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_SYSMENU+$WS_MAXIMIZEBOX
+exstyle=$WS_EX_MDICHILD
+bgcolour=0xFFFFFF
+bgimage=none
+handle=TemplateNEU
+parent=$projectmanager
+code=_Control_set_DPI_Scaling($TemplateNEU)[BREAK]_GUISetIcon($TemplateNEU, $smallIconsdll,1095)[BREAK]_CenterOnMonitor($TemplateNEU ,"", $Runonmonitor)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$TemplateNEU)[BREAK]GUISetFont (8.5,400, 0,$Default_font,$TemplateNEU)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,350,50)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,220-50,350,50)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK][BREAK][BREAK][BREAK][BREAK]
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_hide_new_Template
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00082014]
+handle=405
+code=GUICtrlSetFont(-1,16,400,default,$Default_font)[BREAK]GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=50
+y=10
+width=292
+height=30
+text=_Get_langstr(388)
+state=80
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+id=
+func=
+bgimage=
+order=0
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=550
+textmode=func
+locked=0
+[0x00022012]
+handle=406
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=57
+width=313
+height=15
+text=_Get_langstr(381)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=
+func=
+bgimage=
+order=3
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=550
+textmode=func
+locked=0
+[0x0002200C]
+handle=407
+code=_Control_set_DPI_Scaling($control_handle)
+type=input
+x=10
+y=77
+width=332
+height=20
+text=
+state=80
+style=
+exstyle=512
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=$INPUT_VORLAGENAME
+func=
+bgimage=
+order=4
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=550
+textmode=text
+locked=0
+[0x0002200E]
+handle=408
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=107
+width=313
+height=15
+text=_Get_langstr(132)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=
+func=
+bgimage=
+order=5
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=550
+textmode=func
+locked=0
+[0x00022010]
+handle=409
+code=_Control_set_DPI_Scaling($control_handle)
+type=input
+x=10
+y=127
+width=332
+height=20
+text=
+state=80
+style=
+exstyle=512
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=$INPUT_VORLAGEAUTHOR
+func=
+bgimage=
+order=6
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=550
+textmode=text
+locked=0
+[0x0002200A]
+handle=410
+code=Button_AddIcon(-1, $smallIconsdll, 314,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=180
+width=100
+height=30
+text=_Get_langstr(7)
+state=80
+style=$BS_DEFPUSHBUTTON
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=
+func=_Create_Template
+bgimage=
+order=7
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=834
+textmode=func
+[0x00022008]
+handle=411
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=115
+y=180
+width=100
+height=30
+text=_Get_langstr(8)
+state=80
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+id=
+func=_hide_new_Template
+bgimage=
+order=8
+tabpage=-1
+tooltip=
+fontattribute=0
+iconindex=
+resize=834
+textmode=func
+locked=0
+[0x00022006]
+handle=412
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,346+1,32,32)
+type=image
+x=10
+y=10
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=8
+tabpage=-1
+iconindex=
+textmode=text
+#ce

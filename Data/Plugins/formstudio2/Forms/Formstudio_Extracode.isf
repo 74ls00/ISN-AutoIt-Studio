@@ -1,0 +1,202 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$ExtracodeGUI = GUICreate(_ISNPlugin_Get_langstring(20),712,550,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SIZEBOX,$WS_MAXIMIZEBOX),-1,$StudioFenster_inside)
+GUISetBkColor(0xFFFFFF,$ExtracodeGUI)
+_Control_set_DPI_Scaling($ExtracodeGUI)
+GUISetFont ($Default_font_size,400, 0,$Default_font,$ExtracodeGUI)
+GUISetBkColor($ISN_Hintergrundfarbe,$ExtracodeGUI)
+guictrlcreatepic($Window_TOP_IMG,0,0,712,40)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)
+GUICtrlSetResizing(-1,550)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic($Window_Row_Bottom_IMG,0,550-50,712,50)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)
+GUICtrlSetResizing(-1,582)
+_Control_set_DPI_Scaling(-1)
+GUICtrlSetState(-1,$GUI_DISABLE)
+_CenterOnMonitor($ExtracodeGUI,"", $Runonmonitor)
+
+$Code_Generieren_umschalttab = _GUICtrlTab_Create ($ExtracodeGUI,10*$DPI, 50*$DPI, 689*$DPI, 35*$DPI,$TCS_BUTTONS,-1)
+GUICtrlSetResizing($Code_Generieren_umschalttab,550)
+GUICtrlSetBkColor(-1,$ISN_Hintergrundfarbe)
+$Code_Generieren_umschalttab_Tab1 =  _GUICtrlTab_InsertItem($Code_Generieren_umschalttab, 0, _ISNPlugin_Get_langstring(228))
+$Code_Generieren_umschalttab_Tab2 =  _GUICtrlTab_InsertItem($Code_Generieren_umschalttab, 1, _ISNPlugin_Get_langstring(229))
+$Code_Edit = CreateEditor()
+_Code_GUI_Resize()
+
+
+$ExtracodeGUI_Label = GUICtrlCreateLabel(_ISNPlugin_Get_langstring(82),10,10,690,42,-1,-1)
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetResizing(-1,550)
+GUICtrlSetFont(-1,16,400,0,$Default_font)
+GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)
+_Control_set_DPI_Scaling(-1)
+$Showcodebt1 = GUICtrlCreateButton(_ISNPlugin_Get_langstring(57),10,510,128,32,-1,-1)
+GUICtrlSetOnEvent(-1,"_Hide_The_Code")
+GUICtrlSetResizing(-1,834)
+_Control_set_DPI_Scaling(-1)
+Button_AddIcon(-1, $smallIconsdll, 314,0)
+$Showcodebt2 = GUICtrlCreateButton(_ISNPlugin_Get_langstring(70),139,510,156,32,-1,-1)
+GUICtrlSetOnEvent(-1,"_Save_AS_Au3")
+GUICtrlSetResizing(-1,834)
+_Control_set_DPI_Scaling(-1)
+Button_AddIcon(-1, $smallIconsdll, 1785,0)
+$Showcodebt3 = GUICtrlCreateButton(_ISNPlugin_Get_langstring(71),298,510,128,32,-1,-1)
+GUICtrlSetOnEvent(-1,"_Copy_to_Clipboard")
+GUICtrlSetResizing(-1,834)
+_Control_set_DPI_Scaling(-1)
+Button_AddIcon(-1, $smallIconsdll, 1311,0)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_ISNPlugin_Get_langstring(20)
+breite=712
+hoehe=550
+style=$WS_POPUP+$WS_CAPTION+$WS_SIZEBOX+$WS_MAXIMIZEBOX
+exstyle=-1
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$ExtracodeGUI
+parent=$StudioFenster_inside
+code=_Control_set_DPI_Scaling($ExtracodeGUI)[BREAK]GUISetFont ($Default_font_size,400, 0,$Default_font,$ExtracodeGUI)[BREAK]GUISetBkColor($ISN_Hintergrundfarbe,$ExtracodeGUI)[BREAK]guictrlcreatepic($Window_TOP_IMG,0,0,712,40)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_TOP_IMG_Dark)[BREAK]GUICtrlSetResizing(-1,550)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic($Window_Row_Bottom_IMG,0,550-50,712,50)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, $Window_Row_Bottom_IMG_Dark)[BREAK]GUICtrlSetResizing(-1,582)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]_CenterOnMonitor($ExtracodeGUI,"", $Runonmonitor)[BREAK][BREAK]$Code_Generieren_umschalttab = _GUICtrlTab_Create ($ExtracodeGUI,10*$DPI, 50*$DPI, 689*$DPI, 35*$DPI,$TCS_BUTTONS,-1)[BREAK]GUICtrlSetResizing($Code_Generieren_umschalttab,550)[BREAK]GUICtrlSetBkColor(-1,$ISN_Hintergrundfarbe)[BREAK]$Code_Generieren_umschalttab_Tab1 =  _GUICtrlTab_InsertItem($Code_Generieren_umschalttab, 0, _ISNPlugin_Get_langstring(228))[BREAK]$Code_Generieren_umschalttab_Tab2 =  _GUICtrlTab_InsertItem($Code_Generieren_umschalttab, 1, _ISNPlugin_Get_langstring(229))[BREAK]$Code_Edit = CreateEditor()[BREAK]_Code_GUI_Resize()[BREAK][BREAK][BREAK]
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x00301FFC]
+handle=394
+locked=0
+resize=550
+code=GUICtrlSetFont(-1,16,400,0,$Default_font)[BREAK]GUICtrlSetColor(-1,$ISN_Schriftfarbe_titel)[BREAK]_Control_set_DPI_Scaling(-1)
+type=label
+x=10
+y=10
+width=690
+height=42
+text=_ISNPlugin_Get_langstring(82)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=$ExtracodeGUI_Label
+func=
+bgimage=
+order=0
+tabpage=-1
+iconindex=
+textmode=func
+[0x003725FC]
+handle=395
+locked=0
+resize=834
+code=_Control_set_DPI_Scaling(-1)[BREAK]Button_AddIcon(-1, $smallIconsdll, 314,0)
+type=button
+x=10
+y=510
+width=128
+height=32
+text=_ISNPlugin_Get_langstring(57)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Showcodebt1
+func=_Hide_The_Code
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=1
+[0x002D264C]
+handle=396
+locked=0
+resize=834
+code=_Control_set_DPI_Scaling(-1)[BREAK]Button_AddIcon(-1, $smallIconsdll, 1785,0)
+type=button
+x=139
+y=510
+width=156
+height=32
+text=_ISNPlugin_Get_langstring(70)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Showcodebt2
+func=_Save_AS_Au3
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=2
+[0x002A25DC]
+handle=397
+locked=0
+resize=834
+code=_Control_set_DPI_Scaling(-1)[BREAK]Button_AddIcon(-1, $smallIconsdll, 1311,0)
+type=button
+x=298
+y=510
+width=128
+height=32
+text=_ISNPlugin_Get_langstring(71)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=Showcodebt3
+func=_Copy_to_Clipboard
+bgimage=
+tabpage=-1
+iconindex=
+textmode=func
+order=3
+#ce

@@ -1,0 +1,378 @@
+; -- Created with ISN Form Studio 2 for ISN AutoIt Studio -- ;
+#include <StaticConstants.au3>
+#include <GUIConstantsEx.au3>
+#include <WindowsConstants.au3>
+#Include <GuiButton.au3>
+
+$Update_gefunden_GUI = GUICreate(_Get_langstr(344),541,243,-1,-1,BitOr($WS_POPUP,$WS_CAPTION,$WS_SYSMENU),$WS_EX_TOPMOST)
+GUISetBkColor(0xFFFFFF,$Update_gefunden_GUI)
+GUISetOnEvent($GUI_EVENT_CLOSE, "_Auto_Update_jetzt_nicht", $Update_gefunden_GUI)
+WinSetOnTop ($Update_gefunden_GUI, "", 1)
+GUISetFont(8.5, 400, 0, "Segoe UI", $Update_gefunden_GUI)
+_Control_set_DPI_Scaling($Update_gefunden_GUI)
+_CenterOnMonitor($Update_gefunden_GUI ,"", $Runonmonitor)
+guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,541,80)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,243-30,541,30)
+_Control_set_DPI_Scaling(-1)
+if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")
+GUICtrlSetState(-1,$GUI_DISABLE)
+GUISetBkColor($Fenster_Hintergrundfarbe,$Update_gefunden_GUI)
+GUICtrlCreateLabel(_Get_langstr(344),50,10,468,32,-1,-1)
+GUICtrlSetFont(-1,16,400,0,"Segoe UI")
+GUICtrlSetColor(-1,"0x003399")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetColor(-1,$Titel_Schriftfarbe)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(711),10,50,518,20,$SS_CENTER,-1)
+GUICtrlSetFont(-1,10,400,0,"Segoe UI")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+$Update_gefunden_GUI_aktuelle_Version = GUICtrlCreateLabel("Aktuelle Version",10,80,520,20,$SS_CENTER,-1)
+GUICtrlSetFont(-1,11,400,0,"Segoe UI")
+GUICtrlSetBkColor(-1,"-2")
+GUICtrlSetData(-1,_Get_langstr(333)&" "&$Studioversion&" ("&$VersionBuild&")")
+_Control_set_DPI_Scaling($Update_gefunden_GUI_aktuelle_Version)
+$Update_gefunden_GUI_gefundene_Version = GUICtrlCreateLabel("Im Web verfügbar:",10,109,520,20,$SS_CENTER,-1)
+GUICtrlSetFont(-1,11,400,0,"Segoe UI")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling($Update_gefunden_GUI_gefundene_Version)
+GUICtrlCreateLabel(_Get_langstr(712),10,152,518,15,$SS_CENTER,-1)
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(713),10,170,136,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_ISN_Helper_Neues_Update_Gefunden_Show_Update_GUI")
+Button_AddIcon(-1, $smallIconsdll, 762,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton("In 7 Tagen erneut erinnern",150,170,217,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Auto_Update_in_X_Tagen_erinnern")
+guictrlsetdata(-1,StringReplace(_Get_langstr(715),"%1",_ISNPlugin_Studio_Config_Read_Value("autoupdate_searchtimer", "14")))
+Button_AddIcon(-1, $smallIconsdll, 177,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateButton(_Get_langstr(716),370,170,159,30,-1,-1)
+GUICtrlSetOnEvent(-1,"_Auto_Update_jetzt_nicht")
+Button_AddIcon(-1, $smallIconsdll, 1173,0)
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreateLabel(_Get_langstr(714),10,220,525,15,$SS_CENTER,-1)
+GUICtrlSetColor(-1,"0x808080")
+GUICtrlSetBkColor(-1,"-2")
+_Control_set_DPI_Scaling(-1)
+GUICtrlCreatePic("",10,10,32,32,-1,-1)
+_Control_set_DPI_Scaling(-1)
+_SetIconAlpha(-1, $bigiconsdll,341+1,32,32)
+
+
+
+#cs
+[gui]
+Handle_deklaration=default
+Handle_deklaration_const=false
+title=_Get_langstr(344)
+breite=541
+hoehe=243
+style=$WS_POPUP+$WS_CAPTION+$WS_SYSMENU
+exstyle=$WS_EX_TOPMOST
+bgcolour=0xFFFFFF
+bgimage=none
+handle=$Update_gefunden_GUI
+parent=
+code=WinSetOnTop ($Update_gefunden_GUI, "", 1)[BREAK]GUISetFont(8.5, 400, 0, "Segoe UI", $Update_gefunden_GUI)[BREAK]_Control_set_DPI_Scaling($Update_gefunden_GUI)[BREAK]_CenterOnMonitor($Update_gefunden_GUI ,"", $Runonmonitor)[BREAK]guictrlcreatepic(@scriptdir&"\Data\wintop.jpg",0,0,541,80)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\wintop_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]guictrlcreatepic(@scriptdir&"\Data\row_bottom.jpg",0,243-30,541,30)[BREAK]_Control_set_DPI_Scaling(-1)[BREAK]if $ISN_Dark_Mode = "true" then _SetImage(-1, @scriptdir&"\Data\row_bottom_dark.png")[BREAK]GUICtrlSetState(-1,$GUI_DISABLE)[BREAK]GUISetBkColor($Fenster_Hintergrundfarbe,$Update_gefunden_GUI)
+codebeforegui=
+xpos=-1
+ypos=-1
+center_gui=true
+title_textmode=func
+isf_include_once=false
+only_controls_in_isf=false
+const_modus=default
+gui_event_close=_Auto_Update_jetzt_nicht
+gui_event_minimize=
+gui_event_restore=
+gui_event_maximize=
+gui_event_mousemove=
+gui_event_primarydown=
+gui_event_primaryup=
+gui_event_secoundarydown=
+gui_event_secoundaryup=
+gui_event_resized=
+gui_event_dropped=
+[0x002312CE]
+handle=405
+code=GUICtrlSetColor(-1,$Titel_Schriftfarbe)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=50
+y=10
+width=468
+height=32
+text=_Get_langstr(344)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x003399
+bgcolour=-2
+font=Segoe UI
+fontsize=16
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=0
+iconindex=
+resize=
+textmode=func
+locked=0
+[0x002509A6]
+handle=406
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=50
+width=518
+height=20
+text=_Get_langstr(711)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Segoe UI
+fontsize=10
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=2
+iconindex=
+resize=
+textmode=func
+[0x001726BC]
+handle=407
+code=GUICtrlSetData(-1,_Get_langstr(333)&" "&$Studioversion&" ("&$VersionBuild&")")[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=80
+width=520
+height=20
+text=Aktuelle Version
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Segoe UI
+fontsize=11
+fontstyle=400
+fontattribute=0
+id=$Update_gefunden_GUI_aktuelle_Version
+func=
+bgimage=
+tabpage=-1
+order=3
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x001E0FB0]
+handle=408
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=109
+width=520
+height=20
+text=Im Web verfügbar:
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=Segoe UI
+fontsize=11
+fontstyle=400
+fontattribute=0
+id=$Update_gefunden_GUI_gefundene_Version
+func=
+bgimage=
+tabpage=-1
+order=4
+iconindex=
+resize=
+textmode=text
+locked=0
+[0x0014133C]
+handle=409
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=152
+width=518
+height=15
+text=_Get_langstr(712)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x000000
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=7
+iconindex=
+resize=
+textmode=func
+locked=0
+[0x001826CC]
+handle=410
+code=Button_AddIcon(-1, $smallIconsdll, 762,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=10
+y=170
+width=136
+height=30
+text=_Get_langstr(713)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_ISN_Helper_Neues_Update_Gefunden_Show_Update_GUI
+bgimage=
+tabpage=-1
+order=8
+iconindex=
+resize=
+textmode=func
+[0x001611F4]
+handle=411
+code=guictrlsetdata(-1,StringReplace(_Get_langstr(715),"%1",_ISNPlugin_Studio_Config_Read_Value("autoupdate_searchtimer", "14")))[BREAK]Button_AddIcon(-1, $smallIconsdll, 177,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=150
+y=170
+width=217
+height=30
+text=In 7 Tagen erneut erinnern
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Auto_Update_in_X_Tagen_erinnern
+bgimage=
+tabpage=-1
+order=9
+iconindex=
+resize=
+textmode=text
+[0x00181136]
+handle=412
+code=Button_AddIcon(-1, $smallIconsdll, 1173,0)[BREAK]_Control_set_DPI_Scaling($control_handle)
+type=button
+x=370
+y=170
+width=159
+height=30
+text=_Get_langstr(716)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=0xF0F0F0
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=_Auto_Update_jetzt_nicht
+bgimage=
+tabpage=-1
+order=10
+iconindex=
+resize=
+textmode=func
+locked=0
+[0x00052AEC]
+handle=413
+code=_Control_set_DPI_Scaling($control_handle)
+type=label
+x=10
+y=220
+width=525
+height=15
+text=_Get_langstr(714)
+tooltip=
+state=$GUI_SHOW+$GUI_ENABLE
+style=$SS_CENTER
+exstyle=
+textcolour=0x808080
+bgcolour=-2
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+tabpage=-1
+order=11
+iconindex=
+resize=
+textmode=func
+locked=0
+[0x00062AEA]
+handle=414
+locked=0
+resize=
+code=_Control_set_DPI_Scaling($control_handle)[BREAK]_SetIconAlpha(-1, $bigiconsdll,341+1,32,32)
+type=image
+x=10
+y=10
+width=32
+height=32
+tooltip=
+text=
+state=$GUI_SHOW+$GUI_ENABLE
+style=
+exstyle=
+textcolour=0x000000
+bgcolour=
+font=MS Sans Serif
+fontsize=8
+fontstyle=400
+fontattribute=0
+id=
+func=
+bgimage=
+order=12
+tabpage=-1
+iconindex=
+textmode=text
+#ce
