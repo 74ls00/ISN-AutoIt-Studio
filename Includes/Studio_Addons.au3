@@ -476,7 +476,7 @@ Func _oeffne_Editormodus($Datei = "")
 	_Loading_Progress(100)
 	_Hide_Loading()
 	_Write_ISN_Debug_Console("done", 1, 1, 1, 1)
-	_Show_Warning("confirmeditormode", 308, _Get_langstr(178), _Get_langstr(667), _Get_langstr(7))
+	_Show_Warning("confirmeditormode", 308, _Get_langstr(61), _Get_langstr(667), _Get_langstr(7))
 
 EndFunc   ;==>_oeffne_Editormodus
 
@@ -2613,7 +2613,7 @@ EndFunc   ;==>_Backup_Files
 Func _Rename_Project()
 	If $Templatemode = 1 Then Return
 	If $Tempmode = 1 Then Return
-	$i = MsgBox(262144 + 48 + 4, _Get_langstr(178), _Get_langstr(227), 0, $Projekteinstellungen_GUI)
+	$i = MsgBox(262144 + 48 + 4, _Get_langstr(61), _Get_langstr(227), 0, $Projekteinstellungen_GUI)
 	If $i = 6 Then
 		$var = InputBox(_Get_langstr(226), _Get_langstr(226), IniRead($Pfad_zur_Project_ISN, "ISNAUTOITSTUDIO", "name", ""), "", 200 * $DPI, 150 * $DPI, Default, Default, -1, $Projekteinstellungen_GUI)
 		If $var = "" Then Return
@@ -2644,7 +2644,7 @@ Func _Rename_Project()
 			EndIf
 		EndIf
 		_Load_Project_by_Foldername($Offenes_Projekt_backup)
-		MsgBox(262144 + 64, _Get_langstr(178), _Get_langstr(392), 0, $Studiofenster)
+		MsgBox(262144 + 64, _Get_langstr(61), _Get_langstr(392), 0, $Studiofenster)
 	EndIf
 EndFunc   ;==>_Rename_Project
 
@@ -2653,7 +2653,7 @@ Func _Rename_Author()
 	If @error = 0 Then
 		If $var = IniRead($Pfad_zur_Project_ISN, "ISNAUTOITSTUDIO", "author", "") Then Return
 		IniWrite($Pfad_zur_Project_ISN, "ISNAUTOITSTUDIO", "author", $var)
-		MsgBox(262144 + 64, _Get_langstr(178), _Get_langstr(230), 0, $Projekteinstellungen_GUI)
+		MsgBox(262144 + 64, _Get_langstr(61), _Get_langstr(230), 0, $Projekteinstellungen_GUI)
 		_Zeige_Projekteinstellungen("projectproperties")
 	EndIf
 EndFunc   ;==>_Rename_Author
@@ -2663,7 +2663,7 @@ Func _Rename_Comment()
 	If @error = 0 Then
 		If $var = IniRead($Pfad_zur_Project_ISN, "ISNAUTOITSTUDIO", "comment", "") Then Return
 		IniWrite($Pfad_zur_Project_ISN, "ISNAUTOITSTUDIO", "comment", $var)
-		MsgBox(262144 + 64, _Get_langstr(178), _Get_langstr(232), 0, $Projekteinstellungen_GUI)
+		MsgBox(262144 + 64, _Get_langstr(61), _Get_langstr(232), 0, $Projekteinstellungen_GUI)
 		_Zeige_Projekteinstellungen("projectproperties")
 	EndIf
 
@@ -2674,7 +2674,7 @@ Func _chance_Version()
 	If @error = 0 Then
 		If $var = IniRead($Pfad_zur_Project_ISN, "ISNAUTOITSTUDIO", "version", "") Then Return
 		IniWrite($Pfad_zur_Project_ISN, "ISNAUTOITSTUDIO", "version", $var)
-		MsgBox(262144 + 64, _Get_langstr(178), _Get_langstr(234), 0, $Projekteinstellungen_GUI)
+		MsgBox(262144 + 64, _Get_langstr(61), _Get_langstr(234), 0, $Projekteinstellungen_GUI)
 		_Zeige_Projekteinstellungen("projectproperties")
 	EndIf
 EndFunc   ;==>_chance_Version
@@ -8383,7 +8383,7 @@ Func _Ersteinrichtungsassistenten_wiederherstellen()
 	If $result = 6 Then
 		RegDelete("HKEY_CURRENT_USER\Software\ISN AutoIt Studio", "Configfile")
 		FileDelete(@ScriptDir & "\portable.dat")
-		MsgBox(262144 + 64, _Get_langstr(178), _Get_langstr(790), 0, $Config_GUI)
+		MsgBox(262144 + 64, _Get_langstr(61), _Get_langstr(790), 0, $Config_GUI)
 		_exit()
 	EndIf
 EndFunc   ;==>_Ersteinrichtungsassistenten_wiederherstellen
@@ -8409,7 +8409,7 @@ Func _Testprojekt_anlegen()
 		_UnZIP_SetOptions()
 		$result = _UnZIP_Unzip(@ScriptDir & "\Data\Packages\testprojekt.zip", _ISN_Variablen_aufloesen($Projectfolder))
 		_GUICtrlStatusBar_SetText_ISN($Status_bar, "")
-		MsgBox(262144 + 64, _Get_langstr(178), _Get_langstr(792), 0, $Config_GUI)
+		MsgBox(262144 + 64, _Get_langstr(61), _Get_langstr(792), 0, $Config_GUI)
 	EndIf
 EndFunc   ;==>_Testprojekt_anlegen
 
@@ -8418,7 +8418,7 @@ Func _Erweitertes_Debugging_aktivieren()
 	GUICtrlSetState($Tools_menu_debugging_erweitertes_debugging_deaktivieren, $GUI_UNCHECKED)
 	$Erweitertes_debugging = "true"
 	_Write_in_Config("enhanced_debugging", $Erweitertes_debugging)
-	_Show_Warning("confirmdebugging", 308, _Get_langstr(178), _Get_langstr(803), _Get_langstr(7))
+	_Show_Warning("confirmdebugging", 308, _Get_langstr(61), _Get_langstr(803), _Get_langstr(7))
 EndFunc   ;==>_Erweitertes_Debugging_aktivieren
 
 Func _Erweitertes_Debugging_deaktivieren()
